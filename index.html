@@ -6,39 +6,90 @@
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/app.css">
 
+
+
+
+    <!-- Firebase - Main Files -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+
+    <!-- Firebase - Other Files -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+
+    <!-- Initialize Firebase -->
     <script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyBVARDFRI7QWempiL8upUd2S-G8s1Uom-o",
-        authDomain: "awesomeapp-4ec8d.firebaseapp.com",
-        databaseURL: "https://awesomeapp-4ec8d.firebaseio.com",
-        projectId: "awesomeapp-4ec8d",
-        storageBucket: "awesomeapp-4ec8d.appspot.com",
-        messagingSenderId: "523185544926"
-    };
-    firebase.initializeApp(config);
-    </script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/2.7.0/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.7.0/firebaseui.css" />
-    <script type="text/javascript">
-      // FirebaseUI config.
+      var config = {
+          apiKey: "AIzaSyBVARDFRI7QWempiL8upUd2S-G8s1Uom-o",
+          authDomain: "awesomeapp-4ec8d.firebaseapp.com",
+          databaseURL: "https://awesomeapp-4ec8d.firebaseio.com",
+          projectId: "awesomeapp-4ec8d",
+          storageBucket: "awesomeapp-4ec8d.appspot.com",
+          messagingSenderId: "523185544926"
+      };
+      firebase.initializeApp(config);
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
       var uiConfig = {
-        signInSuccessUrl: './dashboard.html',
+        callbacks: {
+          signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+            // User successfully signed in.
+            // Return type determines whether we continue the redirect automatically
+            // or whether we leave that to developer to handle.
+            return true;
+          },
+          uiShown: function() {
+            // The widget is rendered.
+            // Hide the loader.
+            document.getElementById('loader').style.display = 'none';
+          }
+        },
+        // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+        signInFlow: 'popup',
+        signInSuccessUrl: './',
         signInOptions: [
           // Leave the lines as is for the providers you want to offer your users.
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-          firebase.auth.EmailAuthProvider.PROVIDER_ID,
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID
         ],
         // Terms of service url.
         tosUrl: '<your-tos-url>'
       };
 
-      // Initialize the FirebaseUI Widget using Firebase.
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
       // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
+      
+
+      /*
+       * Handle the sign-in flow with Firebase SDK [ Sign-in with Google ]
+       */
+       var provider = new firebase.auth.GoogleAuthProvider();
+
+       firebase.auth().signInWithPopup(provider).then(function(result) {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          var token = result.credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          
+          console.log(user);
+        }).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          // ...
+          console.log(errorMessage);
+        });
     </script>
+
+
+
   </head>
   <body>
     
@@ -46,8 +97,9 @@
 
     <main class="landing-page">
       <div class="container">
-        <section class="intro">
+        <section class="intro ">
           <h1>AwesomeApp help you</h1>
+          <div id="loader">Loading...</div>
           <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
           <div id="modal1" class="modal">
             <div class="modal-content">
@@ -65,6 +117,15 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/materialize.min.js"></script>
-    <script src="js/app.js"></script>
+    <script>
+
+      // Init Materialize UI
+      $(document).ready(function(){
+          $('select').formSelect();
+          $('.modal').modal();
+          $('.sidenav').sidenav();
+      });
+    </script>
+    <!-- <script src="js/app.js"></script> -->
   </body>
 </html>
