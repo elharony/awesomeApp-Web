@@ -1,169 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="css/materialize.min.css">
-    <link rel="stylesheet" href="css/app.css">
-</head>
-<body>
-    
-    <section class="single-project">
-        <div class="container">
-            <h2>Connect with your classmates</h2>
-            <div class="project-details row">
-                <div class="info col s6">
-                    <h3>P1 - Birthday Card</h3>
-                    <p>Deadline: <time>1.03.2018</time></p>
-                </div>
-                <div class="search col s6">
-                    <div class="input-field col s6">
-                        <select>
-                            <option value="" disabled selected>Finished</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
-                        </select>
-                    </div>
-                    <div class="input-field col s6">
-                        <select>
-                            <option value="" disabled selected>Language</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="students row">
-                <div class="student col s6 m4">
-                    <div class="student-container">
-                        <img src="http://via.placeholder.com/50x50" alt="Student Image">
-                        <h3>elharony <span>FEND</span></h3>
-                        <h4>Finished <span>Egypt</span></h4>
-                    </div>
-                </div>
-                <div class="student col s6 m4">
-                    <div class="student-container">
-                        <img src="http://via.placeholder.com/50x50" alt="Student Image">
-                        <h3>elharony <span>FEND</span></h3>
-                        <h4>Finished <span>Egypt</span></h4>
-                    </div>
-                </div>
-                <div class="student col s6 m4">
-                    <div class="student-container">
-                        <img src="http://via.placeholder.com/50x50" alt="Student Image">
-                        <h3>elharony <span>FEND</span></h3>
-                        <h4>Finished <span>Egypt</span></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <title>Sample FirebaseUI App</title>
 
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBVARDFRI7QWempiL8upUd2S-G8s1Uom-o",
+        authDomain: "awesomeapp-4ec8d.firebaseapp.com",
+        databaseURL: "https://awesomeapp-4ec8d.firebaseio.com",
+        projectId: "awesomeapp-4ec8d",
+        storageBucket: "awesomeapp-4ec8d.appspot.com",
+        messagingSenderId: "523185544926"
+    };
+    firebase.initializeApp(config);
+    </script>
+    <!-- *******************************************************************************************
+       * TODO(DEVELOPER): Paste the initialization snippet from:
+       * Firebase Console > Overview > Add Firebase to your web app. *
+       ***************************************************************************************** -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.7.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.7.0/firebaseui.css" />
+    <script type="text/javascript">
+      // FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: './dashboard.html',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        ],
+        // Terms of service url.
+        tosUrl: '<your-tos-url>'
+      };
 
-    <section class="projects">
-        <div class="container">
-            <h2>Select your project</h2>
-            <div class="row">
-                <div class="project col s6">
-                    <div class="project-container z-depth-2">
-                        <h3>P1 - Birthday Card</h3>
-                        <p>Deadline: <time>1.03.2018</time></p>
-                    </div>
-                </div>
-                <div class="project col s6">
-                    <div class="project-container z-depth-2">
-                        <h3>P1 - Birthday Card</h3>
-                        <p>Deadline: <time>1.03.2018</time></p>
-                    </div>
-                </div>
-                <div class="project col s6">
-                    <div class="project-container z-depth-2">
-                        <h3>P1 - Birthday Card</h3>
-                        <p>Deadline: <time>1.03.2018</time></p>
-                    </div>
-                </div>
-                <div class="project col s6">
-                    <div class="project-container z-depth-2">
-                        <h3>P1 - Birthday Card</h3>
-                        <p>Deadline: <time>1.03.2018</time></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="paths">
-        <div class="container">
-            <h2>Choose a path</h2>
-            <div class="row">
-                <div class="path col s6 m3 center-align">
-                    <div class="path-container z-depth-3">
-                        <i class="medium material-icons">android</i>
-                        <h3>ABND</h3>
-                    </div>
-                </div>
-                <div class="path col s6 m3 center-align">
-                    <div class="path-container z-depth-3">
-                        <i class="medium material-icons">android</i>
-                        <h3>AND</h3>
-                    </div>
-                </div>
-                <div class="path col s6 m3 center-align">
-                    <div class="path-container z-depth-3">
-                        <i class="medium material-icons">laptop</i>
-                        <h3>FEND</h3>
-                    </div>
-                </div>
-                <div class="path col s6 m3 center-align">
-                    <div class="path-container z-depth-3">
-                        <i class="medium material-icons">laptop</i>
-                        <h3>MWS</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="user-preferences container">
-        <h2>User Preferences</h2>
-        <form action="" id="preferencesForm">
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="slackName" type="text" class="validate">
-                    <label for="slackName">Slack Name</label>
-                </div>
-                <div class="input-field col s6">
-                    <select id="tracks" class="browser-default">
-                        <option value="" disabled selected>Nanodegree Tracks</option>
-                    </select>
-                </div>
-                <div class="input-field col s6">
-                    <select id="langOne" class="browser-default">
-                        <option value="" disabled selected>Preferred Language #1</option>
-                    </select>
-                </div>
-                <div class="input-field col s6">
-                    <select id="langTwo" class="browser-default">
-                        <option value="" disabled selected>Preferred Language #2</option>
-                    </select>
-                </div>
-                <div class="input-field col s6 center-align">
-                    <button type="submit" id="savePreferences" class="waves-effect waves-light btn-small">Save</button>
-                </div>
-            </div>
-        </form>
-    </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/materialize.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-firestore.js"></script>
-    <script src="js/app.js"></script>
-</body>
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+  </head>
+  <body>
+    <!-- The surrounding HTML is left untouched by FirebaseUI.
+         Your app may use that space for branding, controls and other customizations.-->
+    <h1>Welcome to My Awesome App</h1>
+    <div id="firebaseui-auth-container"></div>
+  </body>
 </html>
