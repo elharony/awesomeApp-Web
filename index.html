@@ -2,7 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Sample FirebaseUI App</title>
+    <title>AwesomeApp | Work with your Udacity ND Classmates</title>
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/app.css">
 
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <script>
@@ -17,10 +19,6 @@
     };
     firebase.initializeApp(config);
     </script>
-    <!-- *******************************************************************************************
-       * TODO(DEVELOPER): Paste the initialization snippet from:
-       * Firebase Console > Overview > Add Firebase to your web app. *
-       ***************************************************************************************** -->
     <script src="https://cdn.firebase.com/libs/firebaseui/2.7.0/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.7.0/firebaseui.css" />
     <script type="text/javascript">
@@ -43,9 +41,30 @@
     </script>
   </head>
   <body>
-    <!-- The surrounding HTML is left untouched by FirebaseUI.
-         Your app may use that space for branding, controls and other customizations.-->
-    <h1>Welcome to My Awesome App</h1>
-    <div id="firebaseui-auth-container"></div>
+    
+
+
+    <main class="landing-page">
+      <div class="container">
+        <section class="intro">
+          <h1>AwesomeApp help you</h1>
+          <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+          <div id="modal1" class="modal">
+            <div class="modal-content">
+              <h4>Login/Register</h4>
+              <p>Find a classmate now!</p>
+              <div id="firebaseui-auth-container"></div>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Not Interested</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
