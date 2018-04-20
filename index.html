@@ -79,13 +79,14 @@
           <div id="loader">Loading...</div>
           <div id="firebaseui-auth-container"></div>
         </section>
-        <section class="loggedIn" style="display: block">
+        <section class="loggedIn" style="display: none">
             <ul class="collection">
               <li class="collection-item avatar">
                 <img id="userImage" src="" class="circle">
                 <span id="userName" class="title"></span>
                 <p id="userEmail"></p>
                 <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                <a id="logout" class="waves-effect waves-light btn-large">Logout</a>
               </li>
             </ul>
         </section>
@@ -106,9 +107,11 @@
       /*
        * LoggedIn
        */
+      const loggedInDiv = document.querySelector(".loggedIn");
       const userImage   = document.querySelector("#userImage");
       const userName    = document.querySelector("#userName");
       const userEmail   = document.querySelector("#userEmail");
+      const logoutBtn   = document.querySelector("#logout");
 
       /*
        * Handle the sign-in flow with Firebase SDK [ Sign-in with Google ]
@@ -122,6 +125,7 @@
           var user = result.user;
 
           // Fill the user info
+          loggedInDiv.style.display = "block";
           userImage.setAttribute("src", user.photoURL);
           userName.innerHTML  = user.displayName;
           userEmail.innerHTML = user.email;
@@ -137,6 +141,15 @@
           // ...
           console.log(errorMessage);
         });
+
+        // Logout
+        logoutBtn.addEventListener("click", function() {
+          firebase.auth().signOut().then(function() {
+            alert("Signed out!")
+          }).catch(function(error) {
+            alert("There is an error while signed out: " + error);
+          });
+        })
 
 
 
