@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>AwesomeApp | Work with your Udacity ND Classmates</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/app.css">
 
@@ -64,6 +65,14 @@
       
 
       /*
+       * LoggedIn
+       */
+      const loggedInDiv = document.querySelector(".loggedIn");
+      const userImage   = document.querySelector("#userImage");
+      const userName    = document.querySelector("#userName");
+      const userEmail   = document.querySelector("#userEmail");
+
+      /*
        * Handle the sign-in flow with Firebase SDK [ Sign-in with Google ]
        */
        var provider = new firebase.auth.GoogleAuthProvider();
@@ -73,8 +82,13 @@
           var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
+
+          // Fill the user info
+          loggedInDiv.style.display = "block";
+          userImage.setAttribute("src", photoURL);
+          userName.innerHTML  = user.displayName;
+          userEmail.innerHTML = user.email;
           
-          console.log(user);
         }).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
@@ -97,7 +111,7 @@
 
     <main class="landing-page">
       <div class="container">
-        <section class="intro ">
+        <section class="intro">
           <h1>AwesomeApp help you</h1>
           <div id="loader">Loading...</div>
           <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
@@ -111,6 +125,16 @@
               <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Not Interested</a>
             </div>
           </div>
+        </section>
+        <section class="loggedIn" style="display: block">
+            <ul class="collection">
+              <li class="collection-item avatar">
+                <img id="userImage" src="" class="circle">
+                <span id="userName" class="title"></span>
+                <p id="userEmail"></p>
+                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+              </li>
+            </ul>
         </section>
       </div>
     </main>
