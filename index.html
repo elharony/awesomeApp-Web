@@ -51,7 +51,7 @@
         },
         // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
         signInFlow: 'popup',
-        signInSuccessUrl: './',
+        signInSuccessUrl: './dashboard.html',
         signInOptions: [
           // Leave the lines as is for the providers you want to offer your users.
           firebase.auth.GoogleAuthProvider.PROVIDER_ID
@@ -118,7 +118,7 @@
        */
        var provider = new firebase.auth.GoogleAuthProvider();
 
-       firebase.auth().signInWithPopup(provider).then(function(result) {
+       firebase.auth().signInWithRedirect(provider).then(function(result) {
           // This gives you a Google Access Token. You can use it to access the Google API.
           var token = result.credential.accessToken;
           // The signed-in user info.
@@ -129,6 +129,8 @@
           userImage.setAttribute("src", user.photoURL);
           userName.innerHTML  = user.displayName;
           userEmail.innerHTML = user.email;
+
+          console.log(user);
           
         }).catch(function(error) {
           // Handle Errors here.
