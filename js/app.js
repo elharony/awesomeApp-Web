@@ -201,13 +201,28 @@ docRef.get().then(function(doc) {
             }
         });
 
-
         // Languages
         const langOne = document.querySelector("#langOne");
         optionFiedCreator(myData.langsArray, langOne);
-
         const langTwo = document.querySelector("#langTwo");
         optionFiedCreator(myData.langsArray, langTwo);
+
+
+
+        /*
+         * Explore
+         */
+        const tracksContainer = document.querySelector(".tracks");
+        myData.tracksArray.forEach(function (value) {
+            const track = document.createElement("div");
+            track.className = "track col s6 m3 center-align";
+            const trackBtn = document.createElement("button");
+            trackBtn.className = "waves-effect waves-light btn-large";
+            trackBtn.innerHTML = value;
+            track.appendChild(trackBtn);
+            tracksContainer.appendChild(track);
+        });
+
 
 
     }
