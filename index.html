@@ -14,21 +14,54 @@
   <body>
 
     <main class="landing-page">
-      <div class="container">
-        <section class="signedIn" style="display: none">
-          <h1 id="done">Signed In!!</h1>
-        </section>
+
+        <div class="signedIn" style="display: none">
+          <section class="user-preferences container">
+            <h2>Preferences <a href="#!" id="signout">Logout</a></h2>
+            <form action="" id="preferencesForm">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="slackName" type="text" class="validate">
+                        <label for="slackName">Slack Username</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <select id="tracks" class="browser-default">
+                            <option value="" disabled selected>Nanodegree Tracks</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s6">
+                        <select id="langOne" class="browser-default">
+                            <option value="" disabled selected>Preferred Language #1</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s6">
+                        <select id="langTwo" class="browser-default">
+                            <option value="" disabled selected>Preferred Language #2</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s6 center-align">
+                        <button type="submit" id="savePreferences" class="waves-effect waves-light btn-small">Save</button>
+                    </div>
+                </div>
+            </form>
+          </section>
+        </div>
+
+
         <section class="signedOut" style="display: none">
-          <h1 id="login">Please login!</h1>
-          <div id="loader">Loading...........</div>
-          <div id="firebaseui-auth-container"></div>
+          <div class="container">
+            <h1 id="login">Please login!</h1>
+            <div id="loader">Loading...........</div>
+            <div id="firebaseui-auth-container"></div>
+          </div>
         </section>
       </div>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/materialize.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
