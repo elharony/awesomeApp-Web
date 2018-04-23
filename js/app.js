@@ -72,18 +72,58 @@ firebase.initializeApp(config);
   */
  firebase.auth().onAuthStateChanged(function(user) {
    if (user) {
-     loggedInDiv.style.display = "block";
-     loggedOutDiv.style.display = "none";
-     console.log(user);
-     userName.innerHTML = user.displayName;
-     userEmail.innerHTML = user.email;
-     userImage.setAttribute("src", user.photoURL);
+
+    // Show/Hide based on Auth
+    loggedInDiv.style.display = "block";
+    loggedOutDiv.style.display = "none";
+    console.log(user);
+
+    // Display User Data
+    userName.innerHTML = user.displayName;
+    userEmail.innerHTML = user.email;
+    userImage.setAttribute("src", user.photoURL);
+
+
+    // Add New Data
+    const preferencesForm  = document.querySelector("#preferencesForm");
+    const u_slackName      = document.querySelector("#slackName");
+    const u_track          = document.querySelector("#tracks");
+    const u_currentProject = document.querySelector("#availableProjects");
+    const u_langOne        = document.querySelector("#langOne");
+    const u_langTwo        = document.querySelector("#langTwo");
+
+    preferencesForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
+    });
+    
      
    } else {
      loggedInDiv.style.display = "none";
      loggedOutDiv.style.display = "block";
    }
  });
+
+
+/*
+ * Write User Data
+ */
+function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentProject, u_langOne, u_langTwo) {
+    db.doc("Users/" + u_id + "/").set({
+      userName: u_name,
+      userEmail: u_email,
+      slackName: u_slackName,
+      userTrack: u_track,
+      currentProject: u_currentProject,
+      languageFirst: u_langOne,
+      languageSecond: u_langTwo
+    }).then(function() {
+        console.log("Data Saved!");
+    }).catch(function(error) {
+        console.log("Error: ", error)
+    });
+}
+
 
 
  /*
@@ -121,6 +161,9 @@ function optionFiedCreator(arrayOfData, containerElement) {
 )}
 
 
+/*
+ * Get All Data
+ */
 docRef.get().then(function(doc) {
     if(doc && doc.exists) {
         const myData = doc.data();
