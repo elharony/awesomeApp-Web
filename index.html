@@ -16,37 +16,64 @@
     <main class="landing-page">
 
         <div class="signedIn" style="display: none">
-          <section class="user-preferences container">
-            <h2>Preferences <a href="#!" id="signout">Logout</a></h2>
-            <form action="" id="preferencesForm">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="slackName" type="text" class="validate">
-                        <label for="slackName">Slack Username</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <select id="tracks" class="browser-default">
-                            <option value="" disabled selected>Nanodegree Tracks</option>
-                        </select>
-                    </div>
-                    <div class="input-field col s6">
-                        <select id="langOne" class="browser-default">
-                            <option value="" disabled selected>Preferred Language #1</option>
-                        </select>
-                    </div>
-                    <div class="input-field col s6">
-                        <select id="langTwo" class="browser-default">
-                            <option value="" disabled selected>Preferred Language #2</option>
-                        </select>
-                    </div>
-                    <div class="input-field col s6 center-align">
-                        <button type="submit" id="savePreferences" class="waves-effect waves-light btn-small">Save</button>
-                    </div>
+          <div class="container">
+              <ul class="collection">
+                <li class="collection-item avatar">
+                  <img id="userImage" src="" alt="" class="circle">
+                  <span id="userName" class="title">Title</span>
+                  <p id="userEmail"></p>
+                  <a href="#!" class="secondary-content" id="signout"><button class="waves-effect waves-light btn-large">Logout</button>
+                  </a>
+                </li>
+              </ul>
+            <div class="row">
+                <div class="col s12">
+                  <ul class="tabs">
+                    <li class="tab col s3"><a href="#preferences">Preferences</a></li>
+                    <li class="tab col s3"><a class="active" href="#paths">Paths</a></li>
+                    <li class="tab col s3 disabled"><a href="#test3">Disabled Tab</a></li>
+                    <li class="tab col s3"><a href="#test4">Test 4</a></li>
+                  </ul>
                 </div>
-            </form>
-          </section>
-        </div>
+  
+                <!-- Preferences -->
+                <div id="preferences" class="col s12">
+                  <form action="" id="preferencesForm">
+                      <div class="row">
+                          <div class="input-field col s12">
+                              <input id="slackName" type="text" class="validate">
+                              <label for="slackName">Slack Username</label>
+                          </div>
+                          <div class="input-field col s6">
+                              <select id="tracks" class="browser-default">
+                                  <option value="" disabled selected>Nanodegree Tracks</option>
+                              </select>
+                          </div>
+                          <div class="input-field col s6">
+                              <select id="langOne" class="browser-default">
+                                  <option value="" disabled selected>Preferred Language #1</option>
+                              </select>
+                          </div>
+                          <div class="input-field col s6">
+                              <select id="langTwo" class="browser-default">
+                                  <option value="" disabled selected>Preferred Language #2</option>
+                              </select>
+                          </div>
+                          <div class="input-field col s6 center-align">
+                              <button type="submit" id="savePreferences" class="waves-effect waves-light btn-small">Save</button>
+                          </div>
+                      </div>
+                  </form>    
+                </div>
+  
 
+  
+                <div id="paths" class="col s12">Test 2</div>
+                <div id="test3" class="col s12">Test 3</div>
+                <div id="test4" class="col s12">Test 4</div>
+            </div>
+          </div>
+        </div>
 
         <section class="signedOut" style="display: none">
           <div class="container">
