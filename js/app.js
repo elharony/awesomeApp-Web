@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $('.tabs').tabs();
     $('select').formSelect();
     $('.modal').modal();
     $('.sidenav').sidenav();
@@ -58,12 +59,26 @@ firebase.initializeApp(config);
 
  const loggedInDiv = document.querySelector(".signedIn");
  const loggedOutDiv = document.querySelector(".signedOut");
+ const userName  = document.querySelector("#userName");
+ const userEmail = document.querySelector("#userEmail");
+ const userImage = document.querySelector("#userImage");
 
+
+
+ /*
+  *
+  * LoggedIn / LoggedOut
+  *
+  */
  firebase.auth().onAuthStateChanged(function(user) {
    if (user) {
      loggedInDiv.style.display = "block";
      loggedOutDiv.style.display = "none";
-     document.querySelector("#done").innerHTML = user;
+     console.log(user);
+     userName.innerHTML = user.displayName;
+     userEmail.innerHTML = user.email;
+     userImage.setAttribute("src", user.photoURL);
+     
    } else {
      loggedInDiv.style.display = "none";
      loggedOutDiv.style.display = "block";
