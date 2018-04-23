@@ -134,6 +134,31 @@ docRef.get().then(function(doc) {
         const tracks = document.querySelector("#tracks");
         optionFiedCreator(myData.tracksArray, tracks);
 
+        // Get Available Projects based on the selected Track
+        const availableProjects = document.querySelector("#availableProjects");
+        tracks.addEventListener("change", function() {
+            switch(tracks.value) {
+                case "AND":
+                    availableProjects.innerHTML = "";
+                    optionFiedCreator(myData.andProjectsArray, availableProjects);
+                break;
+                case "ABND":
+                    availableProjects.innerHTML = "";
+                    optionFiedCreator(myData.abndProjectsArray, availableProjects);
+                break;
+                case "FEND":
+                    availableProjects.innerHTML = "";
+                    optionFiedCreator(myData.fendProjectsArray, availableProjects);
+                break;
+                case "MWS":
+                    availableProjects.innerHTML = "";
+                    optionFiedCreator(myData.mwsProjectsArray, availableProjects);
+                break;
+
+            }
+        });
+
+
         // Languages
         const langOne = document.querySelector("#langOne");
         optionFiedCreator(myData.langsArray, langOne);
