@@ -212,17 +212,33 @@ docRef.get().then(function(doc) {
         /*
          * Explore
          */
+
+        // Tracks
         const tracksContainer = document.querySelector(".tracks");
         myData.tracksArray.forEach(function (value) {
             const track = document.createElement("div");
             track.className = "track col s6 m3 center-align";
             const trackBtn = document.createElement("button");
-            trackBtn.className = "waves-effect waves-light btn-large";
+            trackBtn.className = "track-button waves-effect waves-light btn-large";
             trackBtn.innerHTML = value;
+            trackBtn.setAttribute("data-value", value);
             track.appendChild(trackBtn);
             tracksContainer.appendChild(track);
         });
 
+        // Projects in each Track
+        const projectsContainer = document.querySelector(".projects");
+
+        // Add Event Listener to each Track Button
+        const trackButtons = document.querySelectorAll(".track-button");
+        console.log(trackButtons);
+        for(let i = 0; i < trackButtons.length; i++) {
+            trackButtons[i].addEventListener("click", function() {
+                const trackName = this.getAttribute("data-value");
+
+                
+            });
+        }
 
 
     }
