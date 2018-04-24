@@ -160,6 +160,19 @@ function optionFiedCreator(arrayOfData, containerElement) {
     }
 )}
 
+/*
+ * Display All Related Projects
+ */
+function getProjects(arrayOfData, containerElement, trackName) {
+    arrayOfData.forEach(function(data) {
+        const project = document.createElement("button");
+        project.className = "project-button waves-effect waves-light btn-large";
+        project.setAttribute("data-value", trackName);
+        project.innerHTML = data;
+        containerElement.appendChild(project);
+    });
+}
+
 
 /*
  * Get All Data
@@ -226,17 +239,36 @@ docRef.get().then(function(doc) {
             tracksContainer.appendChild(track);
         });
 
-        // Projects in each Track
-        const projectsContainer = document.querySelector(".projects");
 
         // Add Event Listener to each Track Button
         const trackButtons = document.querySelectorAll(".track-button");
-        console.log(trackButtons);
+
+        // Projects in each Track
+        const projectsContainer = document.querySelector(".projects");
+
         for(let i = 0; i < trackButtons.length; i++) {
             trackButtons[i].addEventListener("click", function() {
                 const trackName = this.getAttribute("data-value");
 
-                
+                // Display the projects based on the clicked Track
+                switch(trackName) {
+                    case "AND":
+                        projectsContainer.innerHTML = "";
+                        getProjects(myData.andProjectsArray, projectsContainer, "AND");
+                    break;
+                    case "ABND":
+                        projectsContainer.innerHTML = "";
+                        getProjects(myData.abndProjectsArray, projectsContainer, "ABND");
+                    break;
+                    case "FEND":
+                        projectsContainer.innerHTML = "";
+                        getProjects(myData.fendProjectsArray, projectsContainer, "FEND");
+                    break;
+                    case "MWS":
+                        projectsContainer.innerHTML = "";
+                        getProjects(myData.mwsProjectsArray, projectsContainer, "MWS");
+                    break;
+                }
             });
         }
 
