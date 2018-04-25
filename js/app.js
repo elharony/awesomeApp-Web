@@ -265,16 +265,21 @@ function getStudents(containerElement, projectName) {
     .get()
     .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-            const student = document.createElement("button");
-            student.className = "student-card waves-effect waves-light btn-large";
-            student.innerHTML = `Slack: ${doc.data().slackName} | 1st Lang: ${doc.data().languageFirst} | 2nd Lang: ${doc.data().languageSecond}`;
+            const student = document.createElement("ul");
+            student.className = "student-card collection";
+
+            const data_contact = document.createElement("li");
+            data_contact.className = "collection-item row";
+            data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><i class="fas fa-user"></i> ${doc.data().userName}</div>`;
+
+            const data_languages = document.createElement("li");
+            data_languages.className = "collection-item row";
+            data_languages.innerHTML = `<div class="col s6"><i class="fas fa-globe"></i> ${doc.data().languageFirst}</div> <div class="col s6"><i class="fas fa-globe"></i> ${doc.data().languageSecond}</div>`;
+
+            student.appendChild(data_contact);
+            student.appendChild(data_languages);
             containerElement.appendChild(student);
-            /*
-            * doc.data().slackName
-            * doc.data().languageFirst
-            * doc.data().languageSecond
-            */
-            console.log(doc.id, " => ", doc.data());
+            
         });
     })
     .catch(function(error) {
