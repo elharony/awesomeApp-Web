@@ -5,5 +5,8 @@
 #explore .track-details .projects .project-button {
   width: 100%;
   text-align: left; }
+#explore .track-details .students {
+  max-height: 450px;
+  overflow-y: scroll; }
 
 /*# sourceMappingURL=app.css.map */
