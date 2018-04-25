@@ -76,7 +76,7 @@ firebase.initializeApp(config);
     // Show/Hide based on Auth
     loggedInDiv.style.display = "block";
     loggedOutDiv.style.display = "none";
-    console.log(user);
+    // console.log(user);
 
     // Display User Data
     userName.innerHTML = user.displayName;
@@ -147,7 +147,6 @@ var db = firebase.firestore();
 
 const docRef = db.doc("helpData/tracks");
 
-
 /*
  * Option Field Creator [ Create and Fill it with Data ]
  */
@@ -167,11 +166,122 @@ function getProjects(arrayOfData, containerElement, trackName) {
     arrayOfData.forEach(function(data) {
         const project = document.createElement("button");
         project.className = "project-button waves-effect waves-light btn-large";
-        project.setAttribute("data-value", trackName);
+        project.setAttribute("data-track", trackName);
+        project.setAttribute("data-project", data);
         project.innerHTML = data;
         containerElement.appendChild(project);
     });
+
+    // Project Buttons
+    const projectButtons = document.querySelectorAll(".project-button");
+
+    // Students Container
+    const studentsContainer = document.querySelector(".students");
+
+    for(let i = 0; i < projectButtons.length; i++) {
+        projectButtons[i].addEventListener("click", function() {
+            const trackName = this.getAttribute("data-track");
+            const projectName = this.getAttribute("data-project");
+            console.log("Clicked Project: ", projectName);
+            getProjectNames(trackName);
+            // Show all people who are working on the Selected Project
+            switch(trackName) {
+                case "AND":
+                    for(let x  = 0; x < andProjects.length; x++) {
+                        switch(projectName) {
+                            case andProjects[x]:
+                                studentsContainer.innerHTML = "";
+                                getStudents(studentsContainer, andProjects[x]);
+                            break;
+                        }
+                    }
+                break;
+                case "ABND":
+                    for(let x  = 0; x < abndProjects.length; x++) {
+                        switch(projectName) {
+                            case abndProjects[x]:
+                                studentsContainer.innerHTML = "";
+                                getStudents(studentsContainer, abndProjects[x]);
+                            break;
+                        }
+                    }
+                break;
+                case "FEND":
+                    for(let x  = 0; x < fendProjects.length; x++) {
+                        switch(projectName) {
+                            case fendProjects[x]:
+                                studentsContainer.innerHTML = "";
+                                getStudents(studentsContainer, fendProjects[x]);
+                            break;
+                        }
+                    }
+                break;
+                case "MWS":
+                    for(let x  = 0; x < mwsProjects.length; x++) {
+                        switch(projectName) {
+                            case mwsProjects[x]:
+                                studentsContainer.innerHTML = "";
+                                getStudents(studentsContainer, mwsProjects[x]);
+                            break;
+                        }
+                    }
+                break;
+            }
+        });
+    }
 }
+
+
+/*
+ * Get Project Names
+ */
+let andProjects,
+    abndProjects,
+    fendProjects,
+    mwsProjects;
+function getProjectNames(track) {
+    db.collection("helpData").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            andProjects = doc.data().andProjectsArray;
+            abndProjects = doc.data().abndProjectsArray;
+            fendProjects = doc.data().fendProjectsArray;
+            mwsProjects = doc.data().mwsProjectsArray;
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+}
+getProjectNames();
+
+
+
+/*
+ * Show all Students in the Selected Project
+ */
+function getStudents(containerElement, projectName) {
+
+    db.collection("Users").where("currentProject", "==", projectName)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            const student = document.createElement("button");
+            student.className = "student-card waves-effect waves-light btn-large";
+            student.innerHTML = `Slack: ${doc.data().slackName} | 1st Lang: ${doc.data().languageFirst} | 2nd Lang: ${doc.data().languageSecond}`;
+            containerElement.appendChild(student);
+            /*
+            * doc.data().slackName
+            * doc.data().languageFirst
+            * doc.data().languageSecond
+            */
+            console.log(doc.id, " => ", doc.data());
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+}
+
 
 
 /*
@@ -180,7 +290,7 @@ function getProjects(arrayOfData, containerElement, trackName) {
 docRef.get().then(function(doc) {
     if(doc && doc.exists) {
         const myData = doc.data();
-        console.log(myData);
+        // console.log(myData);
 
         /*
          *  User Preferences
@@ -240,10 +350,10 @@ docRef.get().then(function(doc) {
         });
 
 
-        // Add Event Listener to each Track Button
+        // Track Buttons
         const trackButtons = document.querySelectorAll(".track-button");
 
-        // Projects in each Track
+        // Projects Container
         const projectsContainer = document.querySelector(".projects");
 
         for(let i = 0; i < trackButtons.length; i++) {
