@@ -3,6 +3,7 @@
   #explore .tracks .track .track-button {
     width: 100%; }
 #explore .track-details .projects .project-button {
-  width: 100%; }
+  width: 100%;
+  text-align: left; }
 
 /*# sourceMappingURL=app.css.map */
