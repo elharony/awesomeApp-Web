@@ -305,6 +305,30 @@ function getStudents(containerElement, projectName) {
 }
 
 
+/*
+ * Display projects based on Track
+ * [ Preferences ]
+ */
+function getAvailableProjects(db, tracks, container) {
+    switch(tracks.value) {
+        case "AND":
+            container.innerHTML = "";
+            optionFiedCreator(db.andProjectsArray, container);
+        break;
+        case "ABND":
+            container.innerHTML = "";
+            optionFiedCreator(db.abndProjectsArray, container);
+        break;
+        case "FEND":
+            container.innerHTML = "";
+            optionFiedCreator(db.fendProjectsArray, container);
+        break;
+        case "MWS":
+            container.innerHTML = "";
+            optionFiedCreator(db.mwsProjectsArray, container);
+        break;
+    }
+}
 
 /*
  * Get All Data
@@ -325,24 +349,7 @@ docRef.get().then(function(doc) {
         // Get Available Projects based on the selected Track
         const availableProjects = document.querySelector("#availableProjects");
         tracks.addEventListener("change", function() {
-            switch(tracks.value) {
-                case "AND":
-                    availableProjects.innerHTML = "";
-                    optionFiedCreator(myData.andProjectsArray, availableProjects);
-                break;
-                case "ABND":
-                    availableProjects.innerHTML = "";
-                    optionFiedCreator(myData.abndProjectsArray, availableProjects);
-                break;
-                case "FEND":
-                    availableProjects.innerHTML = "";
-                    optionFiedCreator(myData.fendProjectsArray, availableProjects);
-                break;
-                case "MWS":
-                    availableProjects.innerHTML = "";
-                    optionFiedCreator(myData.mwsProjectsArray, availableProjects);
-                break;
-            }
+            getAvailableProjects(myData, tracks, availableProjects);
         });
 
         // Languages
