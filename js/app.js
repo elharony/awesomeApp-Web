@@ -76,7 +76,7 @@ firebase.initializeApp(config);
     // Show/Hide based on Auth
     loggedInDiv.style.display = "block";
     loggedOutDiv.style.display = "none";
-    // console.log(user);
+    console.log(user);
 
     // Display User Data
     userName.innerHTML = user.displayName;
@@ -84,13 +84,30 @@ firebase.initializeApp(config);
     userImage.setAttribute("src", user.photoURL);
 
 
-    // Add New Data
+    // Preferences Fields
     const preferencesForm  = document.querySelector("#preferencesForm");
     const u_slackName      = document.querySelector("#slackName");
     const u_track          = document.querySelector("#tracks");
     const u_currentProject = document.querySelector("#availableProjects");
     const u_langOne        = document.querySelector("#langOne");
     const u_langTwo        = document.querySelector("#langTwo");
+
+
+    db.doc("Users/" + user.uid + "/").get().then(function(doc) {
+        if (doc.exists) {
+            u_slackName.value = doc.data().slackName;
+            u_track.value = doc.data().userTrack;
+            u_currentProject.value = doc.data().currentProject;
+            u_langOne.value = doc.data().languageFirst;
+            u_langTwo.value = doc.data().languageSecond;
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
 
     preferencesForm.addEventListener("submit", function(e) {
         e.preventDefault();
@@ -325,7 +342,6 @@ docRef.get().then(function(doc) {
                     availableProjects.innerHTML = "";
                     optionFiedCreator(myData.mwsProjectsArray, availableProjects);
                 break;
-
             }
         });
 
