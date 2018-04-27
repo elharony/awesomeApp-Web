@@ -121,7 +121,8 @@ function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentPro
       languageFirst: u_langOne,
       languageSecond: u_langTwo
     }).then(function() {
-        alert("Saved!");
+        alert("Updated!");
+        location.reload();
     }).catch(function(error) {
         console.log("Error: ", error)
     });
@@ -392,6 +393,7 @@ function getAvailableProjects(db, tracks, container) {
  */
 document.querySelector("#signout").addEventListener("click", function() {
     firebase.auth().signOut().then(function() {
+        alert("We will miss you!");
         location.reload();
     }, function(error) {
         console.error('Sign Out Error', error);
