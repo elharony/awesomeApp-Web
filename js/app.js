@@ -205,7 +205,7 @@ db.doc("helpData/tracks").get().then(function(doc) {
         const track = document.createElement("div");
         track.className = "track col s6 m3 center-align";
         const trackBtn = document.createElement("button");
-        trackBtn.className = "track-button waves-effect waves-light btn-large light-blue darken-1";
+        trackBtn.className = "track-button waves-effect waves-light btn-large grey darken-4";
         trackBtn.innerHTML = value;
         trackBtn.setAttribute("data-value", value);
         track.appendChild(trackBtn);
@@ -273,7 +273,7 @@ function optionFiedCreator(arrayOfData, containerElement) {
 function getProjects(arrayOfData, containerElement, trackName) {
     arrayOfData.forEach(function(data) {
         const project = document.createElement("button");
-        project.className = "project-button waves-effect waves-light btn-large light-blue darken-4";
+        project.className = "project-button waves-effect waves-light btn-large grey darken-3";
         project.setAttribute("data-track", trackName);
         project.setAttribute("data-project", data);
         project.innerHTML = data;
