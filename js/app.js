@@ -147,7 +147,7 @@ function getStudents(containerElement, projectName) {
 
             const data_contact = document.createElement("li");
             data_contact.className = "collection-item row";
-            data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><i class="fas fa-user"></i> ${doc.data().userName}</div>`;
+            data_contact.innerHTML = `<div class="col s12"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div>`;
 
             const data_languages = document.createElement("li");
             data_languages.className = "collection-item row";
