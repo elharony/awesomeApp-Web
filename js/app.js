@@ -1,10 +1,3 @@
-$(document).ready(function(){
-    $('.tabs').tabs();
-    $('select').formSelect();
-    $('.modal').modal();
-    $('.sidenav').sidenav();
-});
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyBVARDFRI7QWempiL8upUd2S-G8s1Uom-o",
@@ -402,4 +395,16 @@ document.querySelector("#signout").addEventListener("click", function() {
     }, function(error) {
         console.error('Sign Out Error', error);
     });
+});
+
+
+
+/*****************************
+********* UI Stuff ***********
+******************************/
+$(document).ready(function(){
+    $('.tabs').tabs();
+    $('select').formSelect();
+    $('.modal').modal();
+    $('.sidenav').sidenav();
 });
