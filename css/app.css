@@ -1,3 +1,16 @@
+.signedOut {
+  background: url(../img/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat; }
+  .signedOut .inner {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 20%;
+    text-align: center; }
+    .signedOut .inner h1 {
+      margin: 0;
+      color: #eee; }
+
 #explore .tracks {
   margin-top: 2rem; }
   #explore .tracks .track .track-button {
