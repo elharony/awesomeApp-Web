@@ -44,12 +44,12 @@ firebase.initializeApp(config);
  ui.start('#firebaseui-auth-container', uiConfig);
 
 
- const loggedInDiv = document.querySelector(".signedIn");
- const loggedOutDiv = document.querySelector(".signedOut");
- const userName  = document.querySelector("#userName");
- const userEmail = document.querySelector("#userEmail");
- const userImage = document.querySelector("#userImage");
-
+ // Select the intro [ Info Summary Div ]
+ const loggedInDiv     = document.querySelector(".signedIn");
+ const loggedOutDiv    = document.querySelector(".signedOut");
+ const userContact     = document.querySelector("#userContact");
+ const userPreferences = document.querySelector("#userPreferences");
+ const userImage       = document.querySelector("#userImage");
 
 
  /*
@@ -64,8 +64,6 @@ firebase.initializeApp(config);
     console.log(user);
 
     // Display User Data
-    userName.innerHTML = user.displayName;
-    userEmail.innerHTML = user.email;
     userImage.setAttribute("src", user.photoURL);
 
 
@@ -80,12 +78,15 @@ firebase.initializeApp(config);
 
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
         if (doc.exists) {
+            // User Current Info [ Top Summary ]
+            userContact.innerHTML     = `<i class="fas fa-user"></i> ${user.displayName} <br><i class="fas fa-envelope"></i> ${user.email}`;
+            userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject}`;
+
+            // User Current Info [ Preferences Fields ]
             u_slackName.value = doc.data().slackName;
-            u_track.value = doc.data().userTrack;
-            u_currentProject.value = doc.data().currentProject;
             u_langOne.value = doc.data().languageFirst;
             u_langTwo.value = doc.data().languageSecond;
-            console.log("Document data:", doc.data());
+            // console.log("Document data:", doc.data());
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
