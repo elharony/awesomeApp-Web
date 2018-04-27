@@ -147,7 +147,7 @@ function getStudents(containerElement, projectName) {
 
             const data_contact = document.createElement("li");
             data_contact.className = "collection-item row";
-            data_contact.innerHTML = `<div class="col s12"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div>`;
+            data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><a href="https://slack.com/app_redirect?channel=C97PS9WJD" id="go-to-slack" class="waves-effect waves-light btn-small grey darken-4">Go to Slack</a></div>`;
 
             const data_languages = document.createElement("li");
             data_languages.className = "collection-item row";
