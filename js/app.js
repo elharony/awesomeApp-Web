@@ -121,7 +121,7 @@ function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentPro
       languageFirst: u_langOne,
       languageSecond: u_langTwo
     }).then(function() {
-        console.log("Data Saved!");
+        alert("Saved!");
     }).catch(function(error) {
         console.log("Error: ", error)
     });
