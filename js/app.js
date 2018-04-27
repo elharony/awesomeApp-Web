@@ -5,8 +5,6 @@ $(document).ready(function(){
     $('.sidenav').sidenav();
 });
 
-
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyBVARDFRI7QWempiL8upUd2S-G8s1Uom-o",
@@ -19,12 +17,8 @@ var config = {
 firebase.initializeApp(config);
 
 
-
-
 /*
- *
  * Login
- * 
  */
  // Initialize the FirebaseUI Widget using Firebase.
  var ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -66,9 +60,7 @@ firebase.initializeApp(config);
 
 
  /*
-  *
   * LoggedIn / LoggedOut
-  *
   */
  firebase.auth().onAuthStateChanged(function(user) {
    if (user) {
@@ -142,27 +134,131 @@ function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentPro
 }
 
 
-
- /*
-  *
-  * Logout
-  * 
-  */
- document.querySelector("#signout").addEventListener("click", function() {
-    firebase.auth().signOut().then(function() {
-        console.log('Signed Out');
-    }, function(error) {
-        console.error('Sign Out Error', error);
-    });
- });
-
-
-
-
-
 var db = firebase.firestore();
 
-const docRef = db.doc("helpData/tracks");
+
+/*
+ * Show all Students in the Selected Project
+ * [ Explore ]
+ */
+function getStudents(containerElement, projectName) {
+
+    db.collection("Users").where("currentProject", "==", projectName)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            const student = document.createElement("ul");
+            student.className = "student-card collection";
+
+            const data_contact = document.createElement("li");
+            data_contact.className = "collection-item row";
+            data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><i class="fas fa-user"></i> ${doc.data().userName}</div>`;
+
+            const data_languages = document.createElement("li");
+            data_languages.className = "collection-item row";
+            data_languages.innerHTML = `<div class="col s6"><i class="fas fa-globe"></i> ${doc.data().languageFirst}</div> <div class="col s6"><i class="fas fa-globe"></i> ${doc.data().languageSecond}</div>`;
+
+            student.appendChild(data_contact);
+            student.appendChild(data_languages);
+            containerElement.appendChild(student);
+            
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+}
+
+
+/*
+ * Get All Data
+ * [ Preferences & Explore ]
+ */
+db.doc("helpData/tracks").get().then(function(doc) {
+    const myData = doc.data();
+    // console.log(myData);
+
+    /*
+     * Preferences
+     */
+
+    // Tracks
+    const tracks = document.querySelector("#tracks");
+    optionFiedCreator(myData.tracksArray, tracks);
+
+    // Get Available Projects based on the selected Track
+    const availableProjects = document.querySelector("#availableProjects");
+    tracks.addEventListener("change", function() {
+        getAvailableProjects(myData, tracks, availableProjects);
+    });
+
+    // Languages
+    const langOne = document.querySelector("#langOne");
+    optionFiedCreator(myData.langsArray, langOne);
+    const langTwo = document.querySelector("#langTwo");
+    optionFiedCreator(myData.langsArray, langTwo);
+
+
+
+    /*
+     * Explore
+     */
+
+    // Tracks
+    const tracksContainer = document.querySelector(".tracks");
+    myData.tracksArray.forEach(function (value) {
+        const track = document.createElement("div");
+        track.className = "track col s6 m3 center-align";
+        const trackBtn = document.createElement("button");
+        trackBtn.className = "track-button waves-effect waves-light btn-large";
+        trackBtn.innerHTML = value;
+        trackBtn.setAttribute("data-value", value);
+        track.appendChild(trackBtn);
+        tracksContainer.appendChild(track);
+    });
+
+
+    // Track Buttons
+    const trackButtons = document.querySelectorAll(".track-button");
+
+    // Projects Container
+    const projectsContainer = document.querySelector(".projects");
+
+    for(let i = 0; i < trackButtons.length; i++) {
+        trackButtons[i].addEventListener("click", function() {
+            const trackName = this.getAttribute("data-value");
+
+            // Display the projects based on the clicked Track
+            switch(trackName) {
+                case "AND":
+                    projectsContainer.innerHTML = "";
+                    getProjects(myData.andProjectsArray, projectsContainer, "AND");
+                break;
+                case "ABND":
+                    projectsContainer.innerHTML = "";
+                    getProjects(myData.abndProjectsArray, projectsContainer, "ABND");
+                break;
+                case "FEND":
+                    projectsContainer.innerHTML = "";
+                    getProjects(myData.fendProjectsArray, projectsContainer, "FEND");
+                break;
+                case "MWS":
+                    projectsContainer.innerHTML = "";
+                    getProjects(myData.mwsProjectsArray, projectsContainer, "MWS");
+                break;
+            }
+        });
+    }
+
+}).catch(function (error) {
+    console.log("Got an error: ", error);
+});
+
+
+/*****************************
+****** Helper Functions ******
+******************************/
+
 
 /*
  * Option Field Creator [ Create and Fill it with Data ]
@@ -272,39 +368,6 @@ function getProjectNames(track) {
 getProjectNames();
 
 
-
-/*
- * Show all Students in the Selected Project
- */
-function getStudents(containerElement, projectName) {
-
-    db.collection("Users").where("currentProject", "==", projectName)
-    .get()
-    .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            const student = document.createElement("ul");
-            student.className = "student-card collection";
-
-            const data_contact = document.createElement("li");
-            data_contact.className = "collection-item row";
-            data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><i class="fas fa-user"></i> ${doc.data().userName}</div>`;
-
-            const data_languages = document.createElement("li");
-            data_languages.className = "collection-item row";
-            data_languages.innerHTML = `<div class="col s6"><i class="fas fa-globe"></i> ${doc.data().languageFirst}</div> <div class="col s6"><i class="fas fa-globe"></i> ${doc.data().languageSecond}</div>`;
-
-            student.appendChild(data_contact);
-            student.appendChild(data_languages);
-            containerElement.appendChild(student);
-            
-        });
-    })
-    .catch(function(error) {
-        console.log("Error getting documents: ", error);
-    });
-}
-
-
 /*
  * Display projects based on Track
  * [ Preferences ]
@@ -331,87 +394,12 @@ function getAvailableProjects(db, tracks, container) {
 }
 
 /*
- * Get All Data
+ * Logout
  */
-docRef.get().then(function(doc) {
-    if(doc && doc.exists) {
-        const myData = doc.data();
-        // console.log(myData);
-
-        /*
-         *  User Preferences
-         */
-
-        // Tracks
-        const tracks = document.querySelector("#tracks");
-        optionFiedCreator(myData.tracksArray, tracks);
-
-        // Get Available Projects based on the selected Track
-        const availableProjects = document.querySelector("#availableProjects");
-        tracks.addEventListener("change", function() {
-            getAvailableProjects(myData, tracks, availableProjects);
-        });
-
-        // Languages
-        const langOne = document.querySelector("#langOne");
-        optionFiedCreator(myData.langsArray, langOne);
-        const langTwo = document.querySelector("#langTwo");
-        optionFiedCreator(myData.langsArray, langTwo);
-
-
-
-        /*
-         * Explore
-         */
-
-        // Tracks
-        const tracksContainer = document.querySelector(".tracks");
-        myData.tracksArray.forEach(function (value) {
-            const track = document.createElement("div");
-            track.className = "track col s6 m3 center-align";
-            const trackBtn = document.createElement("button");
-            trackBtn.className = "track-button waves-effect waves-light btn-large";
-            trackBtn.innerHTML = value;
-            trackBtn.setAttribute("data-value", value);
-            track.appendChild(trackBtn);
-            tracksContainer.appendChild(track);
-        });
-
-
-        // Track Buttons
-        const trackButtons = document.querySelectorAll(".track-button");
-
-        // Projects Container
-        const projectsContainer = document.querySelector(".projects");
-
-        for(let i = 0; i < trackButtons.length; i++) {
-            trackButtons[i].addEventListener("click", function() {
-                const trackName = this.getAttribute("data-value");
-
-                // Display the projects based on the clicked Track
-                switch(trackName) {
-                    case "AND":
-                        projectsContainer.innerHTML = "";
-                        getProjects(myData.andProjectsArray, projectsContainer, "AND");
-                    break;
-                    case "ABND":
-                        projectsContainer.innerHTML = "";
-                        getProjects(myData.abndProjectsArray, projectsContainer, "ABND");
-                    break;
-                    case "FEND":
-                        projectsContainer.innerHTML = "";
-                        getProjects(myData.fendProjectsArray, projectsContainer, "FEND");
-                    break;
-                    case "MWS":
-                        projectsContainer.innerHTML = "";
-                        getProjects(myData.mwsProjectsArray, projectsContainer, "MWS");
-                    break;
-                }
-            });
-        }
-
-
-    }
-}).catch(function (error) {
-    console.log("Got an error: ", error);
+document.querySelector("#signout").addEventListener("click", function() {
+    firebase.auth().signOut().then(function() {
+        console.log('Signed Out');
+    }, function(error) {
+        console.error('Sign Out Error', error);
+    });
 });
