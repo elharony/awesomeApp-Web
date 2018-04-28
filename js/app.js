@@ -74,12 +74,12 @@ firebase.initializeApp(config);
     const u_currentProject = document.querySelector("#availableProjects");
     const u_langOne        = document.querySelector("#langOne");
     const u_langTwo        = document.querySelector("#langTwo");
-
+	let user_currentProject;
 
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
         if (doc.exists) {
         	const u_tracks_Options = u_track.querySelectorAll('option');
-
+			user_currentProject = doc.data().currentProject;
             // User Current Info [ Top Summary ]
             userContact.innerHTML     = `<i class="fas fa-user"></i> ${user.displayName} <br><i class="fas fa-envelope"></i> ${user.email}`;
             userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject}`;
@@ -96,19 +96,19 @@ firebase.initializeApp(config);
             	console.log(option)
 				if(option.innerHTML === doc.data().userTrack) {
 					option.setAttribute('selected', '');
-					getAvailableProjects(doc.data(), u_track, u_currentProject);
+					//getAvailableProjects(doc.data(), u_track, u_currentProject);
 				}
             })
 
-			const u_currentProjects = u_currentProject.querySelectorAll('option');
-			console.log(u_currentProjects);
-			// set current project as a selected
-            u_currentProjects.forEach(project => {
-            	console.log(project)
-				if(project.innerHTML === doc.data().currentProject) {
-					project.setAttribute('selected', '');
-				}
-            })
+			// const u_currentProjects = u_currentProject.querySelectorAll('option');
+			// console.log(u_currentProjects);
+			// // set current project as a selected
+   //          u_currentProjects.forEach(project => {
+   //          	console.log(project)
+			// 	if(project.innerHTML === doc.data().currentProject) {
+			// 		project.setAttribute('selected', '');
+			// 	}
+   //          })
 
             // console.log("Document data:", doc.data());
         } else {
@@ -268,6 +268,16 @@ db.doc("helpData/tracks").get().then(function(doc) {
             }
         });
     }
+
+    const u_currentProjects = u_currentProject.querySelectorAll('option');
+			console.log(u_currentProjects);
+			// set current project as a selected
+            u_currentProjects.forEach(project => {
+            	console.log(project)
+				if(project.innerHTML === user_currentProject) {
+					project.setAttribute('selected', '');
+				}
+            })
 
 }).catch(function (error) {
     console.log("Got an error: ", error);
