@@ -90,7 +90,7 @@ firebase.initializeApp(config);
             u_langOne.value = doc.data().languageFirst;
             u_langTwo.value = doc.data().languageSecond;
 
-            u_tracks_Options.forEach(option => {
+            u_track[0].forEach(option => {
             	console.log(option)
 				if(option.innerHTML === doc.data().userTrack) {
 					option.setAttribute('selected', '');
