@@ -90,6 +90,12 @@ firebase.initializeApp(config);
             u_langOne.value = doc.data().languageFirst;
             u_langTwo.value = doc.data().languageSecond;
 
+            u_tracks_Options.map(option => {
+				if(option.innerHTML === doc.data().userTrack) {
+					option.setAttribute('selected', '');
+				}
+            })
+
             // console.log("Document data:", doc.data());
         } else {
             // doc.data() will be undefined in this case
