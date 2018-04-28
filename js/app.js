@@ -268,7 +268,7 @@ db.doc("helpData/tracks").get().then(function(doc) {
             }
         });
     }
-
+	const u_currentProject = document.querySelector("#availableProjects");
     const u_currentProjects = u_currentProject.querySelectorAll('option');
 			console.log(u_currentProjects);
 			// set current project as a selected
