@@ -81,7 +81,7 @@ firebase.initializeApp(config);
             // User Current Info [ Top Summary ]
             userContact.innerHTML     = `<i class="fas fa-user"></i> ${user.displayName} <br><i class="fas fa-envelope"></i> ${user.email}`;
             userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject}`;
-
+			console.log(doc.data());
             // User Current Info [ Preferences Fields ]
             u_slackName.value = doc.data().slackName;
             u_langOne.value = doc.data().languageFirst;
@@ -99,8 +99,8 @@ firebase.initializeApp(config);
         e.preventDefault();
         writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
     });
-    
-     
+
+
    } else {
      loggedInDiv.style.display = "none";
      loggedOutDiv.style.display = "block";
@@ -156,7 +156,7 @@ function getStudents(containerElement, projectName) {
             student.appendChild(data_contact);
             student.appendChild(data_languages);
             containerElement.appendChild(student);
-            
+
         });
     })
     .catch(function(error) {
