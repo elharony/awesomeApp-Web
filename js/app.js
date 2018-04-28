@@ -79,6 +79,7 @@ firebase.initializeApp(config);
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
         if (doc.exists) {
         	const u_tracks_Options = u_track.querySelectorAll('option');
+        	const u_currentProjects = u_currentProject.querySelectorAll('option');
             // User Current Info [ Top Summary ]
             userContact.innerHTML     = `<i class="fas fa-user"></i> ${user.displayName} <br><i class="fas fa-envelope"></i> ${user.email}`;
             userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject}`;
@@ -90,10 +91,19 @@ firebase.initializeApp(config);
             u_langOne.value = doc.data().languageFirst;
             u_langTwo.value = doc.data().languageSecond;
 
+			// set current track as a selected
             u_tracks_Options.forEach(option => {
             	console.log(option)
 				if(option.innerHTML === doc.data().userTrack) {
 					option.setAttribute('selected', '');
+				}
+            })
+
+			// set current project as a selected
+            u_currentProjects.forEach(project => {
+            	console.log(option)
+				if(project.innerHTML === doc.data().currentProject) {
+					project.setAttribute('selected', '');
 				}
             })
 
