@@ -50,7 +50,7 @@ firebase.initializeApp(config);
  const userContact     = document.querySelector("#userContact");
  const userPreferences = document.querySelector("#userPreferences");
  const userImage       = document.querySelector("#userImage");
-
+ const event = new Event('change');
 
  /*
   * LoggedIn / LoggedOut
@@ -93,10 +93,9 @@ firebase.initializeApp(config);
 
 			// set current track as a selected
             u_tracks_Options.forEach(option => {
-            	console.log(option)
 				if(option.innerHTML === doc.data().userTrack) {
 					option.setAttribute('selected', '');
-					$(u_track).trigger('change');
+					u_track.dispatchEvent(event);
 					//getAvailableProjects(doc.data(), u_track, u_currentProject);
 				}
             })
