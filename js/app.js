@@ -172,7 +172,7 @@ function getStudents(containerElement, projectName) {
 
             const data_languages = document.createElement("li");
             data_languages.className = "collection-item row";
-            data_languages.innerHTML = `<div class="col s6"><i class="fas fa-globe"></i> ${doc.data().languageFirst}</div> <div class="col s6"><i class="fas fa-globe"></i> ${doc.data().languageSecond}</div>`;
+            data_languages.innerHTML = `<div class="col s12"><i class="fas fa-globe"></i> ${doc.data().languageFirst}, ${doc.data().languageSecond}</div>`;
 
             student.appendChild(data_contact);
             student.appendChild(data_languages);
