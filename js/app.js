@@ -66,7 +66,7 @@ firebase.initializeApp(config);
 
     // Display User Data
     userImage.setAttribute("src", user.photoURL);
-    userContact.innerHTML  = `<i class="fas fa-user"></i> ${user.displayName} <br><i class="fas fa-envelope"></i> ${user.email}`;
+    userContact.innerHTML  = `<i class="fas fa-user"></i> ${user.displayName}`;
 
 
     // Preferences Fields
