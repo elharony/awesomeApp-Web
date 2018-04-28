@@ -50,7 +50,7 @@ firebase.initializeApp(config);
  const userContact     = document.querySelector("#userContact");
  const userPreferences = document.querySelector("#userPreferences");
  const userImage       = document.querySelector("#userImage");
-
+ let user_currentProject;
 
  /*
   * LoggedIn / LoggedOut
@@ -74,7 +74,6 @@ firebase.initializeApp(config);
     const u_currentProject = document.querySelector("#availableProjects");
     const u_langOne        = document.querySelector("#langOne");
     const u_langTwo        = document.querySelector("#langTwo");
-	let user_currentProject;
 
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
         if (doc.exists) {
