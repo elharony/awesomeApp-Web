@@ -83,8 +83,6 @@ firebase.initializeApp(config);
             // User Current Info [ Top Summary ]
             userContact.innerHTML     = `<i class="fas fa-user"></i> ${user.displayName} <br><i class="fas fa-envelope"></i> ${user.email}`;
             userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject}`;
-			console.log(doc.data());
-			console.log(u_track);
 
             // User Current Info [ Preferences Fields ]
             u_slackName.value = doc.data().slackName;
@@ -95,13 +93,12 @@ firebase.initializeApp(config);
             u_tracks_Options.forEach(option => {
 				if(option.innerHTML === doc.data().userTrack) {
 					option.setAttribute('selected', '');
+					// call change event when current track is changed
 					u_track.dispatchEvent(event);
-					//getAvailableProjects(doc.data(), u_track, u_currentProject);
 				}
             })
 
 			const u_currentProjects = u_currentProject.querySelectorAll('option');
-			console.log(u_currentProjects);
 			// set current project as a selected
             u_currentProjects.forEach(project => {
             	console.log(project)
@@ -208,10 +205,9 @@ db.doc("helpData/tracks").get().then(function(doc) {
     // Get Available Projects based on the selected Track
     const availableProjects = document.querySelector("#availableProjects");
     tracks.addEventListener("change", function() {
-		console.log('sended to AvailableProject', myData, tracks, availableProjects)
         getAvailableProjects(myData, tracks, availableProjects);
     });
-	console.log('added listeners')
+
     // Languages
     const langOne = document.querySelector("#langOne");
     optionFiedCreator(myData.langsArray, langOne);
