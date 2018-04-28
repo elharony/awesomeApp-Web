@@ -101,7 +101,6 @@ firebase.initializeApp(config);
 			const u_currentProjects = u_currentProject.querySelectorAll('option');
 			// set current project as a selected
             u_currentProjects.forEach(project => {
-            	console.log(project)
 				if(project.innerHTML === doc.data().currentProject) {
 					project.setAttribute('selected', '');
 				}
