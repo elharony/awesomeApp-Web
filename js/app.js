@@ -209,9 +209,10 @@ db.doc("helpData/tracks").get().then(function(doc) {
     // Get Available Projects based on the selected Track
     const availableProjects = document.querySelector("#availableProjects");
     tracks.addEventListener("change", function() {
+
         getAvailableProjects(myData, tracks, availableProjects);
     });
-
+	console.log('added listeners')
     // Languages
     const langOne = document.querySelector("#langOne");
     optionFiedCreator(myData.langsArray, langOne);
