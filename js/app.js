@@ -96,7 +96,7 @@ firebase.initializeApp(config);
             	console.log(option)
 				if(option.innerHTML === doc.data().userTrack) {
 					option.setAttribute('selected', '');
-					getAvailableProjects(myData, u_track, u_currentProject);
+					getAvailableProjects(doc.data(), u_track, u_currentProject);
 				}
             })
 
