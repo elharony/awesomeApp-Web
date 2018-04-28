@@ -83,7 +83,7 @@ firebase.initializeApp(config);
         	const u_tracks_Options = u_track.querySelectorAll('option');
 
             // User Current Info [ Top Summary ]
-            userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject}`;
+            userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject} <br><i class="fas fa-globe"></i> ${doc.data().languageFirst}, ${doc.data().languageSecond}`;
 
             // User Current Info [ Preferences Fields ]
             u_slackName.value = doc.data().slackName;
