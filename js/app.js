@@ -66,6 +66,7 @@ firebase.initializeApp(config);
 
     // Display User Data
     userImage.setAttribute("src", user.photoURL);
+    userContact.innerHTML  = `<i class="fas fa-user"></i> ${user.displayName} <br><i class="fas fa-envelope"></i> ${user.email}`;
 
 
     // Preferences Fields
@@ -80,7 +81,6 @@ firebase.initializeApp(config);
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
         if (doc.exists) {
             // User Current Info [ Top Summary ]
-            userContact.innerHTML     = `<i class="fas fa-user"></i> ${user.displayName} <br><i class="fas fa-envelope"></i> ${user.email}`;
             userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject}`;
 
             // User Current Info [ Preferences Fields ]
