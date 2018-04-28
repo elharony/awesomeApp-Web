@@ -209,7 +209,7 @@ db.doc("helpData/tracks").get().then(function(doc) {
     // Get Available Projects based on the selected Track
     const availableProjects = document.querySelector("#availableProjects");
     tracks.addEventListener("change", function() {
-
+		console.log('sended to AvailableProject', myData, tracks, availableProjects)
         getAvailableProjects(myData, tracks, availableProjects);
     });
 	console.log('added listeners')
