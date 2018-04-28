@@ -71,7 +71,7 @@ firebase.initializeApp(config);
     const preferencesForm  = document.querySelector("#preferencesForm");
     const u_slackName      = document.querySelector("#slackName");
     const u_track          = document.querySelector("#tracks");
-    const u_tracks_Options = document.querySelectorAll('option');
+    const u_tracks_Options = u_track.querySelectorAll('option');
     const u_currentProject = document.querySelector("#availableProjects");
     const u_langOne        = document.querySelector("#langOne");
     const u_langTwo        = document.querySelector("#langTwo");
@@ -90,7 +90,7 @@ firebase.initializeApp(config);
             u_langOne.value = doc.data().languageFirst;
             u_langTwo.value = doc.data().languageSecond;
 
-            u_track[0].forEach(option => {
+            u_tracks_Options.forEach(option => {
             	console.log(option)
 				if(option.innerHTML === doc.data().userTrack) {
 					option.setAttribute('selected', '');
