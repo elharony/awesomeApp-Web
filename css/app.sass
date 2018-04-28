@@ -1,20 +1,36 @@
+/***********************/
+/** Reset Materialize **/
+/***********************/
+
+// Inputs
 input:not([type]):focus:not([readonly]), input[type="text"]:not(.browser-default):focus:not([readonly]), input[type="password"]:not(.browser-default):focus:not([readonly]), input[type="email"]:not(.browser-default):focus:not([readonly]), input[type="url"]:not(.browser-default):focus:not([readonly]), input[type="time"]:not(.browser-default):focus:not([readonly]), input[type="date"]:not(.browser-default):focus:not([readonly]), input[type="datetime"]:not(.browser-default):focus:not([readonly]), input[type="datetime-local"]:not(.browser-default):focus:not([readonly]), input[type="tel"]:not(.browser-default):focus:not([readonly]), input[type="number"]:not(.browser-default):focus:not([readonly]), input[type="search"]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly])
     border-color: #616161
     box-shadow: 0 1px 0 0 #616161
+
 select:focus
     outline: 1px solid #616161
 
+// Tabs
 .tabs .tab a
     color: #616161
+
 .tabs .tab a:focus, .tabs .tab a:hover
     background: #eceff1
     color: #616161
+
 .tabs .tab a.active, .tabs .tab a:focus.active
     background: #616161
     color: #eceff1
+
 .tabs .indicator
     background: #212121
 
+
+/***************/
+/** My Styles **/
+/***************/
+
+// Preloader
 #loader
     position: fixed
     top: 0
@@ -23,9 +39,11 @@ select:focus
     height: 100%
     background: rgba(253, 253, 253, 0.84)
     z-index: 99
+    
     .preloader-wrapper.big
         top: 30%
 
+// Landing Page [ Sign in / Sign out]
 .signedIn,
 .signedOut
     display: none
@@ -40,16 +58,21 @@ select:focus
         margin: 0 auto
         padding-top: 20%
         text-align: center
+
         h1
             margin: 0
             color: #eee
 
+// Explore [ Tab ]
 #explore
+
     .tracks
         margin-top: 2rem
+
         .track
             .track-button
                 width: 100%
+
     .track-details
         .projects
             .project-button
@@ -60,5 +83,6 @@ select:focus
         .students
             max-height: 450px
             overflow-y: scroll
+            
             .collection
                 margin-top: 0
