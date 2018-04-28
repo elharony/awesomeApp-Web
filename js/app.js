@@ -51,7 +51,7 @@ firebase.initializeApp(config);
  const userContact     = document.querySelector("#userContact");
  const userPreferences = document.querySelector("#userPreferences");
  const userImage       = document.querySelector("#userImage");
-
+ const event = new Event('change');
 
  /*
   * LoggedIn / LoggedOut
@@ -80,6 +80,8 @@ firebase.initializeApp(config);
 
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
         if (doc.exists) {
+        	const u_tracks_Options = u_track.querySelectorAll('option');
+
             // User Current Info [ Top Summary ]
             userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject}`;
 
@@ -87,6 +89,24 @@ firebase.initializeApp(config);
             u_slackName.value = doc.data().slackName;
             u_langOne.value = doc.data().languageFirst;
             u_langTwo.value = doc.data().languageSecond;
+
+			// set current track as a selected
+            u_tracks_Options.forEach(option => {
+				if(option.innerHTML === doc.data().userTrack) {
+					option.setAttribute('selected', '');
+					// call change event when current track is changed
+					u_track.dispatchEvent(event);
+				}
+            })
+
+			const u_currentProjects = u_currentProject.querySelectorAll('option');
+			// set current project as a selected
+            u_currentProjects.forEach(project => {
+				if(project.innerHTML === doc.data().currentProject) {
+					project.setAttribute('selected', '');
+				}
+            })
+
             // console.log("Document data:", doc.data());
         } else {
             // doc.data() will be undefined in this case
@@ -100,8 +120,8 @@ firebase.initializeApp(config);
         e.preventDefault();
         writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
     });
-    
-     
+
+
    } else {
      loggedInDiv.style.display = "none";
      loggedOutDiv.style.display = "block";
@@ -157,7 +177,7 @@ function getStudents(containerElement, projectName) {
             student.appendChild(data_contact);
             student.appendChild(data_languages);
             containerElement.appendChild(student);
-            
+
         });
     })
     .catch(function(error) {
