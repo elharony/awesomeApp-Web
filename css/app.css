@@ -42,6 +42,9 @@ select:focus {
       margin: 0 0 1rem 0;
       color: #fff; }
 
+.signedIn #signout {
+  margin-left: 1rem; }
+
 #explore .tracks {
   margin-top: 2rem; }
   #explore .tracks .track .track-button {
