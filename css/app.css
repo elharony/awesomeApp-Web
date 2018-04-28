@@ -11,20 +11,6 @@ input:not([type]):focus:not([readonly]), input[type="text"]:not(.browser-default
 select:focus {
   outline: 1px solid #616161; }
 
-.tabs .tab a {
-  color: #616161; }
-
-.tabs .tab a:focus, .tabs .tab a:hover {
-  background: #eceff1;
-  color: #616161; }
-
-.tabs .tab a.active, .tabs .tab a:focus.active {
-  background: #616161;
-  color: #eceff1; }
-
-.tabs .indicator {
-  background: #212121; }
-
 /************** */
 /** My Styles */
 /************** */
