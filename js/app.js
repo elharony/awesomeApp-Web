@@ -71,6 +71,7 @@ firebase.initializeApp(config);
     const preferencesForm  = document.querySelector("#preferencesForm");
     const u_slackName      = document.querySelector("#slackName");
     const u_track          = document.querySelector("#tracks");
+    const u_tracks_Options = document.querySelectorAll('options');
     const u_currentProject = document.querySelector("#availableProjects");
     const u_langOne        = document.querySelector("#langOne");
     const u_langTwo        = document.querySelector("#langTwo");
@@ -83,10 +84,12 @@ firebase.initializeApp(config);
             userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject}`;
 			console.log(doc.data());
 			console.log(u_track);
+			console.log(u_tracks_Options);
             // User Current Info [ Preferences Fields ]
             u_slackName.value = doc.data().slackName;
             u_langOne.value = doc.data().languageFirst;
             u_langTwo.value = doc.data().languageSecond;
+
             // console.log("Document data:", doc.data());
         } else {
             // doc.data() will be undefined in this case
