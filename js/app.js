@@ -71,7 +71,7 @@ firebase.initializeApp(config);
     const preferencesForm  = document.querySelector("#preferencesForm");
     const u_slackName      = document.querySelector("#slackName");
     const u_track          = document.querySelector("#tracks");
-    const u_tracks_Options = document.querySelectorAll('options');
+    const u_tracks_Options = document.querySelectorAll('option');
     const u_currentProject = document.querySelector("#availableProjects");
     const u_langOne        = document.querySelector("#langOne");
     const u_langTwo        = document.querySelector("#langTwo");
