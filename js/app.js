@@ -101,15 +101,15 @@ firebase.initializeApp(config);
 				}
             })
 
-			// const u_currentProjects = u_currentProject.querySelectorAll('option');
-			// console.log(u_currentProjects);
-			// // set current project as a selected
-   //          u_currentProjects.forEach(project => {
-   //          	console.log(project)
-			// 	if(project.innerHTML === doc.data().currentProject) {
-			// 		project.setAttribute('selected', '');
-			// 	}
-   //          })
+			const u_currentProjects = u_currentProject.querySelectorAll('option');
+			console.log(u_currentProjects);
+			// set current project as a selected
+            u_currentProjects.forEach(project => {
+            	console.log(project)
+				if(project.innerHTML === doc.data().currentProject) {
+					project.setAttribute('selected', '');
+				}
+            })
 
             // console.log("Document data:", doc.data());
         } else {
