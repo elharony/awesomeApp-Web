@@ -85,7 +85,7 @@ firebase.initializeApp(config);
             userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject}`;
 			console.log(doc.data());
 			console.log(u_track);
-			console.log(u_currentProjects);
+
             // User Current Info [ Preferences Fields ]
             u_slackName.value = doc.data().slackName;
             u_langOne.value = doc.data().languageFirst;
@@ -101,6 +101,7 @@ firebase.initializeApp(config);
             })
 
 			const u_currentProjects = u_currentProject.querySelectorAll('option');
+			console.log(u_currentProjects);
 			// set current project as a selected
             u_currentProjects.forEach(project => {
             	console.log(project)
