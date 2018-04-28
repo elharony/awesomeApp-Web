@@ -1,3 +1,6 @@
+/********************* */
+/** Global Variables */
+/********************* */
 /********************** */
 /** Reset Materialize */
 /********************** */
@@ -51,7 +54,7 @@ select:focus {
     text-align: center; }
     .signedOut .inner h1 {
       margin: 0 0 1rem 0;
-      color: #eee; }
+      color: #fff; }
 
 #explore .tracks {
   margin-top: 2rem; }
