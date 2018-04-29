@@ -25,8 +25,7 @@ body {
   background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(../img/bg-img.gif);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: fixed;
-  height: 100vh;
+  background-attachment: fixed;
 }
 
 .heading-wrapper {
@@ -48,8 +47,8 @@ body {
   box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
 }
 
-.secondary-content a i.fas,
-.fas {
+.secondary-content a,
+.title .fas {
   color: #d82668;
 }
 
@@ -110,7 +109,8 @@ body {
 .signedIn #signout {
   margin-left: 1rem; }
 
-#explore {
+.explore-box {
+  padding: 15px;
   background-color: #fff;
   box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
   height: 700px;
