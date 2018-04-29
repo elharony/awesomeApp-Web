@@ -48,10 +48,14 @@ body {
 }
 
 .secondary-content a,
-.title .fas {
+.title .fas,
+#userPreferences .fas {
   color: #d82668;
 }
 
+.search-icon {
+  font-size: 30px;
+}
 
 
 #loader {
