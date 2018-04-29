@@ -31,6 +31,24 @@ select:focus {
     /* top: 30%; */
 }
 
+.search {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#searchClassmate {
+  width: 100%;
+  max-width: 350px;
+  float: right;
+}
+
+.notfound {
+    color: #F44336;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
 .signedIn,
 .signedOut {
   display: none; }

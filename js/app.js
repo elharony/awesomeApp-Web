@@ -1,4 +1,17 @@
 var loader = document.getElementById('loader');
+var search = document.getElementById('searchClassmate');
+function clearSearch(search) {
+    if (search.value == search.defaultValue) {
+        search.value = "";
+    }
+}
+function setSearch(input) {
+    if (search.value == "") {
+        search.value = search.defaultValue;
+    }
+}
+
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyBVARDFRI7QWempiL8upUd2S-G8s1Uom-o",
@@ -59,6 +72,13 @@ firebase.initializeApp(config);
   */
  firebase.auth().onAuthStateChanged(function(user) {
    if (user) {
+     const studentsContainer = document.querySelector(".students");
+     search.addEventListener('input', ()=>{
+        studentsContainer.innerHTML = '';
+        if(search.value) {
+            getStudents(studentsContainer, null, 'classmate');
+        }
+     });
      refreshPageData(user);
    } else {
      loggedInDiv.style.display = "none";
@@ -177,28 +197,58 @@ var db = firebase.firestore();
  * Show all Students in the Selected Project
  * [ Explore ]
  */
-function getStudents(containerElement, projectName) {
+function getStudents(containerElement, projectName, queryFlag) {
+    let query = queryFlag === 'classmate' ?
+             ["slackName", ">=", search.value]:
+             ["currentProject", ">=", projectName];
 
-    db.collection("Users").where("currentProject", "==", projectName)
+    db.collection("Users").where(...query)
+    .orderBy(queryFlag?'slackName':'currentProject')
+    .startAt(queryFlag?search.value:projectName)
+    .endAt(queryFlag?search.value +"\uf8ff":projectName)
     .get()
     .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
+        containerElement.innerHTML = '';
+        if(querySnapshot.size){
+            querySnapshot.forEach(function(doc) {
+                const student = document.createElement("ul");
+                student.className = "student-card collection";
+
+                const data_contact = document.createElement("li");
+                data_contact.className = "collection-item row";
+                data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><a href="https://slack.com/app_redirect?channel=C97PS9WJD" id="go-to-slack" class="waves-effect waves-light btn-small grey darken-4">Go to Slack</a></div>`;
+
+                const data_languages = document.createElement("li");
+                data_languages.className = "collection-item row";
+                data_languages.innerHTML = `<div class="col s12"><i class="fas fa-globe"></i> ${doc.data().languageFirst}, ${doc.data().languageSecond}</div>`;
+
+
+
+                student.appendChild(data_contact);
+                if(queryFlag) {
+                    const workingProject = document.createElement("li");
+                    workingProject.className = "collection-item row";
+                    const currentTrack = document.createElement("li");
+                    currentTrack.className = "collection-item row";
+                    currentTrack.innerHTML = `<div class="col s12"><i class="fas fa-certificate"></i> ${doc.data().userTrack}</div>`;
+                    workingProject.innerHTML = `<div class="col s12"><i class="fas fa-bug"></i> ${doc.data().currentProject}</div>`;
+                    student.appendChild(currentTrack);
+                    student.appendChild(workingProject);
+                }
+
+                student.appendChild(data_languages);
+                containerElement.appendChild(student);
+
+            });
+        }else{
             const student = document.createElement("ul");
             student.className = "student-card collection";
-
-            const data_contact = document.createElement("li");
-            data_contact.className = "collection-item row";
-            data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><a href="https://slack.com/app_redirect?channel=C97PS9WJD" id="go-to-slack" class="waves-effect waves-light btn-small grey darken-4">Go to Slack</a></div>`;
-
-            const data_languages = document.createElement("li");
-            data_languages.className = "collection-item row";
-            data_languages.innerHTML = `<div class="col s12"><i class="fas fa-globe"></i> ${doc.data().languageFirst}, ${doc.data().languageSecond}</div>`;
-
-            student.appendChild(data_contact);
-            student.appendChild(data_languages);
+            const notFound = document.createElement("li");
+            notFound.className = "collection-item row";
+            notFound.innerHTML = `<div class="col s12 notfound"><i class="small material-icons">error_outline</i> It seems we could not find anything</div>`;
+            student.appendChild(notFound);
             containerElement.appendChild(student);
-
-        });
+        }
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
