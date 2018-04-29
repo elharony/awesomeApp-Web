@@ -53,10 +53,6 @@ body {
   color: #d82668;
 }
 
-.search-icon {
-  font-size: 30px;
-}
-
 
 #loader {
     position: fixed;
@@ -81,10 +77,14 @@ body {
   align-items: center;
 }
 
+.search-icon {
+  font-size: 30px;
+}
+
 #searchClassmate {
   width: 100%;
   max-width: 350px;
-  float: right;
+
 }
 
 .notfound {
