@@ -180,9 +180,6 @@ function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentPro
         // location.reload();
         refreshPageData(firebase.auth().currentUser).then(function() {
             loader.style.display = "none";
-            setTimeout(()=>{
-                alert("Updated!");
-            },200)
         })
     }).catch(function(error) {
         console.log("Error: ", error)
