@@ -14,6 +14,42 @@ select:focus {
 /************** */
 /** My Styles */
 /************** */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: #555;
+  background-color: rgb(231, 231, 231); 
+  background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(../img/bg-img.gif);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.heading-wrapper {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.main-title {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 35px;
+}
+
+.collection {
+  padding: 15px;
+  margin: 20px auto;
+  align-items: center;
+  background-color:#fff;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
+}
+
+.fas {
+  color: #d82668;
+}
+
 #loader {
     position: fixed;
     display: flex;
