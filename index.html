@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AwesomeApp | Work with your Udacity ND Classmates</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/materialize.min.css">
@@ -13,82 +14,127 @@
   </head>
   <body>
 
-    <main class="main-content">
+    <main>
 
-        <div class="signedIn" style="display: none">
+        <div class="signedIn">
           <div class="container">
               <ul class="collection">
                 <li class="collection-item avatar">
                   <img id="userImage" src="" alt="" class="circle">
                   <span id="userContact" class="title"></span>
                   <p id="userPreferences"></p>
-                  <a href="javascript:void()" class="secondary-content btn-floating waves-effect waves-light btn-large red darken-2" id="signout"><i class="fas fa-sign-out-alt"></i></a>
+                  <div class="secondary-content">
+                    <a href="#preferences" class="btn-floating waves-effect waves-light btn-large modal-trigger blue" title="Preferences"><i class="fas fa-user-circle"></i></a>
+                    <a href="#" class="btn-floating waves-effect waves-light btn-large red" id="signout" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+                  </div>
+                  
                 </li>
               </ul>
-            <div class="row">
+
+
+            <!-- Preferences -->
+            <div id="preferences" class="modal">
+              <form action="" id="preferencesForm">
+              <div class="modal-content">
+                <h4>Preferences</h4>
+                <p>Update your Preferences to stay connected with other classmates!</p>
+                <div class="input-field col s12">
+                    <input id="slackName" type="text" placeholder="Slack Username" required>
+                </div>
+                <div class="input-field col s12">
+                    <select id="tracks" class="browser-default" required>
+                        <option value="" disabled selected>Nanodegree Tracks</option>
+                    </select>
+                </div>
+                <div class="input-field col s12">
+                    <select id="availableProjects" class="browser-default" required>
+                        <option value="" disabled selected>Current Project</option>
+                    </select>
+                </div>
+                <div class="input-field col s12">
+                    <select id="langOne" class="browser-default" required>
+                        <option value="" disabled selected>Preferred Language #1</option>
+                    </select>
+                </div>
+                <div class="input-field col s12">
+                    <select id="langTwo" class="browser-default" required>
+                        <option value="" disabled selected>Preferred Language #2</option>
+                    </select>
+                </div>
                 <div class="col s12">
-                  <ul class="tabs">
-                    <li class="tab col s3"><a class="active" href="#preferences">Preferences</a></li>
-                    <li class="tab col s3"><a href="#explore">Explore</a></li>
-                  </ul>
+                    <a href="#!" class="btn-floating modal-action modal-close waves-effect btn-large grey darken-4"><i class="fas fa-times"></i></a>
+                    <button type="submit" id="savePreferences" class="secondary-content btn-floating modal-action modal-close waves-effect btn-large green accent-4" title="Update Preferences"><i class="fas fa-pencil-alt"></i></button>
                 </div>
-  
-                <!-- Preferences -->
-                <div id="preferences" class="col s12">
-                  <form action="" id="preferencesForm">
-                      <div class="row">
-                          <div class="input-field col s12">
-                              <input id="slackName" type="text" placeholder="Slack Username">
-                          </div>
-                          <div class="input-field col s6">
-                              <select id="tracks" class="browser-default">
-                                  <option value="" disabled selected>Nanodegree Tracks</option>
-                              </select>
-                          </div>
-                          <div class="input-field col s6">
-                              <select id="availableProjects" class="browser-default">
-                                  <option value="" disabled selected>Current Project</option>
-                              </select>
-                          </div>
-                          <div class="input-field col s6">
-                              <select id="langOne" class="browser-default">
-                                  <option value="" disabled selected>Preferred Language #1</option>
-                              </select>
-                          </div>
-                          <div class="input-field col s6">
-                              <select id="langTwo" class="browser-default">
-                                  <option value="" disabled selected>Preferred Language #2</option>
-                              </select>
-                          </div>
-                          <div class="input-field col s12 left-align">
-                              <button type="submit" id="savePreferences" class="btn-floating waves-effect waves-light btn-large green accent-4"><i class="fas fa-pencil-alt"></i></button>
-                          </div>
-                      </div>
-                  </form>    
-                </div>
-  
-                <!-- Explore -->
-                <div id="explore" class="col s12">
+              </div>
 
-                  <!-- Tracks -->
-                  <div class="tracks row">
-                  </div>
+              </form>    
+            </div>
 
-                  <!-- Details -->
-                  <div class="track-details row">
-                    <div class="projects col s12 m6"></div>
-                    <div class="students col s12 m6"></div>
-                  </div>
+            <!-- Explore -->
+            <div id="explore" class="col s12">
 
-                </div>
+              <!-- Tracks -->
+              <div class="tracks row">
+              </div>
+
+              <!-- Details -->
+              <div class="track-details row">
+                <div class="projects col s12 m6"></div>
+                <div class="students col s12 m6"></div>
+              </div>
+
             </div>
           </div>
         </div>
 
-        <section class="signedOut" style="display: none">
+        <section class="signedOut">
           <div class="inner">
             <h1 id="login">Meet a classmate!</h1>
-            <div id="loader">Loading...........</div>
+            <div id="loader">
+              
+              <div class="preloader-wrapper big active">
+                  <div class="spinner-layer spinner-blue">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div><div class="gap-patch">
+                      <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+            
+                  <div class="spinner-layer spinner-red">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div><div class="gap-patch">
+                      <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+            
+                  <div class="spinner-layer spinner-yellow">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div><div class="gap-patch">
+                      <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+            
+                  <div class="spinner-layer spinner-green">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div><div class="gap-patch">
+                      <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+          
+            </div>
             <div id="firebaseui-auth-container"></div>
           </div>
         </section>
