@@ -1,3 +1,4 @@
+var loader = document.getElementById('loader');
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyBVARDFRI7QWempiL8upUd2S-G8s1Uom-o",
@@ -58,6 +59,20 @@ firebase.initializeApp(config);
   */
  firebase.auth().onAuthStateChanged(function(user) {
    if (user) {
+     refreshPageData(user);
+   } else {
+     loggedInDiv.style.display = "none";
+     loggedOutDiv.style.display = "block";
+   }
+ });
+
+/*
+ * initialize user data and refresh page
+ */
+ const refreshPageData = (user) => {
+    return new Promise((resolve, reject) => {
+    //Show preloader
+    loader.style.display = "flex";
 
     // Show/Hide based on Auth
     loggedInDiv.style.display = "block";
@@ -80,7 +95,7 @@ firebase.initializeApp(config);
 
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
         if (doc.exists) {
-        	const u_tracks_Options = u_track.querySelectorAll('option');
+            const u_tracks_Options = u_track.querySelectorAll('option');
 
             // User Current Info [ Top Summary ]
             userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject} <br><i class="fas fa-globe"></i> ${doc.data().languageFirst}, ${doc.data().languageSecond}`;
@@ -90,21 +105,21 @@ firebase.initializeApp(config);
             u_langOne.value = doc.data().languageFirst;
             u_langTwo.value = doc.data().languageSecond;
 
-			// set current track as a selected
+            // set current track as a selected
             u_tracks_Options.forEach(option => {
-				if(option.innerHTML === doc.data().userTrack) {
-					option.setAttribute('selected', '');
-					// call change event when current track is changed
-					u_track.dispatchEvent(event);
-				}
+                if(option.innerHTML === doc.data().userTrack) {
+                    option.setAttribute('selected', '');
+                    // call change event when current track is changed
+                    u_track.dispatchEvent(event);
+                }
             })
 
-			const u_currentProjects = u_currentProject.querySelectorAll('option');
-			// set current project as a selected
+            const u_currentProjects = u_currentProject.querySelectorAll('option');
+            // set current project as a selected
             u_currentProjects.forEach(project => {
-				if(project.innerHTML === doc.data().currentProject) {
-					project.setAttribute('selected', '');
-				}
+                if(project.innerHTML === doc.data().currentProject) {
+                    project.setAttribute('selected', '');
+                }
             })
 
             // console.log("Document data:", doc.data());
@@ -112,22 +127,22 @@ firebase.initializeApp(config);
             // doc.data() will be undefined in this case
             console.log("No such document!");
         }
+
+        resolve(true);
+        loader.style.display = "none";
     }).catch(function(error) {
         console.log("Error getting document:", error);
     });
 
     preferencesForm.addEventListener("submit", function(e) {
         e.preventDefault();
+        loader.style.display = "flex";
         writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
-    });
+    }, {once:true});
 
+  });
 
-   } else {
-     loggedInDiv.style.display = "none";
-     loggedOutDiv.style.display = "block";
-   }
- });
-
+}
 
 /*
  * Write User Data
@@ -142,8 +157,13 @@ function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentPro
       languageFirst: u_langOne,
       languageSecond: u_langTwo
     }).then(function() {
-        alert("Updated!");
-        location.reload();
+        // location.reload();
+        refreshPageData(firebase.auth().currentUser).then(function() {
+            loader.style.display = "none";
+            setTimeout(()=>{
+                alert("Updated!");
+            },200)
+        })
     }).catch(function(error) {
         console.log("Error: ", error)
     });
