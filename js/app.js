@@ -481,7 +481,6 @@ function getAvailableProjects(db, tracks, container) {
  */
 document.querySelector("#signout").addEventListener("click", function() {
     firebase.auth().signOut().then(function() {
-        alert("We will miss you!");
         location.reload();
     }, function(error) {
         console.error('Sign Out Error', error);
