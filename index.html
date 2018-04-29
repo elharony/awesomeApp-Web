@@ -27,9 +27,13 @@
                     <a href="#preferences" class="btn-floating waves-effect waves-light btn-large modal-trigger blue" title="Preferences"><i class="fas fa-user-circle"></i></a>
                     <a href="#" class="btn-floating waves-effect waves-light btn-large red" id="signout" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
                   </div>
-                  
+
                 </li>
               </ul>
+              <div class="search">
+                  <i class="medium material-icons">search</i>
+                  <input id="searchClassmate" type="text" name="search" value="Quick search for a classmate" onfocus="clearSearch(this)" onblur="setSearch(this)">
+              </div>
 
 
             <!-- Preferences -->
@@ -67,7 +71,7 @@
                 </div>
               </div>
 
-              </form>    
+              </form>
             </div>
 
             <!-- Explore -->
@@ -86,12 +90,8 @@
             </div>
           </div>
         </div>
+        <div id="loader">
 
-        <section class="signedOut">
-          <div class="inner">
-            <h1 id="login">Meet a classmate!</h1>
-            <div id="loader">
-              
               <div class="preloader-wrapper big active">
                   <div class="spinner-layer spinner-blue">
                     <div class="circle-clipper left">
@@ -102,7 +102,7 @@
                       <div class="circle"></div>
                     </div>
                   </div>
-            
+
                   <div class="spinner-layer spinner-red">
                     <div class="circle-clipper left">
                       <div class="circle"></div>
@@ -112,7 +112,7 @@
                       <div class="circle"></div>
                     </div>
                   </div>
-            
+
                   <div class="spinner-layer spinner-yellow">
                     <div class="circle-clipper left">
                       <div class="circle"></div>
@@ -122,7 +122,7 @@
                       <div class="circle"></div>
                     </div>
                   </div>
-            
+
                   <div class="spinner-layer spinner-green">
                     <div class="circle-clipper left">
                       <div class="circle"></div>
@@ -133,8 +133,11 @@
                     </div>
                   </div>
                 </div>
-          
-            </div>
+
+        </div>
+        <section class="signedOut">
+          <div class="inner">
+            <h1 id="login">Meet a classmate!</h1>
             <div id="firebaseui-auth-container"></div>
           </div>
         </section>

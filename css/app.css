@@ -15,15 +15,39 @@ select:focus {
 /** My Styles */
 /************** */
 #loader {
-  position: fixed;
-  top: 0;
-  left: 0;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(253, 253, 253, 0.84);
+    z-index: 99;
+}
+
+#loader .preloader-wrapper.big {
+    /* top: 30%; */
+}
+
+.search {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#searchClassmate {
   width: 100%;
-  height: 100%;
-  background: rgba(253, 253, 253, 0.84);
-  z-index: 99; }
-  #loader .preloader-wrapper.big {
-    top: 30%; }
+  max-width: 350px;
+  float: right;
+}
+
+.notfound {
+    color: #F44336;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
 
 .signedIn,
 .signedOut {

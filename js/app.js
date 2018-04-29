@@ -1,3 +1,17 @@
+var loader = document.getElementById('loader');
+var search = document.getElementById('searchClassmate');
+function clearSearch(search) {
+    if (search.value == search.defaultValue) {
+        search.value = "";
+    }
+}
+function setSearch(input) {
+    if (search.value == "") {
+        search.value = search.defaultValue;
+    }
+}
+
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyBVARDFRI7QWempiL8upUd2S-G8s1Uom-o",
@@ -58,6 +72,27 @@ firebase.initializeApp(config);
   */
  firebase.auth().onAuthStateChanged(function(user) {
    if (user) {
+     const studentsContainer = document.querySelector(".students");
+     search.addEventListener('input', ()=>{
+        studentsContainer.innerHTML = '';
+        if(search.value) {
+            getStudents(studentsContainer, null, 'classmate');
+        }
+     });
+     refreshPageData(user);
+   } else {
+     loggedInDiv.style.display = "none";
+     loggedOutDiv.style.display = "block";
+   }
+ });
+
+/*
+ * initialize user data and refresh page
+ */
+ const refreshPageData = (user) => {
+    return new Promise((resolve, reject) => {
+    //Show preloader
+    loader.style.display = "flex";
 
     // Show/Hide based on Auth
     loggedInDiv.style.display = "block";
@@ -80,7 +115,7 @@ firebase.initializeApp(config);
 
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
         if (doc.exists) {
-        	const u_tracks_Options = u_track.querySelectorAll('option');
+            const u_tracks_Options = u_track.querySelectorAll('option');
 
             // User Current Info [ Top Summary ]
             userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject} <br><i class="fas fa-globe"></i> ${doc.data().languageFirst}, ${doc.data().languageSecond}`;
@@ -90,21 +125,21 @@ firebase.initializeApp(config);
             u_langOne.value = doc.data().languageFirst;
             u_langTwo.value = doc.data().languageSecond;
 
-			// set current track as a selected
+            // set current track as a selected
             u_tracks_Options.forEach(option => {
-				if(option.innerHTML === doc.data().userTrack) {
-					option.setAttribute('selected', '');
-					// call change event when current track is changed
-					u_track.dispatchEvent(event);
-				}
+                if(option.innerHTML === doc.data().userTrack) {
+                    option.setAttribute('selected', '');
+                    // call change event when current track is changed
+                    u_track.dispatchEvent(event);
+                }
             })
 
-			const u_currentProjects = u_currentProject.querySelectorAll('option');
-			// set current project as a selected
+            const u_currentProjects = u_currentProject.querySelectorAll('option');
+            // set current project as a selected
             u_currentProjects.forEach(project => {
-				if(project.innerHTML === doc.data().currentProject) {
-					project.setAttribute('selected', '');
-				}
+                if(project.innerHTML === doc.data().currentProject) {
+                    project.setAttribute('selected', '');
+                }
             })
 
             // console.log("Document data:", doc.data());
@@ -112,22 +147,22 @@ firebase.initializeApp(config);
             // doc.data() will be undefined in this case
             console.log("No such document!");
         }
+
+        resolve(true);
+        loader.style.display = "none";
     }).catch(function(error) {
         console.log("Error getting document:", error);
     });
 
     preferencesForm.addEventListener("submit", function(e) {
         e.preventDefault();
+        loader.style.display = "flex";
         writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
-    });
+    }, {once:true});
 
+  });
 
-   } else {
-     loggedInDiv.style.display = "none";
-     loggedOutDiv.style.display = "block";
-   }
- });
-
+}
 
 /*
  * Write User Data
@@ -142,8 +177,13 @@ function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentPro
       languageFirst: u_langOne,
       languageSecond: u_langTwo
     }).then(function() {
-        alert("Updated!");
-        location.reload();
+        // location.reload();
+        refreshPageData(firebase.auth().currentUser).then(function() {
+            loader.style.display = "none";
+            setTimeout(()=>{
+                alert("Updated!");
+            },200)
+        })
     }).catch(function(error) {
         console.log("Error: ", error)
     });
@@ -157,28 +197,58 @@ var db = firebase.firestore();
  * Show all Students in the Selected Project
  * [ Explore ]
  */
-function getStudents(containerElement, projectName) {
+function getStudents(containerElement, projectName, queryFlag) {
+    let query = queryFlag === 'classmate' ?
+             ["slackName", ">=", search.value]:
+             ["currentProject", ">=", projectName];
 
-    db.collection("Users").where("currentProject", "==", projectName)
+    db.collection("Users").where(...query)
+    .orderBy(queryFlag?'slackName':'currentProject')
+    .startAt(queryFlag?search.value:projectName)
+    .endAt(queryFlag?search.value +"\uf8ff":projectName)
     .get()
     .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
+        containerElement.innerHTML = '';
+        if(querySnapshot.size){
+            querySnapshot.forEach(function(doc) {
+                const student = document.createElement("ul");
+                student.className = "student-card collection";
+
+                const data_contact = document.createElement("li");
+                data_contact.className = "collection-item row";
+                data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><a href="https://slack.com/app_redirect?channel=C97PS9WJD" id="go-to-slack" class="waves-effect waves-light btn-small grey darken-4">Go to Slack</a></div>`;
+
+                const data_languages = document.createElement("li");
+                data_languages.className = "collection-item row";
+                data_languages.innerHTML = `<div class="col s12"><i class="fas fa-globe"></i> ${doc.data().languageFirst}, ${doc.data().languageSecond}</div>`;
+
+
+
+                student.appendChild(data_contact);
+                if(queryFlag) {
+                    const workingProject = document.createElement("li");
+                    workingProject.className = "collection-item row";
+                    const currentTrack = document.createElement("li");
+                    currentTrack.className = "collection-item row";
+                    currentTrack.innerHTML = `<div class="col s12"><i class="fas fa-certificate"></i> ${doc.data().userTrack}</div>`;
+                    workingProject.innerHTML = `<div class="col s12"><i class="fas fa-bug"></i> ${doc.data().currentProject}</div>`;
+                    student.appendChild(currentTrack);
+                    student.appendChild(workingProject);
+                }
+
+                student.appendChild(data_languages);
+                containerElement.appendChild(student);
+
+            });
+        }else{
             const student = document.createElement("ul");
             student.className = "student-card collection";
-
-            const data_contact = document.createElement("li");
-            data_contact.className = "collection-item row";
-            data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><a href="https://slack.com/app_redirect?channel=C97PS9WJD" id="go-to-slack" class="waves-effect waves-light btn-small grey darken-4">Go to Slack</a></div>`;
-
-            const data_languages = document.createElement("li");
-            data_languages.className = "collection-item row";
-            data_languages.innerHTML = `<div class="col s12"><i class="fas fa-globe"></i> ${doc.data().languageFirst}, ${doc.data().languageSecond}</div>`;
-
-            student.appendChild(data_contact);
-            student.appendChild(data_languages);
+            const notFound = document.createElement("li");
+            notFound.className = "collection-item row";
+            notFound.innerHTML = `<div class="col s12 notfound"><i class="small material-icons">error_outline</i> It seems we could not find anything</div>`;
+            student.appendChild(notFound);
             containerElement.appendChild(student);
-
-        });
+        }
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
