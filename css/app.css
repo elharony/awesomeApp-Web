@@ -109,8 +109,11 @@ body {
 .signedIn #signout {
   margin-left: 1rem; }
 
+.row {
+  margin: 15px;
+}
+
 .explore-box {
-  padding: 15px;
   background-color: #fff;
   box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
   height: 700px;
