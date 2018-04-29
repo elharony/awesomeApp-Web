@@ -46,9 +46,12 @@ body {
   box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
 }
 
+.secondary-content a i.fas,
 .fas {
   color: #d82668;
 }
+
+
 
 #loader {
     position: fixed;
@@ -104,6 +107,11 @@ body {
 
 .signedIn #signout {
   margin-left: 1rem; }
+
+#explore {
+  background-color: #fff;
+  height: 700px;
+}
 
 #explore .tracks {
   margin-top: 2rem; }
