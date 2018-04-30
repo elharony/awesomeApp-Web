@@ -53,8 +53,9 @@ body {
   color: #d81b60;
 }
 
-.fas {
-  margin: 3px 5px 3px 0;
+.fas:not(.btn-fa),
+.fab {
+  margin: 4px;
 }
 
 #loader {
