@@ -94,7 +94,7 @@ body {
 }
 
 .notfound {
-    color: #F44336;
+    color: #f4364f;
     font-size: 16px;
     display: flex;
     align-items: center;
@@ -125,10 +125,6 @@ body {
   background-color: #fff;
   box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
   height: 700px;
-}
-
-.tracks-wrapper {
-  padding: 15px;
 }
 
 #explore .tracks {
