@@ -143,9 +143,10 @@ padding-top: 15px; }
 .link-container {
   text-align: center;
   padding: 15px;
+  width: 100%;
 }
 
-.link-container .gaphic {
-  color: #333;
+a.graphic {
   font-size: 12px;
+  color: #424242;
 }
