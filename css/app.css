@@ -47,6 +47,11 @@ body {
   box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
 }
 
+.avatar img {
+  width: 65px;
+  height: 65px;
+}
+
 .secondary-content a,
 .title .fas,
 #userPreferences .fas {
