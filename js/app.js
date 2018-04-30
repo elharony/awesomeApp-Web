@@ -242,7 +242,7 @@ function getStudents(containerElement, projectName, queryFlag) {
             student.className = "student-card collection";
             const notFound = document.createElement("li");
             notFound.className = "collection-item row";
-            notFound.innerHTML = `<div class="col s12 notfound"><i class="small material-icons">error_outline</i> It seems we could not find anything</div>`;
+            notFound.innerHTML = `<div class="col s12 notfound"><i class="small material-icons .fab">error_outline</i> It seems we could not find anything</div>`;
             student.appendChild(notFound);
             containerElement.appendChild(student);
         }

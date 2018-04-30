@@ -53,10 +53,6 @@ body {
   color: #d81b60;
 }
 
-.fas:not(.btn-fa),
-.fab {
-  margin: 4px;
-}
 
 #loader {
     position: fixed;
