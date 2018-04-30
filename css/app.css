@@ -121,7 +121,7 @@ body {
 
 
 #explore {
-  padding: 4px 15px;
+  padding: 0 15px;
   background-color: #fff;
   box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
   min-height: 700px;
