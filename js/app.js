@@ -163,7 +163,6 @@ var fbase = firebase.initializeApp(config);
         loader.style.display = "flex";
         writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
     }, {once:true});
-<<<<<<< HEAD
 
 
     db.collection("Users")
@@ -171,12 +170,8 @@ var fbase = firebase.initializeApp(config);
     .then(function(querySnapshot) {
         totalClassmates.innerHTML = querySnapshot.size;
     });
-=======
->>>>>>> upstream/master
 
-  });
 
-<<<<<<< HEAD
     db.collection("Users").limit(1)
     .get()
     .then(function(querySnapshot) {
@@ -194,8 +189,6 @@ var fbase = firebase.initializeApp(config);
 
   });
 
-=======
->>>>>>> upstream/master
 }
 
 /*
@@ -214,12 +207,9 @@ function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentPro
         // location.reload();
         refreshPageData(firebase.auth().currentUser).then(function() {
             loader.style.display = "none";
-<<<<<<< HEAD
             setTimeout(()=>{
                 alert("Updated!");
             },200)
-=======
->>>>>>> upstream/master
         })
     }).catch(function(error) {
         console.log("Error: ", error)
@@ -521,6 +511,7 @@ function getAvailableProjects(db, tracks, container) {
  */
 document.querySelector("#signout").addEventListener("click", function() {
     firebase.auth().signOut().then(function() {
+        alert("We will miss you!");
         location.reload();
     }, function(error) {
         console.error('Sign Out Error', error);
