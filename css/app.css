@@ -140,7 +140,12 @@ padding-top: 15px; }
 
 /*# sourceMappingURL=app.css.map */
 
-.gaphic {
+.link-container {
+  text-align: center;
+  padding: 15px;
+}
+
+.link-container .gaphic {
   color: #333;
   font-size: 12px;
 }
