@@ -213,7 +213,7 @@ function getStudents(containerElement, projectName, queryFlag) {
 
                 const data_contact = document.createElement("li");
                 data_contact.className = "collection-item row";
-                data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><a href="https://slack.com/app_redirect?channel=C97PS9WJD" id="go-to-slack" class="waves-effect waves-light btn-small grey darken-3">Go to Slack</a></div>`;
+                data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><a href="https://slack.com/app_redirect?channel=C97PS9WJD" id="go-to-slack" class="waves-effect waves-light btn-small grey darken-4">Go to Slack</a></div>`;
 
                 const data_languages = document.createElement("li");
                 data_languages.className = "collection-item row";
@@ -293,7 +293,7 @@ db.doc("helpData/tracks").get().then(function(doc) {
         const track = document.createElement("div");
         track.className = "track col s6 m3 center-align";
         const trackBtn = document.createElement("button");
-        trackBtn.className = "track-button waves-effect waves-light btn-large grey darken-3";
+        trackBtn.className = "track-button waves-effect waves-light btn-large grey darken-4";
         trackBtn.innerHTML = value;
         trackBtn.setAttribute("data-value", value);
         track.appendChild(trackBtn);

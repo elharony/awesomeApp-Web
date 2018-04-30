@@ -48,8 +48,7 @@ body {
 }
 
 .avatar img {
-  width: 65px;
-  height: 65px;
+  margin-right: 5px;
 }
 
 .secondary-content a,
