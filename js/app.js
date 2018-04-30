@@ -361,7 +361,7 @@ function optionFiedCreator(arrayOfData, containerElement) {
 function getProjects(arrayOfData, containerElement, trackName) {
     arrayOfData.forEach(function(data) {
         const project = document.createElement("button");
-        project.className = "project-button waves-effect waves-light btn-large grey darken-3";
+        project.className = "project-button waves-effect waves-light btn-large grey lighten-3";
         project.setAttribute("data-track", trackName);
         project.setAttribute("data-project", data);
         project.innerHTML = data;
