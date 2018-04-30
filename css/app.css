@@ -124,7 +124,7 @@ body {
   padding: 4px 15px;
   background-color: #fff;
   box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
-  height: 700px;
+  min-height: 700px;
 }
 
 #explore .tracks {
