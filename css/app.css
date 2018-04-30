@@ -15,10 +15,6 @@ select:focus {
 /** My Styles */
 /************** */
 
-* {
-  box-sizing: border-box;
-}
-
 body {
   color: #555;
   background-color: rgb(231, 231, 231); 
@@ -128,7 +124,8 @@ body {
 }
 
 #explore .tracks {
-  margin-top: 2rem; }
+  margin-top: 2rem;
+padding-top: 15px; }
   #explore .tracks .track .track-button {
     width: 100%; }
 #explore .track-details .projects .project-button {
