@@ -21,7 +21,7 @@ var config = {
     storageBucket: "awesomeapp-4ec8d.appspot.com",
     messagingSenderId: "523185544926"
 };
-firebase.initializeApp(config);
+var fbase = firebase.initializeApp(config);
 
 
 /*
@@ -112,6 +112,10 @@ firebase.initializeApp(config);
     const u_langOne        = document.querySelector("#langOne");
     const u_langTwo        = document.querySelector("#langTwo");
 
+    //info-box fields
+    const totalClassmates  = document.querySelector("#totalClassmates");
+    const lastClassmate  = document.querySelector("#lastClassmate");
+
 
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
         if (doc.exists) {
@@ -159,6 +163,29 @@ firebase.initializeApp(config);
         loader.style.display = "flex";
         writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
     }, {once:true});
+
+
+    db.collection("Users")
+    .get()
+    .then(function(querySnapshot) {
+        totalClassmates.innerHTML = querySnapshot.size;
+    });
+
+
+    db.collection("Users").limit(1)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            lastClassmate.innerHTML = doc.data().slackName;
+        });
+    });
+
+    // var ref = db.collection("Users");
+    // ref.orderByKey().limitToLast(5).on("child_added", function(snapshot) {
+    //   console.log(snapshot.key);
+    // });
+
+
 
   });
 

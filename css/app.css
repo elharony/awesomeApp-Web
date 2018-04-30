@@ -42,6 +42,22 @@ select:focus {
   float: right;
 }
 
+.allClassmates {
+  display: flex;
+  align-items: flex-end;
+}
+
+.student-card .collection-item {
+  display: flex;
+  align-items: center;
+}
+
+#totalClassmates {
+  font-size: 22px;
+  line-height: 27px;
+  margin: 0 5px;
+}
+
 .notfound {
     color: #F44336;
     font-size: 16px;
