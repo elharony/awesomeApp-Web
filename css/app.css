@@ -42,7 +42,6 @@ select:focus {
   float: right;
 }
 
-<<<<<<< HEAD
 .allClassmates {
   display: flex;
   align-items: flex-end;
@@ -59,8 +58,6 @@ select:focus {
   margin: 0 5px;
 }
 
-=======
->>>>>>> upstream/master
 .notfound {
     color: #F44336;
     font-size: 16px;
