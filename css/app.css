@@ -55,7 +55,7 @@ select:focus {
 #totalClassmates {
   font-size: 22px;
   line-height: 27px;
-  margin: 0 5px;
+  margin: 0 5px 0 0;
 }
 
 .notfound {
@@ -63,6 +63,18 @@ select:focus {
     font-size: 16px;
     display: flex;
     align-items: center;
+}
+
+.hidden {
+  opacity: 0;
+  display: none;
+  transition: opacity .5 ease-out;
+}
+
+.deadline {
+  opacity: 1;
+  display: flex;
+  transition: opacity .5 ease-out;
 }
 
 .signedIn,

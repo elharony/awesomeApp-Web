@@ -187,13 +187,6 @@ var fbase = firebase.initializeApp(config);
         });
     });
 
-    // var ref = db.collection("Users");
-    // ref.orderByKey().limitToLast(5).on("child_added", function(snapshot) {
-    //   console.log(snapshot.key);
-    // });
-
-
-
   });
 
 }
@@ -213,10 +206,6 @@ function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentPro
     }).then(function() {
         // location.reload();
         refreshPageData(firebase.auth().currentUser).then(function() {
-            loader.style.display = "none";
-            setTimeout(()=>{
-                alert("Updated!");
-            },200)
         })
     }).catch(function(error) {
         console.log("Error: ", error)
@@ -414,7 +403,7 @@ function getProjects(arrayOfData, containerElement, trackName) {
     const studentsContainer = document.querySelector(".students");
 
     for(let i = 0; i < projectButtons.length; i++) {
-        projectButtons[i].addEventListener("click", function() {
+        projectButtons[i].addEventListener("click", function(evt) {
             const trackName = this.getAttribute("data-track");
             const projectName = this.getAttribute("data-project");
             console.log("Clicked Project: ", projectName);
@@ -462,6 +451,45 @@ function getProjects(arrayOfData, containerElement, trackName) {
                     }
                 break;
             }
+
+
+            // Retrieve project's deadlines
+
+            let projectsContainer = document.querySelectorAll(".projects button");
+            let hideDeadlineBox = document.querySelector(".projects .deadline");
+
+            if(hideDeadlineBox) {
+                hideDeadlineBox.classList.remove('deadline');
+                hideDeadlineBox.classList.add('hidden');
+            }
+
+            const insertIndex = Array.prototype.indexOf.call(projectsContainer, evt.target);
+            const matchValue = projectName.match(/[^w+\S][\w+:\s,\d$]*/g)[0].trim();
+            // Prevent to retrieve again if already has deadline (if next sibling not a student-card OR IF it is a last button and it's button already has no sibling)
+            if(evt.target.nextSibling && !evt.target.nextSibling.classList.contains('student-card') || !evt.target.nextSibling && insertIndex + 1 === projectsContainer.length) {
+
+            db.collection("Projects").where('name', '==', matchValue)
+                .get().then((querySnapshot) => {
+                    querySnapshot.forEach(function(doc) {
+                        const deadline = doc.data().deadline
+                        .toLocaleString('en-EN',{ timeZone: 'UTC', day: "numeric", month: "long", year: "numeric", minute: "2-digit", hour: "2-digit", timeZoneName: "short" })
+                    const deadline_ul = document.createElement("ul");
+                    deadline_ul.className = "student-card collection deadline";
+                    const deadline_li = document.createElement("li");
+                    deadline_li.className = "collection-item row";;
+                    deadline_li.innerHTML = `<div class="col s12">Deadline: ${deadline}</div>`;
+                    deadline_ul.appendChild(deadline_li);
+                    projectsContainer[insertIndex].after(deadline_ul);
+                    })
+                }).catch((error) => {
+                    console.log(error)
+                })
+
+            }else if(evt.target.nextSibling && !evt.target.nextSibling.classList.contains('project-button')) {
+                evt.target.nextSibling.classList.remove('hidden')
+                evt.target.nextSibling.classList.add('deadline')
+            }
+
         });
     }
 }
