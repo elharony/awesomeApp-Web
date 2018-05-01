@@ -72,15 +72,22 @@ var fbase = firebase.initializeApp(config);
   */
  firebase.auth().onAuthStateChanged(function(user) {
    if (user) {
+
      const studentsContainer = document.querySelector(".students");
+     // Listener to check search input
      search.addEventListener('input', ()=>{
+        //when input - clear students container from previous data
         studentsContainer.innerHTML = '';
+
         if(search.value) {
+            // get request to the DB
             getStudents(studentsContainer, null, 'classmate');
         }
      });
+     // refresh once when application run
      refreshPageData(user);
    } else {
+     // if not authorized user change view
      loggedInDiv.style.display = "none";
      loggedOutDiv.style.display = "block";
    }
@@ -236,6 +243,7 @@ function getStudents(containerElement, projectName, queryFlag) {
     .get()
     .then(function(querySnapshot) {
         containerElement.innerHTML = '';
+        if(queryFlag && search.value === '') return;
         if(querySnapshot.size){
             querySnapshot.forEach(function(doc) {
                 const student = document.createElement("ul");
@@ -276,6 +284,7 @@ function getStudents(containerElement, projectName, queryFlag) {
             student.appendChild(notFound);
             containerElement.appendChild(student);
         }
+
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
