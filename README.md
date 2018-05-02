@@ -12,5 +12,5 @@ It includes:
 - Preferred Language #1
 - Preferred Language #2
 
-## When can I join?
-The WebApplication isn't ready yet, but I am doing my best to make it happen as soon as possible!
+## How can I join?
+The Application isn't ready for use now, but you can test it from the [Live Preview](https://elharony.github.io/awesomeApp-Web/) and give us your feedback.
