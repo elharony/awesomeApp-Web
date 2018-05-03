@@ -15,7 +15,7 @@ select:focus {
 /** My Styles */
 /************** */
 
-body {
+.signedIn {
   color: #555;
   background-color: rgb(231, 231, 231); 
   background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(../img/bg-img.gif);
@@ -36,23 +36,26 @@ body {
 }
 
 .collection {
+  background-color:#fff;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
+}
+
+.user-box {
   padding: 15px;
   margin: 20px auto;
   align-items: center;
-  background-color:#fff;
-  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
 }
 
 .avatar img {
   margin-right: 5px;
 }
 
+
 .secondary-content a,
 .title .fas,
 #userPreferences .fas {
   color: #d81b60;
 }
-
 
 #loader {
     position: fixed;
