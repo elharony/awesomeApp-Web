@@ -15,6 +15,10 @@ select:focus {
 /** My Styles */
 /************** */
 
+body {
+  padding: 0;
+}
+
 .signedIn {
   color: #555;
   background-color: rgb(231, 231, 231); 
