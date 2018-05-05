@@ -21,8 +21,8 @@ var config = {
     storageBucket: "awesomeapp-4ec8d.appspot.com",
     messagingSenderId: "523185544926"
 };
-firebase.initializeApp(config);
 
+firebase.initializeApp(config);
 
 /*
  * Login
@@ -71,16 +71,23 @@ firebase.initializeApp(config);
   * LoggedIn / LoggedOut
   */
  firebase.auth().onAuthStateChanged(function(user) {
+
    if (user) {
      const studentsContainer = document.querySelector(".students");
+     // Listener to check search input
      search.addEventListener('input', ()=>{
+        //when input - clear students container from previous data
         studentsContainer.innerHTML = '';
+
         if(search.value) {
+            // get request to the DB
             getStudents(studentsContainer, null, 'classmate');
         }
      });
+     // refresh once when application run
      refreshPageData(user);
    } else {
+     // if not authorized user change view
      loggedInDiv.style.display = "none";
      loggedOutDiv.style.display = "block";
    }
@@ -112,18 +119,24 @@ firebase.initializeApp(config);
     const u_langOne        = document.querySelector("#langOne");
     const u_langTwo        = document.querySelector("#langTwo");
 
+    //info-box fields
+    const totalClassmates  = document.querySelector("#totalClassmates");
+    const lastClassmate  = document.querySelector("#lastClassmate");
+
 
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
+        
         if (doc.exists) {
             const u_tracks_Options = u_track.querySelectorAll('option');
 
             // User Current Info [ Top Summary ]
-            userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject} <br><i class="fas fa-globe"></i> ${doc.data().languageFirst}, ${doc.data().languageSecond}`;
+            userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject} <br><i class="fas fa-globe"></i> ${doc.data().language.replace(',', ', ')}`;
 
             // User Current Info [ Preferences Fields ]
+            const [lang1, lang2] = doc.data().language.split(',');
             u_slackName.value = doc.data().slackName;
-            u_langOne.value = doc.data().languageFirst;
-            u_langTwo.value = doc.data().languageSecond;
+            u_langOne.value = lang1;
+            u_langTwo.value = lang2;
 
             // set current track as a selected
             u_tracks_Options.forEach(option => {
@@ -160,6 +173,22 @@ firebase.initializeApp(config);
         writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
     }, {once:true});
 
+
+    db.collection("Users")
+    .get()
+    .then(function(querySnapshot) {
+        totalClassmates.innerHTML = querySnapshot.size;
+    });
+
+
+    db.collection("Users").limit(1)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            lastClassmate.innerHTML = doc.data().slackName;
+        });
+    });
+
   });
 
 }
@@ -170,16 +199,37 @@ firebase.initializeApp(config);
 function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentProject, u_langOne, u_langTwo) {
     db.doc("Users/" + u_id + "/").set({
       userName: u_name,
-      userEmail: u_email,
       slackName: u_slackName,
       userTrack: u_track,
       currentProject: u_currentProject,
-      languageFirst: u_langOne,
-      languageSecond: u_langTwo
+      language: u_langOne + ',' + u_langTwo
+    }).then(function() {
+      db.collection('UsersByLanguage').where('slackName', '==', u_slackName).get().then((querySnapshot)=>{
+        querySnapshot.forEach((data)=>{
+            db.collection('UsersByLanguage').doc(data.id).delete().catch(function(error) {
+                    console.log("Error: ", error)
+                  });
+            });
+      }).then(function() {
+        db.collection("UsersByLanguage").doc(u_langOne + '_' + u_id).set({
+            slackName: u_slackName,
+            project: u_currentProject,
+            languages: u_langOne + ',' + u_langTwo   
+        }).catch(function(error) {
+            console.log("Error: ", error)
+        });  
+      }).then(function() {
+        db.collection("UsersByLanguage").doc(u_langTwo + '_' + u_id).set({
+          slackName: u_slackName,
+          project: u_currentProject,
+          languages: u_langOne + ',' + u_langTwo   
+        }).catch(function(error) {
+          console.log("Error: ", error)
+        });  
+      });
     }).then(function() {
         // location.reload();
         refreshPageData(firebase.auth().currentUser).then(function() {
-            loader.style.display = "none";
         })
     }).catch(function(error) {
         console.log("Error: ", error)
@@ -206,6 +256,7 @@ function getStudents(containerElement, projectName, queryFlag) {
     .get()
     .then(function(querySnapshot) {
         containerElement.innerHTML = '';
+        if(queryFlag && search.value === '') return;
         if(querySnapshot.size){
             querySnapshot.forEach(function(doc) {
                 const student = document.createElement("ul");
@@ -217,7 +268,7 @@ function getStudents(containerElement, projectName, queryFlag) {
 
                 const data_languages = document.createElement("li");
                 data_languages.className = "collection-item row";
-                data_languages.innerHTML = `<div class="col s12"><i class="fas fa-globe"></i> ${doc.data().languageFirst}, ${doc.data().languageSecond}</div>`;
+                data_languages.innerHTML = `<div class="col s12"><i class="fas fa-globe"></i> ${doc.data().language.replace(',',', ')} </div>`;
 
 
 
@@ -246,6 +297,7 @@ function getStudents(containerElement, projectName, queryFlag) {
             student.appendChild(notFound);
             containerElement.appendChild(student);
         }
+
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
@@ -375,7 +427,7 @@ function getProjects(arrayOfData, containerElement, trackName) {
     const studentsContainer = document.querySelector(".students");
 
     for(let i = 0; i < projectButtons.length; i++) {
-        projectButtons[i].addEventListener("click", function() {
+        projectButtons[i].addEventListener("click", function(evt) {
             const trackName = this.getAttribute("data-track");
             const projectName = this.getAttribute("data-project");
             console.log("Clicked Project: ", projectName);
@@ -423,6 +475,45 @@ function getProjects(arrayOfData, containerElement, trackName) {
                     }
                 break;
             }
+
+
+            // Retrieve project's deadlines
+
+            let projectsContainer = document.querySelectorAll(".projects button");
+            let hideDeadlineBox = document.querySelector(".projects .deadline");
+
+            if(hideDeadlineBox) {
+                hideDeadlineBox.classList.remove('deadline');
+                hideDeadlineBox.classList.add('hidden');
+            }
+
+            const insertIndex = Array.prototype.indexOf.call(projectsContainer, evt.target);
+            const matchValue = projectName.match(/[^w+\S][\w+:\s,\d$]*/g)[0].trim();
+            // Prevent to retrieve again if already has deadline (if next sibling not a student-card OR IF it is a last button and it's button already has no sibling)
+            if(evt.target.nextSibling && !evt.target.nextSibling.classList.contains('student-card') || !evt.target.nextSibling && insertIndex + 1 === projectsContainer.length) {
+
+            db.collection("Projects").where('name', '==', matchValue)
+                .get().then((querySnapshot) => {
+                    querySnapshot.forEach(function(doc) {
+                        const deadline = doc.data().deadline
+                        .toLocaleString('en-EN',{ timeZone: 'UTC', day: "numeric", month: "long", year: "numeric", minute: "2-digit", hour: "2-digit", timeZoneName: "short" })
+                    const deadline_ul = document.createElement("ul");
+                    deadline_ul.className = "student-card collection deadline";
+                    const deadline_li = document.createElement("li");
+                    deadline_li.className = "collection-item row";;
+                    deadline_li.innerHTML = `<div class="col s12">Deadline: ${deadline}</div>`;
+                    deadline_ul.appendChild(deadline_li);
+                    projectsContainer[insertIndex].after(deadline_ul);
+                    })
+                }).catch((error) => {
+                    console.log(error)
+                })
+
+            }else if(evt.target.nextSibling && !evt.target.nextSibling.classList.contains('project-button')) {
+                evt.target.nextSibling.classList.remove('hidden')
+                evt.target.nextSibling.classList.add('deadline')
+            }
+
         });
     }
 }
@@ -481,6 +572,7 @@ function getAvailableProjects(db, tracks, container) {
  */
 document.querySelector("#signout").addEventListener("click", function() {
     firebase.auth().signOut().then(function() {
+        alert("We will miss you!");
         location.reload();
     }, function(error) {
         console.error('Sign Out Error', error);

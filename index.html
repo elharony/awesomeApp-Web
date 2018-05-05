@@ -33,11 +33,17 @@
 
                 </li>
               </ul>
-              <div class="search">
-                  <i class="material-icons search-icon">search</i>
-                  <input id="searchClassmate" type="text" name="search" value="Quick search for a classmate" onfocus="clearSearch(this)" onblur="setSearch(this)">
+            
+              <div class="info-box row">
+                <div class="info col s12 m7">
+                    <div class="allClassmates"><span id="totalClassmates"></span> classmates</div>
+                    <div>Last registered: <i class="fab fa-slack-hash"></i> <span id="lastClassmate"></span></div>
+                </div>
+                <div class="search col s12 m5">
+                    <i class="medium material-icons">search</i>
+                    <input id="searchClassmate" type="text" name="search" value="Quick search for a classmate" onfocus="clearSearch(this)" onblur="setSearch(this)">
+                </div>
               </div>
-
 
             <!-- Preferences -->
             <div id="preferences" class="modal">
