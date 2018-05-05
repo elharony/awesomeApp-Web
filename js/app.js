@@ -33,7 +33,6 @@ firebase.initializeApp(config);
  var uiConfig = {
    callbacks: {
      signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-     	console.log(authResult);
        // User successfully signed in.
        // Return type determines whether we continue the redirect automatically
        // or whether we leave that to developer to handle.
@@ -126,10 +125,7 @@ firebase.initializeApp(config);
 
 
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
-        if(doc.data().slackName === '') {
-            $('a.btn-large.modal-trigger.blue').trigger('click');
-            return;
-        }
+        
         if (doc.exists) {
             const u_tracks_Options = u_track.querySelectorAll('option');
 
