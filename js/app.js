@@ -33,6 +33,7 @@ firebase.initializeApp(config);
  var uiConfig = {
    callbacks: {
      signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+     	console.log(authResult);
        // User successfully signed in.
        // Return type determines whether we continue the redirect automatically
        // or whether we leave that to developer to handle.
@@ -71,8 +72,8 @@ firebase.initializeApp(config);
   * LoggedIn / LoggedOut
   */
  firebase.auth().onAuthStateChanged(function(user) {
-   if (user) {
 
+   if (user) {
      const studentsContainer = document.querySelector(".students");
      // Listener to check search input
      search.addEventListener('input', ()=>{
@@ -125,16 +126,21 @@ firebase.initializeApp(config);
 
 
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
+        if(doc.data().slackName === '') {
+            $('a.btn-large.modal-trigger.blue').trigger('click');
+            return;
+        }
         if (doc.exists) {
             const u_tracks_Options = u_track.querySelectorAll('option');
 
             // User Current Info [ Top Summary ]
-            userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject} <br><i class="fas fa-globe"></i> ${doc.data().languageFirst}, ${doc.data().languageSecond}`;
+            userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject} <br><i class="fas fa-globe"></i> ${doc.data().language.replace(',', ', ')}`;
 
             // User Current Info [ Preferences Fields ]
+            const [lang1, lang2] = doc.data().language.split(',');
             u_slackName.value = doc.data().slackName;
-            u_langOne.value = doc.data().languageFirst;
-            u_langTwo.value = doc.data().languageSecond;
+            u_langOne.value = lang1;
+            u_langTwo.value = lang2;
 
             // set current track as a selected
             u_tracks_Options.forEach(option => {
@@ -197,12 +203,34 @@ firebase.initializeApp(config);
 function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentProject, u_langOne, u_langTwo) {
     db.doc("Users/" + u_id + "/").set({
       userName: u_name,
-      userEmail: u_email,
       slackName: u_slackName,
       userTrack: u_track,
       currentProject: u_currentProject,
-      languageFirst: u_langOne,
-      languageSecond: u_langTwo
+      language: u_langOne + ',' + u_langTwo
+    }).then(function() {
+      db.collection('UsersByLanguage').where('slackName', '==', u_slackName).get().then((querySnapshot)=>{
+        querySnapshot.forEach((data)=>{
+            db.collection('UsersByLanguage').doc(data.id).delete().catch(function(error) {
+                    console.log("Error: ", error)
+                  });
+            });
+      }).then(function() {
+        db.collection("UsersByLanguage").doc(u_langOne + '_' + u_id).set({
+            slackName: u_slackName,
+            project: u_currentProject,
+            languages: u_langOne + ',' + u_langTwo   
+        }).catch(function(error) {
+            console.log("Error: ", error)
+        });  
+      }).then(function() {
+        db.collection("UsersByLanguage").doc(u_langTwo + '_' + u_id).set({
+          slackName: u_slackName,
+          project: u_currentProject,
+          languages: u_langOne + ',' + u_langTwo   
+        }).catch(function(error) {
+          console.log("Error: ", error)
+        });  
+      });
     }).then(function() {
         // location.reload();
         refreshPageData(firebase.auth().currentUser).then(function() {
@@ -244,7 +272,7 @@ function getStudents(containerElement, projectName, queryFlag) {
 
                 const data_languages = document.createElement("li");
                 data_languages.className = "collection-item row";
-                data_languages.innerHTML = `<div class="col s12"><i class="fas fa-globe"></i> ${doc.data().languageFirst}, ${doc.data().languageSecond}</div>`;
+                data_languages.innerHTML = `<div class="col s12"><i class="fas fa-globe"></i> ${doc.data().language.replace(',',', ')} </div>`;
 
 
 
