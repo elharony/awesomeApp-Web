@@ -18,18 +18,22 @@
 
         <div class="signedIn">
           <div class="container">
-              <ul class="collection">
+            <div class="heading-wrapper">
+                <h2 class="main-title">Awesome App</h2>
+            </div>
+              <ul class="collection user-box">
                 <li class="collection-item avatar">
                   <img id="userImage" src="" alt="" class="circle">
                   <span id="userContact" class="title"></span>
                   <p id="userPreferences"></p>
                   <div class="secondary-content">
-                    <a href="#preferences" class="btn-floating waves-effect waves-light btn-large modal-trigger blue" title="Preferences"><i class="fas fa-user-circle"></i></a>
-                    <a href="#" class="btn-floating waves-effect waves-light btn-large red" id="signout" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+                    <a href="#preferences" class="btn-floating waves-effect waves-light btn-large modal-trigger pink darken-1" title="Preferences"><i class="fas fa-user-circle btn-fa"></i></a>
+                    <a href="#" class="btn-floating waves-effect waves-light btn-large pink darken-1" id="signout" title="Logout"><i class="fas fa-sign-out-alt btn-fa"></i></a>
                   </div>
 
                 </li>
               </ul>
+            
               <div class="info-box row">
                 <div class="info col s12 m7">
                     <div class="allClassmates"><span id="totalClassmates"></span> classmates</div>
@@ -72,7 +76,7 @@
                 </div>
                 <div class="col s12">
                     <a href="#!" class="btn-floating modal-action modal-close waves-effect btn-large grey darken-4"><i class="fas fa-times"></i></a>
-                    <button type="submit" id="savePreferences" class="secondary-content btn-floating modal-action modal-close waves-effect btn-large green accent-4" title="Update Preferences"><i class="fas fa-pencil-alt"></i></button>
+                    <button type="submit" id="savePreferences" class="secondary-content btn-floating modal-action modal-close waves-effect btn-large pink darken-1 accent-4" title="Update Preferences"><i class="fas fa-pencil-alt"></i></button>
                 </div>
               </div>
 
@@ -80,7 +84,7 @@
             </div>
 
             <!-- Explore -->
-            <div id="explore" class="col s12">
+            <div id="explore" class="col s12 explore-box">
 
               <!-- Tracks -->
               <div class="tracks row">
@@ -91,9 +95,11 @@
                 <div class="projects col s12 m6"></div>
                 <div class="students col s12 m6"></div>
               </div>
-
             </div>
           </div>
+          <footer class="link-container">
+            <a href="http://www.freepik.com" class="graphic">Background vector designed by Starline / Freepik</a>
+          </footer>
         </div>
         <div id="loader">
 

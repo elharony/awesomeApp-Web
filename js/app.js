@@ -264,7 +264,7 @@ function getStudents(containerElement, projectName, queryFlag) {
 
                 const data_contact = document.createElement("li");
                 data_contact.className = "collection-item row";
-                data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><a href="https://slack.com/app_redirect?channel=C97PS9WJD" id="go-to-slack" class="waves-effect waves-light btn-small grey darken-4">Go to Slack</a></div>`;
+                data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><a href="https://slack.com/app_redirect?channel=C97PS9WJD" id="go-to-slack" class="waves-effect waves-light btn-small blue-grey darken-4">Go to Slack</a></div>`;
 
                 const data_languages = document.createElement("li");
                 data_languages.className = "collection-item row";
@@ -293,7 +293,7 @@ function getStudents(containerElement, projectName, queryFlag) {
             student.className = "student-card collection";
             const notFound = document.createElement("li");
             notFound.className = "collection-item row";
-            notFound.innerHTML = `<div class="col s12 notfound"><i class="small material-icons">error_outline</i> It seems we could not find anything</div>`;
+            notFound.innerHTML = `<div class="col s12 notfound"><i class="small material-icons .fab">error_outline</i> It seems we could not find anything</div>`;
             student.appendChild(notFound);
             containerElement.appendChild(student);
         }
@@ -345,7 +345,7 @@ db.doc("helpData/tracks").get().then(function(doc) {
         const track = document.createElement("div");
         track.className = "track col s6 m3 center-align";
         const trackBtn = document.createElement("button");
-        trackBtn.className = "track-button waves-effect waves-light btn-large grey darken-4";
+        trackBtn.className = "track-button waves-effect waves-light btn-large blue-grey darken-4";
         trackBtn.innerHTML = value;
         trackBtn.setAttribute("data-value", value);
         track.appendChild(trackBtn);
@@ -413,7 +413,7 @@ function optionFiedCreator(arrayOfData, containerElement) {
 function getProjects(arrayOfData, containerElement, trackName) {
     arrayOfData.forEach(function(data) {
         const project = document.createElement("button");
-        project.className = "project-button waves-effect waves-light btn-large grey darken-3";
+        project.className = "project-button waves-effect waves-light btn-large blue-grey darken-3";
         project.setAttribute("data-track", trackName);
         project.setAttribute("data-project", data);
         project.innerHTML = data;
