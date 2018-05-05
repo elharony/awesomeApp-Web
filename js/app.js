@@ -21,8 +21,8 @@ var config = {
     storageBucket: "awesomeapp-4ec8d.appspot.com",
     messagingSenderId: "523185544926"
 };
-var fbase = firebase.initializeApp(config);
 
+firebase.initializeApp(config);
 
 /*
  * Login
