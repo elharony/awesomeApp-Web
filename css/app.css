@@ -185,7 +185,8 @@ padding-top: 15px; }
   text-align: left; }
 #explore .track-details .students {
   max-height: 450px;
-  overflow-y: scroll; }
+  /* overflow-y: scroll;  */
+  }
   #explore .track-details .students .collection {
     margin-top: 0; }
 
@@ -200,4 +201,17 @@ padding-top: 15px; }
 a.graphic {
   font-size: 12px;
   color: #424242;
+}
+
+.progress .indeterminate {
+  background: #c50048;
+}
+
+.progress {
+  background: #fa9bc6;
+}
+
+.modal-content select:hover {
+  border: 1px solid #c50048;
+  cursor: pointer;
 }

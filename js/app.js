@@ -240,11 +240,21 @@ function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentPro
 var db = firebase.firestore();
 
 
+// spinner
+const spinnerBox = document.createElement('div');
+spinnerBox.classList.add('progress');
+const spinner = document.createElement('div');
+spinner.classList.add('indeterminate');
+spinnerBox.append(spinner);
+
 /*
  * Show all Students in the Selected Project
  * [ Explore ]
  */
 function getStudents(containerElement, projectName, queryFlag) {
+    containerElement.removeAttribute('style');
+    containerElement.innerHTML = '';
+    containerElement.append(spinnerBox);
     let query = queryFlag === 'classmate' ?
              ["slackName", ">=", search.value]:
              ["currentProject", ">=", projectName];
@@ -258,6 +268,11 @@ function getStudents(containerElement, projectName, queryFlag) {
         containerElement.innerHTML = '';
         if(queryFlag && search.value === '') return;
         if(querySnapshot.size){
+            // add found results
+            const foundInfo = document.createElement("div");
+            foundInfo.innerHTML = "Found " + querySnapshot.size + " record" + (querySnapshot.size===1?"":"s");
+            
+            containerElement.append(foundInfo);
             querySnapshot.forEach(function(doc) {
                 const student = document.createElement("ul");
                 student.className = "student-card collection";
@@ -286,7 +301,10 @@ function getStudents(containerElement, projectName, queryFlag) {
 
                 student.appendChild(data_languages);
                 containerElement.appendChild(student);
-
+                
+                if(containerElement.offsetHeight > 400){
+                    containerElement.setAttribute('style', 'overflow-y:scroll');
+                }
             });
         }else{
             const student = document.createElement("ul");
@@ -309,17 +327,32 @@ function getStudents(containerElement, projectName, queryFlag) {
  * Get All Data
  * [ Preferences & Explore ]
  */
-db.doc("helpData/tracks").get().then(function(doc) {
-    const myData = doc.data();
-    // console.log(myData);
 
+db.collection('Languages').get().then(function(querySnapshot) {
+    const myLanguages =[];
+    querySnapshot.forEach(doc => {
+        myLanguages.push(doc.data().name);
+    });
+    // Languages
+    const langOne = document.querySelector("#langOne");
+    optionFiedCreator(myLanguages, langOne);
+    const langTwo = document.querySelector("#langTwo");
+    optionFiedCreator(myLanguages, langTwo);
+});
+
+db.collection("Tracks").get().then(function(querySnapshot) {
+    
+    const myData =[];
+    querySnapshot.forEach(doc => {
+        myData.push(doc.data().name);
+    });
     /*
      * Preferences
      */
 
     // Tracks
     const tracks = document.querySelector("#tracks");
-    optionFiedCreator(myData.tracksArray, tracks);
+    optionFiedCreator(myData, tracks);
 
     // Get Available Projects based on the selected Track
     const availableProjects = document.querySelector("#availableProjects");
@@ -327,21 +360,13 @@ db.doc("helpData/tracks").get().then(function(doc) {
         getAvailableProjects(myData, tracks, availableProjects);
     });
 
-    // Languages
-    const langOne = document.querySelector("#langOne");
-    optionFiedCreator(myData.langsArray, langOne);
-    const langTwo = document.querySelector("#langTwo");
-    optionFiedCreator(myData.langsArray, langTwo);
-
-
-
     /*
      * Explore
      */
 
     // Tracks
     const tracksContainer = document.querySelector(".tracks");
-    myData.tracksArray.forEach(function (value) {
+    myData.forEach(function (value) {
         const track = document.createElement("div");
         track.className = "track col s6 m3 center-align";
         const trackBtn = document.createElement("button");
@@ -361,25 +386,27 @@ db.doc("helpData/tracks").get().then(function(doc) {
 
     for(let i = 0; i < trackButtons.length; i++) {
         trackButtons[i].addEventListener("click", function() {
+            const studentsContainer = document.querySelector(".students");
+            studentsContainer.innerHTML = "";
             const trackName = this.getAttribute("data-value");
 
             // Display the projects based on the clicked Track
             switch(trackName) {
                 case "AND":
                     projectsContainer.innerHTML = "";
-                    getProjects(myData.andProjectsArray, projectsContainer, "AND");
+                    getProjects(andProjects, projectsContainer, "AND");
                 break;
                 case "ABND":
                     projectsContainer.innerHTML = "";
-                    getProjects(myData.abndProjectsArray, projectsContainer, "ABND");
+                    getProjects(abndProjects, projectsContainer, "ABND");
                 break;
                 case "FEND":
                     projectsContainer.innerHTML = "";
-                    getProjects(myData.fendProjectsArray, projectsContainer, "FEND");
+                    getProjects(fendProjects, projectsContainer, "FEND");
                 break;
                 case "MWS":
                     projectsContainer.innerHTML = "";
-                    getProjects(myData.mwsProjectsArray, projectsContainer, "MWS");
+                    getProjects(mwsProjects, projectsContainer, "MWS");
                 break;
             }
         });
@@ -430,7 +457,7 @@ function getProjects(arrayOfData, containerElement, trackName) {
         projectButtons[i].addEventListener("click", function(evt) {
             const trackName = this.getAttribute("data-track");
             const projectName = this.getAttribute("data-project");
-            console.log("Clicked Project: ", projectName);
+            //console.log("Clicked Project: ", projectName);
             getProjectNames(trackName);
             // Show all people who are working on the Selected Project
             switch(trackName) {
@@ -488,11 +515,10 @@ function getProjects(arrayOfData, containerElement, trackName) {
             }
 
             const insertIndex = Array.prototype.indexOf.call(projectsContainer, evt.target);
-            const matchValue = projectName.match(/[^w+\S][\w+:\s,\d$]*/g)[0].trim();
             // Prevent to retrieve again if already has deadline (if next sibling not a student-card OR IF it is a last button and it's button already has no sibling)
             if(evt.target.nextSibling && !evt.target.nextSibling.classList.contains('student-card') || !evt.target.nextSibling && insertIndex + 1 === projectsContainer.length) {
 
-            db.collection("Projects").where('name', '==', matchValue)
+            db.collection("Projects").where('name', '==', projectName)
                 .get().then((querySnapshot) => {
                     querySnapshot.forEach(function(doc) {
                         const deadline = doc.data().deadline
@@ -518,7 +544,6 @@ function getProjects(arrayOfData, containerElement, trackName) {
     }
 }
 
-
 /*
  * Get Project Names
  */
@@ -527,12 +552,22 @@ let andProjects,
     fendProjects,
     mwsProjects;
 function getProjectNames(track) {
-    db.collection("helpData").get().then(function(querySnapshot) {
+   
+    db.collection("Projects").get().then(function(querySnapshot) {
+        andProjects = [],  
+        abndProjects = [],
+        fendProjects = [],
+        mwsProjects = [];
         querySnapshot.forEach(function(doc) {
-            andProjects = doc.data().andProjectsArray;
-            abndProjects = doc.data().abndProjectsArray;
-            fendProjects = doc.data().fendProjectsArray;
-            mwsProjects = doc.data().mwsProjectsArray;
+            if (doc.id.match(/FEND/gi)) {
+                fendProjects.push(doc.data().name);                
+            }else if(doc.id.match(/ABND/gi)) {
+                abndProjects.push(doc.data().name);                
+            }else if(doc.id.match(/AND/gi)) {
+                andProjects.push(doc.data().name);                
+            }else if(doc.id.match(/MWS/gi)) {
+                mwsProjects.push(doc.data().name);                
+            }
         });
     })
     .catch(function(error) {
@@ -540,7 +575,6 @@ function getProjectNames(track) {
     });
 }
 getProjectNames();
-
 
 /*
  * Display projects based on Track
@@ -550,19 +584,19 @@ function getAvailableProjects(db, tracks, container) {
     switch(tracks.value) {
         case "AND":
             container.innerHTML = "";
-            optionFiedCreator(db.andProjectsArray, container);
+            optionFiedCreator(andProjects, container);
         break;
         case "ABND":
             container.innerHTML = "";
-            optionFiedCreator(db.abndProjectsArray, container);
+            optionFiedCreator(abndProjects, container);
         break;
         case "FEND":
             container.innerHTML = "";
-            optionFiedCreator(db.fendProjectsArray, container);
+            optionFiedCreator(fendProjects, container);
         break;
         case "MWS":
             container.innerHTML = "";
-            optionFiedCreator(db.mwsProjectsArray, container);
+            optionFiedCreator(mwsProjects, container);
         break;
     }
 }
