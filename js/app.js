@@ -252,6 +252,8 @@ spinnerBox.append(spinner);
  * [ Explore ]
  */
 function getStudents(containerElement, projectName, queryFlag) {
+    const foundInfo = document.querySelector('.search-results');
+    foundInfo.innerHTML = '';
     containerElement.removeAttribute('style');
     containerElement.innerHTML = '';
     containerElement.append(spinnerBox);
@@ -259,8 +261,8 @@ function getStudents(containerElement, projectName, queryFlag) {
              ["slackName", ">=", search.value]:
              ["currentProject", ">=", projectName];
 
-    db.collection("Users").where(...query)
-    .orderBy(queryFlag?'slackName':'currentProject')
+    db.collection("Users")
+    .orderBy(queryFlag?'slackName':'currentProject').where(...query)
     .startAt(queryFlag?search.value:projectName)
     .endAt(queryFlag?search.value +"\uf8ff":projectName)
     .get()
@@ -268,12 +270,64 @@ function getStudents(containerElement, projectName, queryFlag) {
         containerElement.innerHTML = '';
         if(queryFlag && search.value === '') return;
         if(querySnapshot.size){
-            // add found results
-            const foundInfo = document.createElement("div");
-            foundInfo.innerHTML = "Found " + querySnapshot.size + " record" + (querySnapshot.size===1?"":"s");
+
+            // lang filter
+            const langFilter = document.createElement('select');
+            langFilter.classList.add('language-filter');
+            langFilter.innerHTML = "<option value disabled selected>Filter by language</option>";
+
+            //filter event listener
+            langFilter.addEventListener('change', function(evt){
+                const studentsFilterList = containerElement.querySelectorAll('ul');
+                studentsFilterList.forEach(e => {
+                    if(e.lastChild.innerHTML.match(langFilter.value)) {
+                        if(e.classList.contains('hidden')){
+                            e.classList.remove('hidden');
+                        }
+                    }else{
+                        e.classList.add('hidden');
+                    }
+                });
+                const numOfItems = langFilter[langFilter.selectedIndex].innerHTML.match(/(\d+)/i)[0];
+                studentsCount.innerHTML = ('Filtered ' + numOfItems + " record" + (+numOfItems===1?"":"s"));
+                const closeFilter = document.createElement("span");
+                closeFilter.classList.add("closeFilter");
+                closeFilter.innerHTML = "close"
+                studentsCount.appendChild(closeFilter);
+
+                //close filter event
+                closeFilter.addEventListener('click', ()=>{
+                    studentsFilterList.forEach(e => {
+                        e.classList.remove('hidden');
+                        
+                    });
+                    langFilter.selectedIndex = 0;
+                    studentsCount.innerHTML = "Found " + querySnapshot.size + " record" + (querySnapshot.size===1?"":"s");
+                });
+            });
             
-            containerElement.append(foundInfo);
-            querySnapshot.forEach(function(doc) {
+            // add found results
+            const infoBox = document.querySelector('.info-block');
+            // const foundInfo = document.querySelector('.search-results');
+            foundInfo.innerHTML = '';
+            //foundInfo.classList.add("search-results");
+            const studentsCount = document.createElement("div");
+            studentsCount.classList.add("search-count");
+            studentsCount.innerHTML = "Found " + querySnapshot.size + " record" + (querySnapshot.size===1?"":"s");
+            foundInfo.append(studentsCount);
+
+            const langFilterObject = {};
+            //containerElement.append(foundInfo);
+            const retrievedStudents = {};
+            querySnapshot.forEach(function(doc) {                
+
+                // extract languages
+                const userLangs = doc.data().language.split(',');
+                userLangs.forEach(lang => {
+                    langFilterObject[lang] = langFilterObject[lang]?langFilterObject[lang]+1:1;
+                    
+                })
+
                 const student = document.createElement("ul");
                 student.className = "student-card collection";
 
@@ -300,12 +354,36 @@ function getStudents(containerElement, projectName, queryFlag) {
                 }
 
                 student.appendChild(data_languages);
-                containerElement.appendChild(student);
                 
-                if(containerElement.offsetHeight > 400){
-                    containerElement.setAttribute('style', 'overflow-y:scroll');
-                }
+                retrievedStudents[doc.data().slackName] = student;
+                
+                
             });
+
+            const sortedList = Object.keys(retrievedStudents);
+            sortedList.sort((a,b)=>{
+                return a.toLowerCase() > b.toLocaleLowerCase();
+            });
+            sortedList.forEach((e,i)=>{
+                containerElement.appendChild(retrievedStudents[e]);
+            });
+
+            if(containerElement.offsetHeight > 420){
+                containerElement.setAttribute('style', 'overflow-y:scroll');
+                containerElement.scrollTop = 0;
+            }
+            
+            optionFiedCreator(Object.keys(langFilterObject).sort(), langFilter);
+            foundInfo.append(langFilter);
+
+            const langContainer = document.querySelectorAll('.language-filter option');
+
+            for(i = 1; i < langContainer.length; i++) {
+                langContainer[i].innerText = langContainer[i].innerText + " (" + langFilterObject[langContainer[i].value] + ") ";
+            }
+
+
+
         }else{
             const student = document.createElement("ul");
             student.className = "student-card collection";
@@ -386,6 +464,8 @@ db.collection("Tracks").get().then(function(querySnapshot) {
 
     for(let i = 0; i < trackButtons.length; i++) {
         trackButtons[i].addEventListener("click", function() {
+            const foundInfo = document.querySelector('.search-results');
+            foundInfo.innerHTML = '';
             const studentsContainer = document.querySelector(".students");
             studentsContainer.innerHTML = "";
             const trackName = this.getAttribute("data-value");

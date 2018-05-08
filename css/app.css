@@ -100,6 +100,10 @@ body {
   align-items: flex-end;
 }
 
+.student-card {
+  box-shadow: 2px 2px 10px #bab7b7;
+}
+
 .student-card .collection-item {
   display: flex;
   align-items: center;
@@ -187,8 +191,24 @@ padding-top: 15px; }
   max-height: 450px;
   /* overflow-y: scroll;  */
   }
+
   #explore .track-details .students .collection {
-    margin-top: 0; }
+    margin-top: 0; 
+    width: 98%;
+  }
+
+.students::-webkit-scrollbar {
+  width: .6em;
+}
+
+.students::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+}
+
+.students::-webkit-scrollbar-thumb {
+background-color: #d81b60;
+outline: 1px solid slategrey;
+}
 
 /*# sourceMappingURL=app.css.map */
 
@@ -214,4 +234,30 @@ a.graphic {
 .modal-content select:hover {
   border: 1px solid #c50048;
   cursor: pointer;
+}
+
+.search-results {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  color: #d81b60;
+}
+
+.language-filter {
+  display: block;
+  cursor: pointer;
+  width: auto;
+}
+
+.language-filter:focus, .language-filter:active {
+  outline: none;
+}
+
+.closeFilter {
+  color: red;
+  font-size: 13px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
 }
