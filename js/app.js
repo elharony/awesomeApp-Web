@@ -1,19 +1,34 @@
-var loader = document.getElementById('loader');
-var search = document.getElementById('searchClassmate');
+const loader = document.getElementById('loader');
+const search = document.getElementById('searchClassmate');
+const slackNameField = document.getElementById('slackName');
+const message = document.getElementById('message');
+
+$('.modal').modal();
+const modalWindow = M.Modal.getInstance($('.modal'));
+$('#prefsButton').on('click', ()=>{
+    modalWindow.open();
+    
+});
+
+
 function clearSearch(search) {
-    if (search.value == search.defaultValue) {
+    if(search.placeholder){
+        search.placeholder = "";
+    }else if (search.value == search.defaultValue) {
         search.value = "";
     }
 }
-function setSearch(input) {
-    if (search.value == "") {
+function setSearch(search) {
+    if(search.placeholder == ""){
+        search.placeholder = "Enter your Slack Username here";
+    }else if (search.value == "") {
         search.value = search.defaultValue;
     }
 }
 
 
 // Initialize Firebase
-var config = {
+const config = {
     apiKey: "AIzaSyBVARDFRI7QWempiL8upUd2S-G8s1Uom-o",
     authDomain: "awesomeapp-4ec8d.firebaseapp.com",
     databaseURL: "https://awesomeapp-4ec8d.firebaseio.com",
@@ -66,13 +81,38 @@ firebase.initializeApp(config);
  const userPreferences = document.querySelector("#userPreferences");
  const userImage       = document.querySelector("#userImage");
  const event = new Event('change');
-
+ const inputEvent = new Event('input');
  /*
   * LoggedIn / LoggedOut
   */
  firebase.auth().onAuthStateChanged(function(user) {
 
+    slackNameField.addEventListener('input', ()=>{
+        //when input - clear students container from previous data
+        slackNameField.innerHTML = '';
+
+        if( slackNameField.value && slackNameField.value.replace(/[^\w]/g,'').length >= 3 &&
+            slackNameField.value.replace(/\s/g,'') !== '' ) {
+
+            message.innerHTML = '';
+            // get request to the DB
+            //checkSlackUsername();
+
+        }else{
+            message.innerHTML = "Your Slack Username should include at least 3 letters";
+            message.style.color = "red";
+        }
+    });
+
    if (user) {
+    
+    $('#closeButton').on('click', ()=>{
+            if( slackNameField.value.replace(/\s/g,'') !== '' &&
+                slackNameField.value.replace(/[^\w]/g,'').length >= 3) {
+                modalWindow.close();
+            }
+    });
+
      const studentsContainer = document.querySelector(".students");
      // Listener to check search input
      search.addEventListener('input', ()=>{
@@ -92,6 +132,41 @@ firebase.initializeApp(config);
      loggedOutDiv.style.display = "block";
    }
  });
+
+function checkSlackUsername(){
+    return new Promise((resolve, reject)=>{
+        db.collection("Users")
+        .where('slackName', '>=', slackNameField.value )
+        .orderBy('slackName')
+        .startAt(slackNameField.value)
+        .endAt(slackNameField.value).get()
+        .then(querySnapshot => {
+            let usrName = '';
+            querySnapshot.forEach(doc => {
+                usrName = doc.data().userName;
+            });
+                if(firebase.auth().currentUser.displayName === usrName){
+                    message.innerHTML = "This is your actual Username"
+                    message.style.color = "green";
+                    reject("Already in use");
+                    return false;
+                }else if(querySnapshot.size && firebase.auth().currentUser.displayName !== usrName ){
+                    message.innerHTML = '<p>This Username already in use. If you\'re sure that is someone uses your Slack Username, please <a href=#>report</a></p>';
+                    message.style.color = "red";
+                    reject("Already in use");
+                    return false;
+                }else if(slackNameField.value.replace(/\s/g,'') !== '' &&
+                        slackNameField.value.replace(/[^\w]/g,'').length >= 3){
+                    message.innerHTML = "Username is available"
+                    message.style.color = "green";
+                    resolve('true');
+                }
+        }).catch(error=>{
+            console.log(error); 
+        })   
+
+    });
+}
 
 /*
  * initialize user data and refresh page
@@ -125,8 +200,14 @@ firebase.initializeApp(config);
 
 
     db.doc("Users/" + user.uid + "/").get().then(function(doc) {
+
         
         if (doc.exists) {
+            if( doc.data().slackName === undefined || 
+                doc.data().slackName === ''  ){
+                modalWindow.open();
+                reject('First need to provide data in Preferences!');
+            }
             const u_tracks_Options = u_track.querySelectorAll('option');
 
             // User Current Info [ Top Summary ]
@@ -158,6 +239,7 @@ firebase.initializeApp(config);
             // console.log("Document data:", doc.data());
         } else {
             // doc.data() will be undefined in this case
+            modalWindow.open();
             console.log("No such document!");
         }
 
@@ -169,9 +251,17 @@ firebase.initializeApp(config);
 
     preferencesForm.addEventListener("submit", function(e) {
         e.preventDefault();
-        loader.style.display = "flex";
-        writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
-    }, {once:true});
+        message.append(spinnerBox)
+        checkSlackUsername().then(response => {
+            if(response) {
+                u_slackName.style.border = "none";
+                loader.style.display = "flex";
+                message.innerHTML = '';
+                modalWindow.close();
+                writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
+            }
+        })
+    });
 
 
     db.collection("Users")
@@ -197,6 +287,7 @@ firebase.initializeApp(config);
  * Write User Data
  */
 function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentProject, u_langOne, u_langTwo) {
+
     db.doc("Users/" + u_id + "/").set({
       userName: u_name,
       slackName: u_slackName,
