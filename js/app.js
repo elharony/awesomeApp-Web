@@ -240,17 +240,29 @@ function writeUserData(u_id, u_name, u_email, u_slackName, u_track, u_currentPro
 var db = firebase.firestore();
 
 
+// spinner
+const spinnerBox = document.createElement('div');
+spinnerBox.classList.add('progress');
+const spinner = document.createElement('div');
+spinner.classList.add('indeterminate');
+spinnerBox.append(spinner);
+
 /*
  * Show all Students in the Selected Project
  * [ Explore ]
  */
 function getStudents(containerElement, projectName, queryFlag) {
+    const foundInfo = document.querySelector('.search-results');
+    foundInfo.innerHTML = '';
+    containerElement.removeAttribute('style');
+    containerElement.innerHTML = '';
+    containerElement.append(spinnerBox);
     let query = queryFlag === 'classmate' ?
              ["slackName", ">=", search.value]:
              ["currentProject", ">=", projectName];
 
-    db.collection("Users").where(...query)
-    .orderBy(queryFlag?'slackName':'currentProject')
+    db.collection("Users")
+    .orderBy(queryFlag?'slackName':'currentProject').where(...query)
     .startAt(queryFlag?search.value:projectName)
     .endAt(queryFlag?search.value +"\uf8ff":projectName)
     .get()
@@ -258,7 +270,64 @@ function getStudents(containerElement, projectName, queryFlag) {
         containerElement.innerHTML = '';
         if(queryFlag && search.value === '') return;
         if(querySnapshot.size){
-            querySnapshot.forEach(function(doc) {
+
+            // lang filter
+            const langFilter = document.createElement('select');
+            langFilter.classList.add('language-filter');
+            langFilter.innerHTML = "<option value disabled selected>Filter by language</option>";
+
+            //filter event listener
+            langFilter.addEventListener('change', function(evt){
+                const studentsFilterList = containerElement.querySelectorAll('ul');
+                studentsFilterList.forEach(e => {
+                    if(e.lastChild.innerHTML.match(langFilter.value)) {
+                        if(e.classList.contains('hidden')){
+                            e.classList.remove('hidden');
+                        }
+                    }else{
+                        e.classList.add('hidden');
+                    }
+                });
+                const numOfItems = langFilter[langFilter.selectedIndex].innerHTML.match(/(\d+)/i)[0];
+                studentsCount.innerHTML = ('Filtered ' + numOfItems + " record" + (+numOfItems===1?"":"s"));
+                const closeFilter = document.createElement("span");
+                closeFilter.classList.add("closeFilter");
+                closeFilter.innerHTML = "close"
+                studentsCount.appendChild(closeFilter);
+
+                //close filter event
+                closeFilter.addEventListener('click', ()=>{
+                    studentsFilterList.forEach(e => {
+                        e.classList.remove('hidden');
+                        
+                    });
+                    langFilter.selectedIndex = 0;
+                    studentsCount.innerHTML = "Found " + querySnapshot.size + " record" + (querySnapshot.size===1?"":"s");
+                });
+            });
+            
+            // add found results
+            const infoBox = document.querySelector('.info-block');
+            // const foundInfo = document.querySelector('.search-results');
+            foundInfo.innerHTML = '';
+            //foundInfo.classList.add("search-results");
+            const studentsCount = document.createElement("div");
+            studentsCount.classList.add("search-count");
+            studentsCount.innerHTML = "Found " + querySnapshot.size + " record" + (querySnapshot.size===1?"":"s");
+            foundInfo.append(studentsCount);
+
+            const langFilterObject = {};
+            //containerElement.append(foundInfo);
+            const retrievedStudents = {};
+            querySnapshot.forEach(function(doc) {                
+
+                // extract languages
+                const userLangs = doc.data().language.split(',');
+                userLangs.forEach(lang => {
+                    langFilterObject[lang] = langFilterObject[lang]?langFilterObject[lang]+1:1;
+                    
+                })
+
                 const student = document.createElement("ul");
                 student.className = "student-card collection";
 
@@ -285,9 +354,36 @@ function getStudents(containerElement, projectName, queryFlag) {
                 }
 
                 student.appendChild(data_languages);
-                containerElement.appendChild(student);
-
+                
+                retrievedStudents[doc.data().slackName] = student;
+                
+                
             });
+
+            const sortedList = Object.keys(retrievedStudents);
+            sortedList.sort((a,b)=>{
+                return a.toLowerCase() > b.toLocaleLowerCase();
+            });
+            sortedList.forEach((e,i)=>{
+                containerElement.appendChild(retrievedStudents[e]);
+            });
+
+            if(containerElement.offsetHeight > 420){
+                containerElement.setAttribute('style', 'overflow-y:scroll');
+                containerElement.scrollTop = 0;
+            }
+            
+            optionFiedCreator(Object.keys(langFilterObject).sort(), langFilter);
+            foundInfo.append(langFilter);
+
+            const langContainer = document.querySelectorAll('.language-filter option');
+
+            for(i = 1; i < langContainer.length; i++) {
+                langContainer[i].innerText = langContainer[i].innerText + " (" + langFilterObject[langContainer[i].value] + ") ";
+            }
+
+
+
         }else{
             const student = document.createElement("ul");
             student.className = "student-card collection";
@@ -309,17 +405,32 @@ function getStudents(containerElement, projectName, queryFlag) {
  * Get All Data
  * [ Preferences & Explore ]
  */
-db.doc("helpData/tracks").get().then(function(doc) {
-    const myData = doc.data();
-    // console.log(myData);
 
+db.collection('Languages').get().then(function(querySnapshot) {
+    const myLanguages =[];
+    querySnapshot.forEach(doc => {
+        myLanguages.push(doc.data().name);
+    });
+    // Languages
+    const langOne = document.querySelector("#langOne");
+    optionFiedCreator(myLanguages, langOne);
+    const langTwo = document.querySelector("#langTwo");
+    optionFiedCreator(myLanguages, langTwo);
+});
+
+db.collection("Tracks").get().then(function(querySnapshot) {
+    
+    const myData =[];
+    querySnapshot.forEach(doc => {
+        myData.push(doc.data().name);
+    });
     /*
      * Preferences
      */
 
     // Tracks
     const tracks = document.querySelector("#tracks");
-    optionFiedCreator(myData.tracksArray, tracks);
+    optionFiedCreator(myData, tracks);
 
     // Get Available Projects based on the selected Track
     const availableProjects = document.querySelector("#availableProjects");
@@ -327,21 +438,13 @@ db.doc("helpData/tracks").get().then(function(doc) {
         getAvailableProjects(myData, tracks, availableProjects);
     });
 
-    // Languages
-    const langOne = document.querySelector("#langOne");
-    optionFiedCreator(myData.langsArray, langOne);
-    const langTwo = document.querySelector("#langTwo");
-    optionFiedCreator(myData.langsArray, langTwo);
-
-
-
     /*
      * Explore
      */
 
     // Tracks
     const tracksContainer = document.querySelector(".tracks");
-    myData.tracksArray.forEach(function (value) {
+    myData.forEach(function (value) {
         const track = document.createElement("div");
         track.className = "track col s6 m3 center-align";
         const trackBtn = document.createElement("button");
@@ -361,25 +464,29 @@ db.doc("helpData/tracks").get().then(function(doc) {
 
     for(let i = 0; i < trackButtons.length; i++) {
         trackButtons[i].addEventListener("click", function() {
+            const foundInfo = document.querySelector('.search-results');
+            foundInfo.innerHTML = '';
+            const studentsContainer = document.querySelector(".students");
+            studentsContainer.innerHTML = "";
             const trackName = this.getAttribute("data-value");
 
             // Display the projects based on the clicked Track
             switch(trackName) {
                 case "AND":
                     projectsContainer.innerHTML = "";
-                    getProjects(myData.andProjectsArray, projectsContainer, "AND");
+                    getProjects(andProjects, projectsContainer, "AND");
                 break;
                 case "ABND":
                     projectsContainer.innerHTML = "";
-                    getProjects(myData.abndProjectsArray, projectsContainer, "ABND");
+                    getProjects(abndProjects, projectsContainer, "ABND");
                 break;
                 case "FEND":
                     projectsContainer.innerHTML = "";
-                    getProjects(myData.fendProjectsArray, projectsContainer, "FEND");
+                    getProjects(fendProjects, projectsContainer, "FEND");
                 break;
                 case "MWS":
                     projectsContainer.innerHTML = "";
-                    getProjects(myData.mwsProjectsArray, projectsContainer, "MWS");
+                    getProjects(mwsProjects, projectsContainer, "MWS");
                 break;
             }
         });
@@ -430,7 +537,7 @@ function getProjects(arrayOfData, containerElement, trackName) {
         projectButtons[i].addEventListener("click", function(evt) {
             const trackName = this.getAttribute("data-track");
             const projectName = this.getAttribute("data-project");
-            console.log("Clicked Project: ", projectName);
+            //console.log("Clicked Project: ", projectName);
             getProjectNames(trackName);
             // Show all people who are working on the Selected Project
             switch(trackName) {
@@ -488,11 +595,10 @@ function getProjects(arrayOfData, containerElement, trackName) {
             }
 
             const insertIndex = Array.prototype.indexOf.call(projectsContainer, evt.target);
-            const matchValue = projectName.match(/[^w+\S][\w+:\s,\d$]*/g)[0].trim();
             // Prevent to retrieve again if already has deadline (if next sibling not a student-card OR IF it is a last button and it's button already has no sibling)
             if(evt.target.nextSibling && !evt.target.nextSibling.classList.contains('student-card') || !evt.target.nextSibling && insertIndex + 1 === projectsContainer.length) {
 
-            db.collection("Projects").where('name', '==', matchValue)
+            db.collection("Projects").where('name', '==', projectName)
                 .get().then((querySnapshot) => {
                     querySnapshot.forEach(function(doc) {
                         const deadline = doc.data().deadline
@@ -518,7 +624,6 @@ function getProjects(arrayOfData, containerElement, trackName) {
     }
 }
 
-
 /*
  * Get Project Names
  */
@@ -527,12 +632,22 @@ let andProjects,
     fendProjects,
     mwsProjects;
 function getProjectNames(track) {
-    db.collection("helpData").get().then(function(querySnapshot) {
+   
+    db.collection("Projects").get().then(function(querySnapshot) {
+        andProjects = [],  
+        abndProjects = [],
+        fendProjects = [],
+        mwsProjects = [];
         querySnapshot.forEach(function(doc) {
-            andProjects = doc.data().andProjectsArray;
-            abndProjects = doc.data().abndProjectsArray;
-            fendProjects = doc.data().fendProjectsArray;
-            mwsProjects = doc.data().mwsProjectsArray;
+            if (doc.id.match(/FEND/gi)) {
+                fendProjects.push(doc.data().name);                
+            }else if(doc.id.match(/ABND/gi)) {
+                abndProjects.push(doc.data().name);                
+            }else if(doc.id.match(/AND/gi)) {
+                andProjects.push(doc.data().name);                
+            }else if(doc.id.match(/MWS/gi)) {
+                mwsProjects.push(doc.data().name);                
+            }
         });
     })
     .catch(function(error) {
@@ -540,7 +655,6 @@ function getProjectNames(track) {
     });
 }
 getProjectNames();
-
 
 /*
  * Display projects based on Track
@@ -550,19 +664,19 @@ function getAvailableProjects(db, tracks, container) {
     switch(tracks.value) {
         case "AND":
             container.innerHTML = "";
-            optionFiedCreator(db.andProjectsArray, container);
+            optionFiedCreator(andProjects, container);
         break;
         case "ABND":
             container.innerHTML = "";
-            optionFiedCreator(db.abndProjectsArray, container);
+            optionFiedCreator(abndProjects, container);
         break;
         case "FEND":
             container.innerHTML = "";
-            optionFiedCreator(db.fendProjectsArray, container);
+            optionFiedCreator(fendProjects, container);
         break;
         case "MWS":
             container.innerHTML = "";
-            optionFiedCreator(db.mwsProjectsArray, container);
+            optionFiedCreator(mwsProjects, container);
         break;
     }
 }
