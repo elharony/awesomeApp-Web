@@ -99,7 +99,7 @@ firebase.initializeApp(config);
             //checkSlackUsername();
 
         }else{
-            message.innerHTML = "Your Slack Username should include at least 3 letters";
+            message.innerHTML = "Your Slack Username should include at least 3 numbers of letters";
             message.style.color = "red";
         }
     });
@@ -146,10 +146,9 @@ function checkSlackUsername(){
                 usrName = doc.data().userName;
             });
                 if(firebase.auth().currentUser.displayName === usrName){
-                    message.innerHTML = "This is your actual Username"
-                    message.style.color = "green";
-                    reject("Already in use");
-                    return false;
+                    // message.innerHTML = "This is your actual Username"
+                    // message.style.color = "green";
+                    resolve('true');
                 }else if(querySnapshot.size && firebase.auth().currentUser.displayName !== usrName ){
                     message.innerHTML = '<p>This Username already in use. If you\'re sure that is someone uses your Slack Username, please <a href=#>report</a></p>';
                     message.style.color = "red";
@@ -157,8 +156,8 @@ function checkSlackUsername(){
                     return false;
                 }else if(slackNameField.value.replace(/\s/g,'') !== '' &&
                         slackNameField.value.replace(/[^\w]/g,'').length >= 3){
-                    message.innerHTML = "Username is available"
-                    message.style.color = "green";
+                    // message.innerHTML = "Username is available"
+                    // message.style.color = "green";
                     resolve('true');
                 }
         }).catch(error=>{
