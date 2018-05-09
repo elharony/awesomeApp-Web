@@ -1,4 +1,4 @@
-# AwesomeApp | Connect Udacity Nanodegree Students Together
+# AwesomeApp | Meet a classmate!
 AwesomeApp is a Mobile & WebApp to connect Udacity Nanodegree Students together based on their Preferences.
 
 ## How it works?
