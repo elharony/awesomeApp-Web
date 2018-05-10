@@ -197,7 +197,7 @@ input[type=search] {
   background-color: #fff;
   width: 60%;
   max-width: 800px;
-  height: 550px;
+  height: 600px;
   border-radius: 3px;
   display: flex;
   justify-content: center;
@@ -229,7 +229,7 @@ input[type=search] {
 }
 
 .form-description {
-  margin: 15px 0 30px;
+  margin: 15px 0 25px;
   font-size: 15px;
 }
 
@@ -245,15 +245,16 @@ input[type=search] {
 }
 
 .form-field {
-  padding: 7px 5px;
+  padding: 5px;
   outline-color: rgba(66, 185, 171, 0.8);
-  border: 1px solid rgb(223, 223, 223);
+  border: 1px solid rgb(223, 223, 223) !important;
 }
 
 .btn-form {
   background-color: rgba(66, 185, 171, 0.8);
   border: 2px solid rgba(66, 185, 171, 0.8);
   color: #fff;
+  margin-top: 30px;
   margin-left: 0;
   padding: 5px 35px;
 }
