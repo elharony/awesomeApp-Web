@@ -178,13 +178,16 @@ input[type=search] {
   position: fixed;
   top: 0;
   left: 0;
+  display: none;
+}
+
+.form-center {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(51, 49, 49, 0.8);
-  display: none;
 }
 
 .form-wrapper {

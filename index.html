@@ -46,45 +46,48 @@
 
             <!-- Preferences -->
             <div id="preferences" class="modal">
-              <div class="form-wrapper">
-                  <a id="closeButton" href="javascript:void(0)" class="btn-close"><i class="ion-ios-close-empty icon-close"></i></a>
-
-                  <form action="" id="preferencesForm" class="form">
-                    <h4 class="form-title">Preferences</h4>
-                    <p class="form-description">Update your Preferences to stay connected with other classmates!</p>
-                    <div id="message"></div>
+              <div class="form-center">
+                  <div class="form-wrapper">
+                    <a id="closeButton" href="javascript:void(0)" class="btn-close"><i class="ion-ios-close-empty icon-close"></i></a>
+  
+                    <form action="" id="preferencesForm" class="form">
+                      <h4 class="form-title">Preferences</h4>
+                      <p class="form-description">Update your Preferences to stay connected with other classmates!</p>
+                      <div id="message"></div>
+                        
+                      <div class="field-wrapper">
+                          <label for="slackName" class="form-label">Your Slack Username</label>
+                          <input id="slackName" type="text" name="slackNameField" required onfocus="clearSearch(this)" onblur="setSearch(this)" class="form-field">
+                      </div>
+  
+                      <div class="field-wrapper">
+                          <label for="tracks" class="form-label">Your Track</label>
+                          <select id="tracks" class="form-field" required></select>
+                      </div>
+  
+                      <div class="field-wrapper">
+                          <label for="availableProjects" class="form-label">Current Project</label>
+                          <select id="availableProjects" class="form-field" required></select>
+                      </div>
                       
-                    <div class="field-wrapper">
-                        <label for="slackName" class="form-label">Your Slack Username</label>
-                        <input id="slackName" type="text" name="slackNameField" required onfocus="clearSearch(this)" onblur="setSearch(this)" class="form-field">
-                    </div>
-
-                    <div class="field-wrapper">
-                        <label for="tracks" class="form-label">Your Track</label>
-                        <select id="tracks" class="form-field" required></select>
-                    </div>
-
-                    <div class="field-wrapper">
-                        <label for="availableProjects" class="form-label">Current Project</label>
-                        <select id="availableProjects" class="form-field" required></select>
-                    </div>
-                    
-                    <div class="field-wrapper">
-                        <label for="langOne" class="form-label">First Language</label>
-                        <select id="langOne" class="form-field" required></select>
-                    </div>
-
-                    <div class="field-wrapper">
-                        <label for="langTwo" class="form-label">Second Language</label>
-                        <select id="langTwo" class="form-field" required></select>
-                    </div>
-                    
-                    <div class="button-wrapper">
-                        <button type="submit" id="savePreferences" class="btn btn-form" title="Update Preferences"><i class="fas fa-pencil-alt"></i>Save</button>
-                    </div>
-
-                  </form>
-                </div>  
+                      <div class="field-wrapper">
+                          <label for="langOne" class="form-label">First Language</label>
+                          <select id="langOne" class="form-field" required></select>
+                      </div>
+  
+                      <div class="field-wrapper">
+                          <label for="langTwo" class="form-label">Second Language</label>
+                          <select id="langTwo" class="form-field" required></select>
+                      </div>
+                      
+                      <div class="button-wrapper">
+                          <button type="submit" id="savePreferences" class="btn btn-form" title="Update Preferences">Save</button>
+                      </div>
+  
+                    </form>
+                  </div>  
+              </div>
+              
             </div>
 
             <!-- Explore -->
