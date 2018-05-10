@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AwesomeApp | Work with your Udacity ND Classmates</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
 
     <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
@@ -18,32 +18,31 @@
 
         <div class="signedIn">
           <div class="container">
-            <div class="heading-wrapper">
-                <h2 class="main-title">Awesome App</h2>
-            </div>
-              <ul class="collection user-box">
-                <li class="collection-item avatar">
-                  <img id="userImage" src="" alt="" class="circle">
-                  <span id="userContact" class="title"></span>
-                  <p id="userPreferences"></p>
-                  <div class="secondary-content">
-                    <a id="prefsButton" href="javascript:void(0)" class="btn-floating waves-effect waves-light btn-large pink darken-1" data-target="preferences" title="Preferences"><i class="fas fa-user-circle btn-fa"></i></a>
-                    <a href="#" class="btn-floating waves-effect waves-light btn-large pink darken-1" id="signout" title="Logout"><i class="fas fa-sign-out-alt btn-fa"></i></a>
-                  </div>
 
-                </li>
-              </ul>
-            
-              <div class="info-box row">
-                <div class="info col s12 m7">
-                    <div class="allClassmates"><span id="totalClassmates"></span> classmates</div>
-                    <div>Last registered: <i class="fab fa-slack-hash"></i> <span id="lastClassmate"></span></div>
+            <nav class="side-nav">
+                <div class="logo-box">
+                    <img src="img/logo.gif" alt="Awesome App" class="logo">
+                    <a href="https://github.com/MalgoskaG/AwesomeApp" target="blank" class="download">Download App <i class="ion-ios-download-outline user-icons"></i></a>
                 </div>
-                <div class="search col s12 m5">
-                    <i class="medium material-icons">search</i>
-                    <input id="searchClassmate" type="text" name="search" value="Quick search for a classmate" onfocus="clearSearch(this)" onblur="setSearch(this)">
+                <div class="user-box">
+                    <img id="userImage" src="" alt="" class="user-img">
+                    <p id="userContact"></p>
+                    <div id="userPreferences" class="preferences-wrapper">
+                    </div>
+                    <div class="buttons">
+                        <a id="prefsButton" href="javascript:void(0)" class="btn" data-target="preferences" title="Preferences">Update</a>
+                        <a href="#" class="btn" id="signout" title="Logout">Logout</a>
+                    </div> 
                 </div>
-              </div>
+                <div class="classmates-box">
+                    <div class="classmates-no"><span id="totalClassmates"></span> classmates</div>
+                    <div class="search-wrapper">
+                        <i class="ion-ios-search icon-search"></i>
+                        <input id="searchClassmate" type="search" name="search" placeholder="Search for a classmate" onfocus="clearSearch(this)" onblur="setSearch(this)">
+                    </div>
+                    <div class="last-registered">Last registered:<span class="last-user"><img src="img/slack-white.svg" alt="" class="slack-icon"><span id="lastClassmate"></span></span></div>
+                </div>
+              </nav>
 
             <!-- Preferences -->
             <div id="preferences" class="modal">
@@ -160,7 +159,6 @@
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/materialize.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
     <script src="js/app.js"></script>

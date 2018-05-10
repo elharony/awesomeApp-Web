@@ -1,65 +1,176 @@
-/********************* */
-/** Global Variables */
-/********************* */
-/********************** */
-/** Reset Materialize */
-/********************** */
-input:not([type]):focus:not([readonly]), input[type="text"]:not(.browser-default):focus:not([readonly]), input[type="password"]:not(.browser-default):focus:not([readonly]), input[type="email"]:not(.browser-default):focus:not([readonly]), input[type="url"]:not(.browser-default):focus:not([readonly]), input[type="time"]:not(.browser-default):focus:not([readonly]), input[type="date"]:not(.browser-default):focus:not([readonly]), input[type="datetime"]:not(.browser-default):focus:not([readonly]), input[type="datetime-local"]:not(.browser-default):focus:not([readonly]), input[type="tel"]:not(.browser-default):focus:not([readonly]), input[type="number"]:not(.browser-default):focus:not([readonly]), input[type="search"]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
-  border-color: #616161;
-  box-shadow: 0 1px 0 0 #616161; }
-
-select:focus {
-  outline: 1px solid #616161; }
-
-/************** */
-/** My Styles */
-/************** */
-
-body {
+* {
+  box-sizing: border-box;
+  margin: 0;
   padding: 0;
 }
 
-.signedIn {
+body {
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
   color: #555;
-  background-color: rgb(231, 231, 231); 
-  background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(../img/bg-img.gif);
+}
+.singedIn {
+  padding: 3vh 0;
+
+  background: linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,255,255,0.8)),url(../img/bg-img.gif);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
-.heading-wrapper {
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+  min-height: 94vh;
+  display: flex;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/***** SIDE NAV *****/
+
+.side-nav {
+  flex-basis: 270px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-size: 15px;
+}
+
+/* Logo */
+
+.logo-box {
+  background-color: rgba(66, 185, 171, 0.8);
+  width: 100%;
   text-align: center;
-  padding-top: 20px;
-}
 
-.main-title {
-  text-transform: uppercase;
-  font-weight: 300;
-  font-size: 35px;
-}
-
-.collection {
-  background-color:#fff;
-  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
-}
-
-.user-box {
-  padding: 15px;
-  margin: 20px auto;
+  /* to be deleted */
+  flex-basis: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-.avatar img {
-  margin-right: 5px;
+.logo {
+  width: 150px;
 }
 
-
-.secondary-content a,
-.title .fas,
-#userPreferences .fas {
-  color: #d81b60;
+.download {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 300;
+  text-decoration: none;
+  color: inherit;
 }
+
+/* User */
+
+.user-box {
+  background: linear-gradient(rgba(66, 185, 171, 0.8),rgba(69, 89, 138, 0.9)), url(../img/group.jpeg) 15%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  flex: 1;
+  justify-content: space-around;
+  min-height: 280px;
+  max-height: 400px;
+}
+
+.user-box,
+.classmates-box {
+  padding: 20px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-img {
+  margin: 0 10px 10px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.preferences-wrapper {
+  text-align: center;
+}
+
+.user-icons {
+  margin: 0 5px;
+  font-size: 20px;
+}
+
+.btn {
+  display: inline-block;
+  margin: 20px 7px 10px;
+  padding: 5px 20px;
+  background-color: #fff;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.4s;
+}
+
+.btn:hover {
+  background-color: transparent;
+  color:#fff;
+}
+
+/* Classmates */
+
+.classmates-box {
+  background: linear-gradient(rgba(167, 121, 142, 0.85),rgba(167, 121, 142, 0.85)), url(../img/desk.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  flex: 1;
+}
+
+.classmates-no,
+.last-registered {
+  margin: 20px 0;
+}
+
+.search-wrapper {
+  display: flex;
+  align-content: center;
+  width: 100%;
+}
+
+input[type=search] {
+  padding: 5px;
+  width: 80%;
+  border-radius: 3px;
+  border-color: transparent;
+}
+
+.icon-search {
+  margin: 0 10px;
+  font-size: 25px;
+}
+
+.last-registered {
+  font-size: 14px;
+}
+
+.slack-icon {
+  height: 14px;
+  color: #fff;
+  margin-right: 3px;
+}
+
+.last-user {
+  display: block;
+  padding-top: 10px;
+}
+
+/*******/
 
 #loader {
     position: fixed;
@@ -78,22 +189,7 @@ body {
     /* top: 30%; */
 }
 
-.search {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
 
-.search-icon {
-  font-size: 30px;
-  margin-right: 5px;
-}
-
-#searchClassmate {
-  width: 100%;
-  max-width: 350px;
-
-}
 
 .allClassmates {
   display: flex;
