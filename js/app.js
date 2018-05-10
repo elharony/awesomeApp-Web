@@ -182,7 +182,7 @@ function checkSlackUsername(){
 
     // Display User Data
     userImage.setAttribute("src", user.photoURL);
-    userContact.innerHTML  = `<i class="fas fa-user"></i> ${user.displayName}`;
+    userContact.innerHTML  = `<i class="ion-ios-person-outline user-icons"></i> ${user.displayName}`;
 
 
     // Preferences Fields
@@ -210,7 +210,9 @@ function checkSlackUsername(){
             const u_tracks_Options = u_track.querySelectorAll('option');
 
             // User Current Info [ Top Summary ]
-            userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject} <br><i class="fas fa-globe"></i> ${doc.data().language.replace(',', ', ')}`;
+            userPreferences.innerHTML = `<p><i class="ion-ios-star-outline user-icons"></i> ${doc.data().userTrack}</p>
+            <p><i class="ion-ios-copy-outline user-icons"></i> ${doc.data().currentProject}</p>
+            <p><i class="ion-ios-world-outline user-icons"></i> ${doc.data().language.replace(',', ', ')}</p>`;
 
             // User Current Info [ Preferences Fields ]
             const [lang1, lang2] = doc.data().language.split(',');
