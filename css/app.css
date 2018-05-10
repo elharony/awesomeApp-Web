@@ -9,7 +9,7 @@ body {
   font-family: 'Lato', sans-serif;
   color: #555;
 }
-.singedIn {
+.signedIn {
   padding: 3vh 0;
 
   background: linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,255,255,0.8)),url(../img/bg-img.gif);
