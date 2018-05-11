@@ -319,18 +319,6 @@ input[type=search] {
     align-items: center;
 }
 
-.hidden {
-  opacity: 0;
-  display: none;
-  transition: opacity .5 ease-out;
-}
-
-.deadline {
-  opacity: 1;
-  display: flex;
-  transition: opacity .5 ease-out;
-}
-
 .signedIn,
 .signedOut {
   display: none; }
@@ -516,5 +504,15 @@ a.graphic {
   margin: 10px;
   border: 1px solid #41c5b6;
   font-size: 13px;
+  opacity: 1;
+  display: block;
+  transition: opacity .5 ease-out;
 }
+
+.hidden {
+  opacity: 0;
+  display: none;
+  transition: opacity .5 ease-out;
+}
+
 
