@@ -562,24 +562,28 @@ db.collection("Tracks").get().then(function(querySnapshot) {
             // Display the projects based on the clicked Track
             switch(trackName) {
                 case "AND":
+                    removeClass(trackButtons, 'active');
                     projectsContainer.innerHTML = "";
                     getProjects(andProjects, projectsContainer, "AND");
                     projectsContainer.classList.add("border");
                     e.target.classList.add("active");
                 break;
                 case "ABND":
+                    removeClass(trackButtons, 'active');
                     projectsContainer.innerHTML = "";
                     getProjects(abndProjects, projectsContainer, "ABND");
                     projectsContainer.classList.add("border");
                     e.target.classList.add("active");
                 break;
                 case "FEND":
+                    removeClass(trackButtons, 'active');
                     projectsContainer.innerHTML = "";
                     getProjects(fendProjects, projectsContainer, "FEND");
                     projectsContainer.classList.add("border");
                     e.target.classList.add("active");
                 break;
                 case "MWS":
+                    removeClass(trackButtons, 'active');
                     projectsContainer.innerHTML = "";
                     getProjects(mwsProjects, projectsContainer, "MWS");
                     projectsContainer.classList.add("border");
@@ -592,6 +596,14 @@ db.collection("Tracks").get().then(function(querySnapshot) {
 }).catch(function (error) {
     console.log("Got an error: ", error);
 });
+
+
+function removeClass(element, nameOfClass) {
+    for (let i = 0; element.length; i++) {
+        element[i].classList.remove(nameOfClass);
+    }
+}
+
 
 
 /*****************************
