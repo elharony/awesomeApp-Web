@@ -609,10 +609,10 @@ function optionFiedCreator(arrayOfData, containerElement) {
 function getProjects(arrayOfData, containerElement, trackName) {
     arrayOfData.forEach(function(data) {
         const project = document.createElement("button");
-        project.className = "project-button waves-effect waves-light btn-large blue-grey darken-3";
+        project.className = "project-button";
         project.setAttribute("data-track", trackName);
         project.setAttribute("data-project", data);
-        project.innerHTML = data;
+        project.innerHTML = `${data} <span class="arrow-hidden"></span>`;
         containerElement.appendChild(project);
     });
 
@@ -692,12 +692,9 @@ function getProjects(arrayOfData, containerElement, trackName) {
                     querySnapshot.forEach(function(doc) {
                         const deadline = doc.data().deadline
                         .toLocaleString('en-EN',{ timeZone: 'UTC', day: "numeric", month: "long", year: "numeric", minute: "2-digit", hour: "2-digit", timeZoneName: "short" })
-                    const deadline_ul = document.createElement("ul");
-                    deadline_ul.className = "student-card collection deadline";
-                    const deadline_li = document.createElement("li");
-                    deadline_li.className = "collection-item row";;
-                    deadline_li.innerHTML = `<div class="col s12">Deadline: ${deadline}</div>`;
-                    deadline_ul.appendChild(deadline_li);
+                    const deadline_ul = document.createElement("div");
+                    deadline_ul.className = "project-name deadline";
+                    deadline_ul.innerHTML = `Deadline: ${deadline}</div>`;
                     projectsContainer[insertIndex].after(deadline_ul);
                     })
                 }).catch((error) => {

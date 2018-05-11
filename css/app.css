@@ -450,12 +450,71 @@ a.graphic {
   outline-color: #41c5b6;
 }
 
+/* Projects */
 
-/* Zmienić kod js w linijkach 538 - 547
-const trackBtn = document.createElement("button");
-trackBtn.className = "track-button";
-trackBtn.innerHTML = value;
-trackBtn.setAttribute("data-value", value);
-tracksContainer.appendChild(trackBtn);
-*/
+.track-details {
+  padding: 30px;
+  display: flex;
+}
+
+.projects {
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgb(218, 218, 218);
+  box-shadow: 0 5px 10px rgba(0,0,0, 0.1);
+}
+
+.projects, 
+.students {
+  list-style: none;
+  text-align: center;
+  flex-basis: 50%;
+  margin: 0 20px;
+  height: 100%;
+}
+
+.project-button {
+  border: none;
+  padding: 15px;
+  position: relative;
+  background-color: transparent;
+  font-size: inherit;
+  color: inherit;
+}
+
+.project-button:not(.deadline) {
+  border-top: 1px solid rgb(218, 218, 218);
+  width: 100%;
+}
+
+.project-button:first-child {
+  border-top: none;
+  cursor: pointer;
+}
+
+.arrow-hidden {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  display: inline-block;
+  position: absolute;
+  right: -10px;
+  transform: rotate(45deg);
+  visibility: hidden;
+}
+
+.arrow-show {
+  visibility: visible;
+  background-color: #41c5b6;
+}
+
+.active {
+  background-color: #41c5b6;
+  color:#fff;
+}
+
+.deadline {
+  margin: 10px;
+  border: 1px solid #41c5b6;
+  font-size: 13px;
+}
 
