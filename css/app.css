@@ -10,8 +10,7 @@ body {
   color: #555;
 }
 .signedIn {
-  min-height: 100vh;
-  padding-top: 30px;
+  padding: 3vh 0;
   background: linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,255,255,0.8)),url(../img/bg-img.gif);
   background-size: cover;
   background-repeat: no-repeat;
@@ -21,7 +20,7 @@ body {
 .container {
   max-width: 80%;
   margin: 0 auto;
-  min-height: 800px;
+  min-height: 94vh;
   display: flex;
   border-radius: 3px;
   overflow: hidden;
@@ -262,7 +261,6 @@ input[type=search] {
 .btn-form:hover {
   color: #555;
 }
-
 
 #loader {
     position: fixed;
