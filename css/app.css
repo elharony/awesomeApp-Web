@@ -437,6 +437,7 @@ a.graphic {
   cursor: pointer;
   outline-color: #41c5b6;
   outline: none;
+  transition: all 0.3s;
 }
 
 .track-button:focus {
@@ -478,6 +479,7 @@ a.graphic {
   color: inherit;
   outline: none;
   border: 2px solid transparent;
+  transition: all 0.3s;
 }
 
 .project-button:not(.deadline) {
@@ -503,11 +505,13 @@ a.graphic {
 .arrow-show {
   visibility: visible;
   background-color: #41c5b6;
+  transition: all 0.3s;
 }
 
 .active {
   background-color: #41c5b6;
   color:#fff;
+  transition: all 0.3s;
 }
 
 .deadline {
