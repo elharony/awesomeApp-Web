@@ -292,21 +292,6 @@ input[type=search] {
 
 
 
-.student-card {
-  box-shadow: 2px 2px 10px #bab7b7;
-}
-
-.student-card .collection-item {
-  display: flex;
-  align-items: center;
-}
-
-.student-card .collection-item {
-  display: flex;
-  align-items: center;
-}
-
-
 
 .notfound {
     color: #f82440;
@@ -492,12 +477,12 @@ a.graphic {
   right: -10px;
   transform: rotate(45deg);
   visibility: hidden;
+  transition: all 0.3s;
 }
 
 .arrow-show {
   visibility: visible;
   background-color: #41c5b6;
-  transition: all 0.3s;
 }
 
 .active {
