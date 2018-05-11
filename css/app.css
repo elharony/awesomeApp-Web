@@ -291,15 +291,6 @@ input[type=search] {
 }
 
 
-
-
-.notfound {
-    color: #f82440;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-}
-
 .signedIn,
 .signedOut {
   display: none; }
@@ -319,8 +310,6 @@ input[type=search] {
 
 .signedIn #signout {
   margin-left: 1rem; }
-
-
 
 
 .students::-webkit-scrollbar {
@@ -344,7 +333,7 @@ outline: 1px solid slategrey;
   width: 100%;
 }
 
-a.graphic {
+.graphic {
   font-size: 12px;
   color: #424242;
 }
@@ -555,4 +544,10 @@ a.graphic {
 
 .slack-link:hover .tooltiptext {
   visibility: visible;
+}
+
+.notfound {
+  color: #f82440;
+  font-size: 16px;
+  text-align: center;
 }

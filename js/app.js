@@ -350,7 +350,7 @@ function getStudents(containerElement, projectName, queryFlag) {
     containerElement.innerHTML = '';
     containerElement.append(spinnerBox);
 
-    
+
 
     let query = queryFlag === 'classmate' ?
              ["slackName", ">=", search.value]:
@@ -482,13 +482,12 @@ function getStudents(containerElement, projectName, queryFlag) {
 
 
         }else{
-            const student = document.createElement("ul");
-            student.className = "student-card collection";
+            const student = document.createElement("li");
+            student.className = "student-card";
             const notFound = document.createElement("li");
-            notFound.className = "collection-item row";
-            notFound.innerHTML = `<div class="col s12 notfound"><i class="small material-icons .fab">error_outline</i> It seems we could not find anything</div>`;
-            student.appendChild(notFound);
-            containerElement.appendChild(student);
+            notFound.className = "student-card not-found";
+            notFound.innerHTML = `It seems we could not find anything`;
+            containerElement.appendChild(notFound);
         }
 
     })
