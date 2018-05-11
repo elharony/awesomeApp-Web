@@ -563,10 +563,10 @@ db.collection("Tracks").get().then(function(querySnapshot) {
             studentsContainer.innerHTML = "";
             const trackName = this.getAttribute("data-value");
             
-            removeClass(trackButtons, "active");
+            removeClass(trackButtons, "activeButton");
             projectsContainer.classList.add("border");
             if (e.target.classList.contains("track-button")) {
-                e.target.classList.add("active");
+                e.target.classList.add("activeButton");
             }
 
             // Display the projects based on the clicked Track
@@ -693,10 +693,10 @@ function getProjects(arrayOfData, containerElement, trackName) {
 
             const arrow = document.querySelectorAll(".arrow-hidden");
             removeClass(arrow, "arrow-show");
-            removeClass(projectButtons, "active");
+            removeClass(projectButtons, "activeButton");
 
             if (evt.target.classList.contains("project-button")) {
-                evt.target.classList.add('active');
+                evt.target.classList.add('activeButton');
                 evt.target.lastChild.classList.add('arrow-show');
             }
         

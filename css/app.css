@@ -475,7 +475,7 @@ outline: 1px solid slategrey;
   transition: all 0.1s;
 }
 
-.active {
+.activeButton {
   background-color: #41c5b6;
   color:#fff;
   transition: all 0.1s;
