@@ -537,14 +537,11 @@ db.collection("Tracks").get().then(function(querySnapshot) {
     // Tracks
     const tracksContainer = document.querySelector(".tracks");
     myData.forEach(function (value) {
-        const track = document.createElement("div");
-        track.className = "track col s6 m3 center-align";
         const trackBtn = document.createElement("button");
-        trackBtn.className = "track-button waves-effect waves-light btn-large blue-grey darken-4";
+        trackBtn.className = "track-button";
         trackBtn.innerHTML = value;
         trackBtn.setAttribute("data-value", value);
-        track.appendChild(trackBtn);
-        tracksContainer.appendChild(track);
+        tracksContainer.appendChild(trackBtn);
     });
 
 

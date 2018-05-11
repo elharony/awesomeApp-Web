@@ -271,6 +271,8 @@ input[type=search] {
   color: #555;
 }
 
+
+
 #loader {
     position: fixed;
     display: flex;
@@ -287,8 +289,6 @@ input[type=search] {
 #loader .preloader-wrapper.big {
     /* top: 30%; */
 }
-
-
 
 
 
@@ -352,31 +352,7 @@ input[type=search] {
   margin-left: 1rem; }
 
 
-#explore {
-  padding: 0 15px;
-  background-color: #fff;
-  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
-  min-height: 700px;
-}
 
-#explore .tracks {
-  margin-top: 2rem;
-padding-top: 15px; }
-  #explore .tracks .track .track-button {
-    width: 100%; }
-#explore .track-details .projects .project-button {
-  width: 100%;
-  margin-bottom: 0.5rem;
-  text-align: left; }
-#explore .track-details .students {
-  max-height: 450px;
-  /* overflow-y: scroll;  */
-  }
-
-  #explore .track-details .students .collection {
-    margin-top: 0; 
-    width: 98%;
-  }
 
 .students::-webkit-scrollbar {
   width: .6em;
@@ -443,4 +419,43 @@ a.graphic {
   top: 0;
 }
 
+
+/***** TRACKS & PROJECTS SECTION *****/
+
+.explore-box {
+  flex: 1;
+}
+
+/* Tracks */
+
+.tracks {
+  padding: 25px 20px 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.track-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border-color: transparent;
+  background-color: #fff;
+  font-size: 17px;
+  color: inherit;
+  box-shadow: 0 5px 10px rgba(0,0,0, 0.1);
+  cursor: pointer;
+  outline-color: #41c5b6;
+}
+
+
+/* Zmienić kod js w linijkach 538 - 547
+const trackBtn = document.createElement("button");
+trackBtn.className = "track-button";
+trackBtn.innerHTML = value;
+trackBtn.setAttribute("data-value", value);
+tracksContainer.appendChild(trackBtn);
+*/
 
