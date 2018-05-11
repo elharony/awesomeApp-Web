@@ -455,6 +455,7 @@ a.graphic {
   background-color: rgba(255, 255, 255, 0.6);
   border: 1px solid rgb(218, 218, 218);
   box-shadow: 0 5px 10px rgba(0,0,0, 0.1);
+  border-top: none;
 }
 
 .projects, 
@@ -485,11 +486,6 @@ a.graphic {
 
 .project-button:focus {
   border-bottom-color: #29ccb9;
-}
-
-.project-button:first-child {
-  border-top: none;
-  cursor: pointer;
 }
 
 .arrow-hidden {
