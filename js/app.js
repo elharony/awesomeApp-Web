@@ -420,16 +420,18 @@ function getStudents(containerElement, projectName, queryFlag) {
                     
                 })
 
-                const student = document.createElement("ul");
-                student.className = "student-card collection";
+                const student = document.createElement("li");
+                student.className = "student-card";
 
-                const data_contact = document.createElement("li");
-                data_contact.className = "collection-item row";
-                data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><a href="https://slack.com/app_redirect?channel=C97PS9WJD" id="go-to-slack" class="waves-effect waves-light btn-small blue-grey darken-4">Go to Slack</a></div>`;
+                const data_contact = document.createElement("a");
+                data_contact.className = "slack-link";
+                data_contact.setAttribute("href", "#");
+                data_contact.setAttribute("target", "blank");
+                data_contact.innerHTML = `<img src="img/slack-black.svg" alt="" class="slack-icon"><span>${doc.data().slackName}</span>
+                <span class="tooltiptext">Go to slack</span>`;
 
-                const data_languages = document.createElement("li");
-                data_languages.className = "collection-item row";
-                data_languages.innerHTML = `<div class="col s12"><i class="fas fa-globe"></i> ${doc.data().language.replace(',',', ')} </div>`;
+                const data_languages = document.createElement("p");
+                data_languages.innerHTML = `<p><i class="ion-ios-world-outline user-icons"></i> ${doc.data().language.replace(',',', ')}</p>`;
 
 
 
@@ -558,6 +560,7 @@ db.collection("Tracks").get().then(function(querySnapshot) {
             const studentsContainer = document.querySelector(".students");
             studentsContainer.innerHTML = "";
             const trackName = this.getAttribute("data-value");
+            
             removeClass(trackButtons, "active");
             projectsContainer.classList.add("border");
             e.target.classList.add("active");
