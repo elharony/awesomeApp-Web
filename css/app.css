@@ -436,6 +436,11 @@ a.graphic {
   box-shadow: 0 5px 10px rgba(0,0,0, 0.1);
   cursor: pointer;
   outline-color: #41c5b6;
+  outline: none;
+}
+
+.track-button:focus {
+    border: 2px solid #41c5b6;
 }
 
 /* Projects */
