@@ -475,17 +475,16 @@ a.graphic {
   font-size: inherit;
   color: inherit;
   outline: none;
-  border-width: 0 0 1px;
-  border-color: transparent;
+  border: 2px solid transparent;
 }
 
 .project-button:not(.deadline) {
-  border-top: 1px solid rgb(218, 218, 218);
-  width: 100%;
-}
+    border-top: 1px solid rgb(218, 218, 218);
+    width: 100%;
+  }
 
 .project-button:focus {
-  border-bottom-color: #29ccb9;
+  border: 2px solid #29ccb9;
 }
 
 .arrow-hidden {
