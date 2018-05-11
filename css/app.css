@@ -431,6 +431,7 @@ a.graphic {
 
 .projects {
   background-color: rgba(255, 255, 255, 0.6);
+  text-align: center;
 }
 
 .border {
@@ -439,9 +440,7 @@ a.graphic {
 }
 
 .projects, 
-.students {
-  list-style: none;
-  text-align: center;
+.info-block {
   flex-basis: 50%;
   margin: 0 20px;
   height: 100%;
@@ -509,6 +508,11 @@ a.graphic {
 
 
 /* Students */
+
+.students {
+  list-style: none;
+  width: 100%;
+}
 
 .student-card {
   margin: 10px 0;

@@ -349,6 +349,9 @@ function getStudents(containerElement, projectName, queryFlag) {
     containerElement.removeAttribute('style');
     containerElement.innerHTML = '';
     containerElement.append(spinnerBox);
+
+    
+
     let query = queryFlag === 'classmate' ?
              ["slackName", ">=", search.value]:
              ["currentProject", ">=", projectName];
@@ -431,7 +434,7 @@ function getStudents(containerElement, projectName, queryFlag) {
                 <span class="tooltiptext">Go to slack</span>`;
 
                 const data_languages = document.createElement("p");
-                data_languages.innerHTML = `<p><i class="ion-ios-world-outline user-icons"></i> ${doc.data().language.replace(',',', ')}</p>`;
+                data_languages.innerHTML = `<i class="ion-ios-world-outline user-icons"></i> ${doc.data().language.replace(',',', ')}`;
 
 
 
