@@ -564,18 +564,22 @@ db.collection("Tracks").get().then(function(querySnapshot) {
                 case "AND":
                     projectsContainer.innerHTML = "";
                     getProjects(andProjects, projectsContainer, "AND");
+                    projectsContainer.classList.add("border");
                 break;
                 case "ABND":
                     projectsContainer.innerHTML = "";
                     getProjects(abndProjects, projectsContainer, "ABND");
+                    projectsContainer.classList.add("border");
                 break;
                 case "FEND":
                     projectsContainer.innerHTML = "";
                     getProjects(fendProjects, projectsContainer, "FEND");
+                    projectsContainer.classList.add("border");
                 break;
                 case "MWS":
                     projectsContainer.innerHTML = "";
                     getProjects(mwsProjects, projectsContainer, "MWS");
+                    projectsContainer.classList.add("border");
                 break;
             }
         });
