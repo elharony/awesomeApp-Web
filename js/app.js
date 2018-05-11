@@ -682,7 +682,12 @@ function getProjects(arrayOfData, containerElement, trackName) {
                 break;
             }
 
+
             // Change color of active elements
+
+            const arrow = document.querySelectorAll(".arrow-hidden");
+            removeClass(arrow, "arrow-show");
+            removeClass(projectButtons, "active");
 
             evt.target.classList.add('active');
             evt.target.lastChild.classList.add('arrow-show');
