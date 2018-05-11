@@ -443,6 +443,7 @@ a.graphic {
     border: 2px solid #41c5b6;
 }
 
+
 /* Projects */
 
 .track-details {
@@ -477,13 +478,13 @@ a.graphic {
   border-color: transparent;
 }
 
-.project-button:focus {
-  border-color: #29ccb9;
-}
-
 .project-button:not(.deadline) {
   border-top: 1px solid rgb(218, 218, 218);
   width: 100%;
+}
+
+.project-button:focus {
+  border-bottom-color: #29ccb9;
 }
 
 .project-button:first-child {
