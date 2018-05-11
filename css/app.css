@@ -418,7 +418,7 @@ a.graphic {
 }
 
 .track-button:focus {
-    border: 2px solid #41c5b6;
+  border: 2px solid #41c5b6;
 }
 
 
@@ -459,8 +459,8 @@ a.graphic {
 }
 
 .project-button:not(.deadline) {
-    border-top: 1px solid rgb(218, 218, 218);
-    width: 100%;
+  border-top: 1px solid rgb(218, 218, 218);
+  width: 100%;
   }
 
 .project-button:focus {
@@ -476,18 +476,20 @@ a.graphic {
   right: -10px;
   transform: rotate(45deg);
   visibility: hidden;
-  transition: all 0.3s;
+  opacity: 0;
 }
 
 .arrow-show {
   visibility: visible;
+  opacity: 1;
   background-color: #41c5b6;
+  transition: all 0.1s;
 }
 
 .active {
   background-color: #41c5b6;
   color:#fff;
-  transition: all 0.3s;
+  transition: all 0.1s;
 }
 
 .deadline {
@@ -544,7 +546,6 @@ a.graphic {
   width: 100px;
   text-align: center;
   background-color: #41c5b6;
-  transform: translateX(-43px);
   padding: 5px 10px;
   text-transform: uppercase;
   position: absolute;
@@ -555,4 +556,3 @@ a.graphic {
 .slack-link:hover .tooltiptext {
   visibility: visible;
 }
-
