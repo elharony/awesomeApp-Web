@@ -485,7 +485,7 @@ function getStudents(containerElement, projectName, queryFlag) {
             const student = document.createElement("li");
             student.className = "student-card";
             const notFound = document.createElement("li");
-            notFound.className = "student-card not-found";
+            notFound.className = "student-card notfound";
             notFound.innerHTML = `It seems we could not find anything`;
             containerElement.appendChild(notFound);
         }
@@ -565,7 +565,9 @@ db.collection("Tracks").get().then(function(querySnapshot) {
             
             removeClass(trackButtons, "active");
             projectsContainer.classList.add("border");
-            e.target.classList.add("active");
+            if (e.target.classList.contains("track-button")) {
+                e.target.classList.add("active");
+            }
 
             // Display the projects based on the clicked Track
             switch(trackName) {
@@ -687,15 +689,17 @@ function getProjects(arrayOfData, containerElement, trackName) {
                 break;
             }
 
-
             // Change color of active elements
 
             const arrow = document.querySelectorAll(".arrow-hidden");
             removeClass(arrow, "arrow-show");
             removeClass(projectButtons, "active");
 
-            evt.target.classList.add('active');
-            evt.target.lastChild.classList.add('arrow-show');
+            if (evt.target.classList.contains("project-button")) {
+                evt.target.classList.add('active');
+                evt.target.lastChild.classList.add('arrow-show');
+            }
+        
 
             // Retrieve project's deadlines
 
