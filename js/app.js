@@ -596,7 +596,7 @@ db.collection("Tracks").get().then(function(querySnapshot) {
 
 
 function removeClass(element, elClass) {
-    for (let i = 0; element.length; i++) {
+    for (let i = 0; i < element.length; i++) {
         element[i].classList.remove(elClass);
     }
 }
