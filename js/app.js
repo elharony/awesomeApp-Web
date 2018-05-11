@@ -587,7 +587,7 @@ db.collection("Tracks").get().then(function(querySnapshot) {
     console.log("Got an error: ", error);
 });
 
-
+// Remove class from active elements
 function removeClass(element, elClass) {
     for (let i = 0; i < element.length; i++) {
         element[i].classList.remove(elClass);
@@ -682,6 +682,10 @@ function getProjects(arrayOfData, containerElement, trackName) {
                 break;
             }
 
+            // Change color of active elements
+
+            evt.target.classList.add('active');
+            evt.target.lastChild.classList.add('arrow-show');
 
             // Retrieve project's deadlines
 
