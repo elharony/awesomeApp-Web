@@ -552,7 +552,7 @@ db.collection("Tracks").get().then(function(querySnapshot) {
     const projectsContainer = document.querySelector(".projects");
 
     for(let i = 0; i < trackButtons.length; i++) {
-        trackButtons[i].addEventListener("click", function() {
+        trackButtons[i].addEventListener("click", function(e) {
             const foundInfo = document.querySelector('.search-results');
             foundInfo.innerHTML = '';
             const studentsContainer = document.querySelector(".students");
@@ -565,21 +565,25 @@ db.collection("Tracks").get().then(function(querySnapshot) {
                     projectsContainer.innerHTML = "";
                     getProjects(andProjects, projectsContainer, "AND");
                     projectsContainer.classList.add("border");
+                    e.target.classList.add("active");
                 break;
                 case "ABND":
                     projectsContainer.innerHTML = "";
                     getProjects(abndProjects, projectsContainer, "ABND");
                     projectsContainer.classList.add("border");
+                    e.target.classList.add("active");
                 break;
                 case "FEND":
                     projectsContainer.innerHTML = "";
                     getProjects(fendProjects, projectsContainer, "FEND");
                     projectsContainer.classList.add("border");
+                    e.target.classList.add("active");
                 break;
                 case "MWS":
                     projectsContainer.innerHTML = "";
                     getProjects(mwsProjects, projectsContainer, "MWS");
                     projectsContainer.classList.add("border");
+                    e.target.classList.add("active");
                 break;
             }
         });
