@@ -1,84 +1,430 @@
-/**********************/
-/** Global Variables **/
-/**********************/
-$color_first: #616161  // Dark Grey - 2
-$color_second: #eceff1 // Lighten Grey - 5
-$color_third: #212121  // Dark Grey - 4
-$color_white: #fff     // Pure White
-$bright_overlay: rgba(253, 253, 253, 0.84)
-    
-/***********************/
-/** Reset Materialize **/
-/***********************/
+*
+    box-sizing: border-box
+    margin: 0
+    padding: 0
 
-// Inputs
-input:not([type]):focus:not([readonly]), input[type="text"]:not(.browser-default):focus:not([readonly]), input[type="password"]:not(.browser-default):focus:not([readonly]), input[type="email"]:not(.browser-default):focus:not([readonly]), input[type="url"]:not(.browser-default):focus:not([readonly]), input[type="time"]:not(.browser-default):focus:not([readonly]), input[type="date"]:not(.browser-default):focus:not([readonly]), input[type="datetime"]:not(.browser-default):focus:not([readonly]), input[type="datetime-local"]:not(.browser-default):focus:not([readonly]), input[type="tel"]:not(.browser-default):focus:not([readonly]), input[type="number"]:not(.browser-default):focus:not([readonly]), input[type="search"]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly])
-    border-color: $color_first
-    box-shadow: 0 1px 0 0 $color_first
+body
+    font-size: 16px
+    font-family: 'Lato', sans-serif
+    color: #555
 
-select:focus
-    outline: 1px solid $color_first
+/* Custom Framework */
+.btn 
+    display: inline-block
+    margin: 20px 7px 10px
+    padding: 5px 20px
+    background-color: #fff
+    border: 2px solid #fff
+    border-radius: 3px
+    cursor: pointer
+    font-size: 13px
+    color: #333
+    text-decoration: none
+    transition: all 0.4s
 
-/***************/
-/** My Styles **/
-/***************/
+    &:hover 
+        background-color: transparent
+        color: #fff
 
-// Preloader
-#loader
+
+/* Dashboard */
+.signedIn
+    padding: 3vh 0
+    background: linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,255,255,0.8)),url(../img/bg-img.gif)
+    background-size: cover
+    background-repeat: no-repeat
+    background-attachment: fixed
+
+    .container
+        max-width: 80%
+        margin: 0 auto
+        min-height: 94vh
+        display: flex
+        border-radius: 3px
+        overflow: hidden
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2)
+
+        /* side nav */
+        .side-nav
+            flex-basis: 270px
+            display: flex
+            flex-direction: column
+            align-items: center
+            color: #fff
+            font-size: 15px
+
+            /* logo */
+            .logo-box 
+                background-color: rgba(66, 185, 171, 0.8)
+                width: 100%
+                text-align: center
+
+                /* to be deleted */
+                flex-basis: 170px
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: center
+
+                .logo 
+                    width: 150px
+                    
+                .download 
+                    text-transform: uppercase
+                    font-size: 14px
+                    font-weight: 300
+                    text-decoration: none
+                    color: inherit
+                    
+                .user-icons 
+                    margin: 0 5px
+                    font-size: 20px
+                    
+            
+            /* user info */
+            .user-box,
+            .classmates-box 
+                padding: 20px 10px
+                width: 100%
+                display: flex
+                flex-direction: column
+                align-items: center
+            
+            .user-box 
+                background: linear-gradient(rgba(66, 185, 171, 0.8),rgba(69, 89, 138, 0.9)), url(../img/group.jpeg) 15%
+                background-size: cover
+                background-repeat: no-repeat
+                flex: 1
+                justify-content: space-around
+                min-height: 280px
+                max-height: 400px
+            
+                .user-img 
+                    margin: 0 10px 10px
+                    width: 70px
+                    height: 70px
+                    border-radius: 50%
+                    background-color: #fff
+                    
+
+                .preferences-wrapper 
+                    text-align: center
+                    
+
+            /* classmates */
+            .classmates-box 
+                background: linear-gradient(rgba(167, 121, 142, 0.85),rgba(167, 121, 142, 0.85)), url(../img/desk.jpeg)
+                background-size: cover
+                background-repeat: no-repeat
+                flex: 1
+
+                .classmates-no,
+                .last-registered 
+                    margin: 20px 0
+                
+                .search-wrapper 
+                    display: flex
+                    align-content: center
+                    width: 100%
+                    
+                    .icon-search 
+                        margin: 0 10px
+                        font-size: 25px
+
+                    input[type=search] 
+                        padding: 5px
+                        width: 80%
+                        border-radius: 3px
+                        border-color: transparent
+
+                .last-registered 
+                    font-size: 14px
+
+                    .last-user 
+                        display: block
+                        padding-top: 10px
+
+                        .slack-icon 
+                            height: 14px
+                            color: #fff
+                            margin-right: 3px
+
+        /* modal */
+        .modal 
+            position: fixed
+            top: 0 !important
+            left: 0
+            display: none
+            width: 100%
+            height: 100%
+        
+            .form-center 
+                width: 100%
+                height: 100%
+                display: flex
+                justify-content: center
+                align-items: center
+                background-color: rgba(51, 49, 49, 0.8)
+
+                .form-wrapper 
+                    position: relative
+                    background-color: #fff
+                    width: 60%
+                    max-width: 800px
+                    height: 600px
+                    border-radius: 3px
+                    display: flex
+                    justify-content: center
+                
+                    .btn-close 
+                        text-decoration: none
+                        color: inherit
+                    
+                        .icon-close 
+                            position: absolute
+                            top: 20px
+                            right: 40px
+                            font-size: 35px
+                        
+                    .form 
+                        display: flex
+                        flex-direction: column
+                        width: 80%
+                        height: 85%
+                        margin: auto 0
+                    
+                        .form-title 
+                            font-size: 30px
+                            font-weight: 400
+                        
+                        .form-description 
+                            margin: 15px 0 25px
+                            font-size: 15px
+                        
+                        .field-wrapper 
+                            display: flex
+                            flex-direction: column
+                        
+                            .form-label 
+                                margin-top: 15px
+                                font-size: 13px
+                                color: #777
+                            
+
+                            .form-field 
+                                padding: 5px
+                                outline-color: rgba(66, 185, 171, 0.8)
+                                border: 1px solid rgb(223, 223, 223) !important
+                            
+                        .btn-wrapper
+                            .btn-form 
+                                background-color: rgba(66, 185, 171, 0.8)
+                                border: 2px solid rgba(66, 185, 171, 0.8)
+                                color: #fff
+                                margin-top: 30px
+                                margin-left: 0
+                                padding: 5px 35px
+
+                                &:hover 
+                                    color: #555
+
+
+/* In Progress
+ *
+ * Waiting the new layout changes
+ */
+
+#loader 
     position: fixed
+    display: flex
+    justify-content: center
+    align-items: center
     top: 0
     left: 0
     width: 100%
     height: 100%
-    background: $bright_overlay
+    background: rgba(253, 253, 253, 0.84)
     z-index: 99
-    
-    .preloader-wrapper.big
-        top: 30%
 
-// Landing Page [ Sign in / Sign out]
-.signedIn,
-.signedOut
+
+#loader .preloader-wrapper.big 
+    /* top: 30% */
+
+
+
+
+.allClassmates 
+    display: flex
+    align-items: flex-end
+
+
+.student-card 
+    box-shadow: 2px 2px 10px #bab7b7
+
+
+.student-card .collection-item 
+    display: flex
+    align-items: center
+
+
+#totalClassmates 
+    font-size: 22px
+    line-height: 27px
+    margin: 0 5px 0 0
+
+
+.allClassmates 
+    display: flex
+    align-items: flex-end
+
+
+.student-card .collection-item 
+    display: flex
+    align-items: center
+
+
+#totalClassmates 
+    font-size: 22px
+    line-height: 27px
+    margin: 0 5px 0 0
+
+
+.notfound 
+    color: #f82440
+    font-size: 16px
+    display: flex
+    align-items: center
+
+
+.hidden 
+    opacity: 0
     display: none
-    
-.signedOut
+    transition: opacity .5 ease-out
+
+
+.deadline 
+    opacity: 1
+    display: flex
+    transition: opacity .5 ease-out
+
+
+.signedIn,
+.signedOut 
+    display: none 
+
+.signedOut 
     background: url(../img/background.jpg)
     background-size: cover
-    background-repeat: no-repeat
-
-    .inner
+    background-repeat: no-repeat 
+    .signedOut .inner 
         width: 90%
         margin: 0 auto
         padding-top: 20%
-        text-align: center
+        text-align: center 
+    .signedOut .inner h1 
+        margin: 0 0 1rem 0
+        color: #fff 
 
-        h1
-            margin: 0 0 1rem 0
-            color: $color_white
+.signedIn #signout 
+    margin-left: 1rem 
 
-.signedIn
-    #signout
-        margin-left: 1rem
-// Explore [ Tab ]
-#explore
 
-    .tracks
-        margin-top: 2rem
+#explore 
+    padding: 0 15px
+    background-color: #fff
+    box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1)
+    min-height: 700px
 
-        .track
-            .track-button
-                width: 100%
 
-    .track-details
-        .projects
-            .project-button
-                width: 100%
-                margin-bottom: 0.5rem
-                text-align: left
+#explore .tracks 
+    margin-top: 2rem
+    padding-top: 15px 
+#explore .tracks .track .track-button 
+    width: 100% 
+#explore .track-details .projects .project-button 
+    width: 100%
+    margin-bottom: 0.5rem
+    text-align: left 
+#explore .track-details .students 
+    max-height: 450px
+    /* overflow-y: scroll  */
+  
 
-        .students
-            max-height: 450px
-            overflow-y: scroll
+#explore .track-details .students .collection 
+    margin-top: 0 
+    width: 98%
 
-            .collection
-                margin-top: 0
+
+.students::-webkit-scrollbar 
+    width: .6em
+
+
+.students::-webkit-scrollbar-track 
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3)
+
+
+.students::-webkit-scrollbar-thumb 
+    background-color: #d81b60
+    outline: 1px solid slategrey
+
+
+/*# sourceMappingURL=app.css.map */
+
+.link-container 
+    text-align: center
+    padding: 15px
+    width: 100%
+
+
+a.graphic 
+    font-size: 12px
+    color: #424242
+
+
+.progress .indeterminate 
+    background: #c50048
+
+
+.progress 
+    background: #fa9bc6
+
+
+.modal-content select:hover 
+    border: 1px solid #c50048
+    cursor: pointer
+
+
+.search-results 
+    display: flex
+    justify-content: space-between
+    align-items: center
+    position: relative
+    color: #d81b60
+
+
+.language-filter 
+    display: block
+    cursor: pointer
+    width: auto
+
+
+.language-filter:focus, .language-filter:active 
+    outline: none
+
+
+.closeFilter 
+    color: red
+    font-size: 13px
+    cursor: pointer
+    position: absolute
+    top: 0
+
+
+#message 
+    min-height: 20px
+
+
+
+
+
+
