@@ -559,32 +559,25 @@ db.collection("Tracks").get().then(function(querySnapshot) {
             studentsContainer.innerHTML = "";
             const trackName = this.getAttribute("data-value");
             removeClass(trackButtons, "active");
+            projectsContainer.classList.add("border");
+            e.target.classList.add("active");
 
             // Display the projects based on the clicked Track
             switch(trackName) {
                 case "AND":
                     projectsContainer.innerHTML = "";
                     getProjects(andProjects, projectsContainer, "AND");
-                    projectsContainer.classList.add("border");
-                    e.target.classList.add("active");
                 break;
                 case "ABND":
                     projectsContainer.innerHTML = "";
                     getProjects(abndProjects, projectsContainer, "ABND");
-                    projectsContainer.classList.add("border");
-                    e.target.classList.add("active");
-                break;
                 case "FEND":
                     projectsContainer.innerHTML = "";
                     getProjects(fendProjects, projectsContainer, "FEND");
-                    projectsContainer.classList.add("border");
-                    e.target.classList.add("active");
                 break;
                 case "MWS":
                     projectsContainer.innerHTML = "";
                     getProjects(mwsProjects, projectsContainer, "MWS");
-                    projectsContainer.classList.add("border");
-                    e.target.classList.add("active");
                 break;
             }
         });
