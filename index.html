@@ -42,45 +42,61 @@
                     </div>
                     <div class="last-registered">Last registered:<span class="last-user"><img src="img/slack-white.svg" alt="" class="slack-icon"><span id="lastClassmate"></span></span></div>
                 </div>
+
               </nav>
 
             <!-- Preferences -->
             <div id="preferences" class="modal">
-              <form action="" id="preferencesForm">
-              <div class="modal-content">
-                <h4>Preferences</h4>
-                <p>Update your Preferences to stay connected with other classmates!</p>
-                <div id="message"></div>
-                <div class="input-field col s12">
-                    <input id="slackName" type="text" name="slackNameField"  placeholder"Enter your Slack Username here" required onfocus="clearSearch(this)" onblur="setSearch(this)">
-                </div>
-                <div class="input-field col s12">
-                    <select id="tracks" class="browser-default" required>
-                        <option value="" disabled selected>Nanodegree Tracks</option>
-                    </select>
-                </div>
-                <div class="input-field col s12">
-                    <select id="availableProjects" class="browser-default" required>
-                        <option value="" disabled selected>Current Project</option>
-                    </select>
-                </div>
-                <div class="input-field col s12">
-                    <select id="langOne" class="browser-default" required>
-                        <option value="" disabled selected>Preferred Language #1</option>
-                    </select>
-                </div>
-                <div class="input-field col s12">
-                    <select id="langTwo" class="browser-default" required>
-                        <option value="" disabled selected>Preferred Language #2</option>
-                    </select>
-                </div>
-                <div class="col s12">
-                    <a id="closeButton" href="javascript:void(0)" class="btn-floating waves-effect btn-large grey darken-4"><i class="fas fa-times"></i></a>
-                    <button type="submit" id="savePreferences" class="secondary-content btn-floating waves-effect btn-large pink darken-1 accent-4" title="Update Preferences"><i class="fas fa-pencil-alt"></i></button>
-                </div>
+              <div class="form-center">
+                  <div class="form-wrapper">
+                    <a id="closeButton" href="javascript:void(0)" class="btn-close"><i class="ion-ios-close-empty icon-close"></i></a>
+  
+                    <form action="" id="preferencesForm" class="form">
+                      <h4 class="form-title">Preferences</h4>
+                      <p class="form-description">Update your Preferences to stay connected with other classmates!</p>
+                      <div id="message"></div>
+                        
+                      <div class="field-wrapper">
+                          <label for="slackName" class="form-label">Your Slack Username</label>
+                          <input id="slackName" type="text" name="slackNameField" required onfocus="clearSearch(this)" onblur="setSearch(this)" class="form-field">
+                      </div>
+  
+                      <div class="field-wrapper">
+                          <label for="tracks" class="form-label">Your Track</label>
+                          <select id="tracks" class="browser-default form-field" required>
+                            <option value="" disabled selected>Nanodegree Tracks</option>
+                          </select>
+                      </div>
+  
+                      <div class="field-wrapper">
+                          <label for="availableProjects" class="form-label">Current Project</label>
+                          <select id="availableProjects" class="browser-default form-field" required>
+                            <option value="" disabled selected>Current Project</option>
+                          </select>
+                      </div>
+                      
+                      <div class="field-wrapper">
+                          <label for="langOne" class="form-label">First Language</label>
+                          <select id="langOne" class="browser-default form-field" required>
+                            <option value="" disabled selected>Preferred Language #1</option>
+                          </select>
+                      </div>
+  
+                      <div class="field-wrapper">
+                          <label for="langTwo" class="form-label">Second Language</label>
+                          <select id="langTwo" class="browser-default form-field" required>
+                            <option value="" disabled selected>Preferred Language #2</option>
+                          </select>
+                      </div>
+                      
+                      <div class="button-wrapper">
+                          <button type="submit" id="savePreferences" class="btn btn-form" title="Update Preferences">Save</button>
+                      </div>
+  
+                    </form>
+                  </div>  
               </div>
-
-              </form>
+              
             </div>
 
             <!-- Explore -->
