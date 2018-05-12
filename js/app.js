@@ -434,6 +434,7 @@ function getStudents(containerElement, projectName, queryFlag) {
                 <span class="tooltiptext">Go to slack</span>`;
 
                 const data_languages = document.createElement("p");
+                data_languages.className = "user-language"
                 data_languages.innerHTML = `<i class="ion-ios-world-outline icon-language"></i> ${doc.data().language.replace(',',', ')}`;
 
 
