@@ -818,5 +818,8 @@ $(document).ready(function(){
     $('.sidenav').sidenav();
 });
 
+
+/* style added in css
 const signedOutContainer = document.querySelector(".signedOut");
 signedOutContainer.style.height = window.innerHeight + "px";
+*/

@@ -358,8 +358,11 @@ outline: 1px solid slategrey;
   justify-content: space-between;
   align-items: center;
   color: #f82440;
-  margin-bottom: 10px;
   position: relative;
+}
+
+.search-count {
+  margin-bottom: 10px;
 }
 
 .language-filter {
@@ -367,6 +370,7 @@ outline: 1px solid slategrey;
   cursor: pointer;
   width: auto;
   padding: 5px;
+  margin-bottom: 10px;
 }
 
 .language-filter:focus, .language-filter:active {
@@ -516,7 +520,7 @@ outline: 1px solid slategrey;
 
 .student-card {
   margin: 10px 0;
-  padding: 25px;
+  padding: 25px 35px;
   border: 1px solid rgb(218, 218, 218);
   background-color: rgba(255, 255, 255, 0.6);
   box-shadow: 0 5px 10px rgba(0,0,0, 0.1);
@@ -536,7 +540,7 @@ outline: 1px solid slategrey;
   text-decoration: none;
   outline: none;
   margin-right: auto;
-  padding: 5px 0;
+  padding: 5px 10px 5px 0;
 }
 
 .slack-link:focus {
