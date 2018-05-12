@@ -403,6 +403,7 @@ outline: 1px solid slategrey;
 }
 
 .track-button {
+  margin: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
