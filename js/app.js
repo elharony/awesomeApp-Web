@@ -387,7 +387,7 @@ function getStudents(containerElement, projectName, queryFlag) {
                 studentsCount.innerHTML = ('Filtered ' + numOfItems + " record" + (+numOfItems===1?"":"s"));
                 const closeFilter = document.createElement("span");
                 closeFilter.classList.add("closeFilter");
-                closeFilter.innerHTML = "close"
+                closeFilter.innerHTML = "clear filter"
                 studentsCount.appendChild(closeFilter);
 
                 //close filter event
