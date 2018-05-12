@@ -357,7 +357,6 @@ outline: 1px solid slategrey;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
   color: #d81b60;
 }
 
@@ -377,9 +376,7 @@ outline: 1px solid slategrey;
   color: #f82440;
   font-size: 13px;
   cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 0;
+  margin-left: auto;
 }
 
 /*////////////////////////////////////////////////////////////*/
