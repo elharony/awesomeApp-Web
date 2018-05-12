@@ -575,6 +575,7 @@ db.collection("Tracks").get().then(function(querySnapshot) {
                 case "ABND":
                     projectsContainer.innerHTML = "";
                     getProjects(abndProjects, projectsContainer, "ABND");
+                break;
                 case "FEND":
                     projectsContainer.innerHTML = "";
                     getProjects(fendProjects, projectsContainer, "FEND");
