@@ -388,7 +388,7 @@ function getStudents(containerElement, projectName, queryFlag) {
                 const closeFilter = document.createElement("span");
                 closeFilter.classList.add("closeFilter");
                 closeFilter.innerHTML = "close"
-                closeFilter.insertAdjacentElement("afterend", studentsCount);
+                studentsCount.appendChild(closeFilter);
 
                 //close filter event
                 closeFilter.addEventListener('click', ()=>{
