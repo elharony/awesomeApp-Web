@@ -151,7 +151,7 @@ function checkSlackUsername(){
                     resolve('true');
                 }else if(querySnapshot.size && firebase.auth().currentUser.displayName !== usrName ){
                     message.innerHTML = '<p>This Username already in use. If you\'re sure that is someone uses your Slack Username, please <a href=#>report</a></p>';
-                    message.style.color = "red";
+                    message.style.color = "#f82440";
                     reject("Already in use");
                     return false;
                 }else if(slackNameField.value.replace(/\s/g,'') !== '' &&
@@ -388,7 +388,7 @@ function getStudents(containerElement, projectName, queryFlag) {
                 const closeFilter = document.createElement("span");
                 closeFilter.classList.add("closeFilter");
                 closeFilter.innerHTML = "close"
-                studentsCount.appendChild(closeFilter);
+                closeFilter.insertBefore.(langFilter);
 
                 //close filter event
                 closeFilter.addEventListener('click', ()=>{

@@ -365,6 +365,8 @@ outline: 1px solid slategrey;
   display: block;
   cursor: pointer;
   width: auto;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 .language-filter:focus, .language-filter:active {
@@ -372,11 +374,12 @@ outline: 1px solid slategrey;
 }
 
 .closeFilter {
-  color: red;
+  color: #f82440;
   font-size: 13px;
   cursor: pointer;
   position: absolute;
   top: 0;
+  right: 0;
 }
 
 /*////////////////////////////////////////////////////////////*/
