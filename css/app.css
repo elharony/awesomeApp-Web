@@ -516,7 +516,7 @@ outline: 1px solid slategrey;
 
 .student-card {
   margin: 10px 0;
-  padding: 25px 20px;
+  padding: 25px;
   border: 1px solid rgb(218, 218, 218);
   background-color: rgba(255, 255, 255, 0.6);
   box-shadow: 0 5px 10px rgba(0,0,0, 0.1);
@@ -536,6 +536,7 @@ outline: 1px solid slategrey;
   text-decoration: none;
   outline: none;
   margin-right: auto;
+  padding: 5px 0;
 }
 
 .slack-link:focus {
@@ -593,4 +594,5 @@ outline: 1px solid slategrey;
 
 .user-language {
   order: 2;
+  padding: 5px 0;
 }
