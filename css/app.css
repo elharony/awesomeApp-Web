@@ -617,12 +617,10 @@ outline: 1px solid slategrey;
   }
   .logo-box {
     flex: 1;
-    flex-basis: unset;
   }
   .user-box {
     flex: 2;
     min-width: 265px;
-    order: 3;
   }
 
   .user-img {
@@ -631,6 +629,5 @@ outline: 1px solid slategrey;
   }
   .classmates-box {
     flex: 1;
-    order: 2;
   }
 }
