@@ -669,6 +669,9 @@ outline: 1px solid slategrey;
     width: 75px;
     height: 75px;
   }
+  .form-wrapper {
+    width: 80%;
+  }
 }
 
 @media only screen and (max-width: 481px) {
