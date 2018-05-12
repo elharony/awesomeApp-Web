@@ -99,8 +99,8 @@ firebase.initializeApp(config);
             //checkSlackUsername();
 
         }else{
-            message.innerHTML = "Your Slack Username should include at least 3 numbers of letters";
-            message.style.color = "red";
+            message.innerHTML = "Your Slack Username should include at least 3 numbers or letters";
+            message.style.color = "#f82440";
         }
     });
 
