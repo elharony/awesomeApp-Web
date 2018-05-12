@@ -540,7 +540,7 @@ outline: 1px solid slategrey;
   text-decoration: none;
   outline: none;
   margin-right: auto;
-  padding: 5px 10px 5px 0;
+  padding: 5px 20px 5px 0;
 }
 
 .slack-link:focus {
@@ -650,11 +650,12 @@ outline: 1px solid slategrey;
 }
 
 @media only screen and (max-width: 600px) {
-  .search-results {
-    flex-wrap: wrap-reverse;
+  .track-details {
+    flex-wrap: wrap;
   }
-  .closeFilter {
-    left: 0;
+  .projects,
+  .info-block {
+    flex-basis: 100%;
   }
 }
 
@@ -662,4 +663,5 @@ outline: 1px solid slategrey;
   .user-box {
     order: unset;
   }
+
 }
