@@ -522,7 +522,6 @@ outline: 1px solid slategrey;
   box-shadow: 0 5px 10px rgba(0,0,0, 0.1);
   min-height: 70px;
   display: flex;
-  justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -536,6 +535,7 @@ outline: 1px solid slategrey;
   color: inherit;
   text-decoration: none;
   outline: none;
+  margin-right: auto;
 }
 
 .slack-link:focus {
@@ -578,6 +578,14 @@ outline: 1px solid slategrey;
   font-size: 20px;
 }
 
+.icon-project {
+  margin-left: 3px;
+}
+
 .user-track {
   padding: 10px 0;
+}
+
+.user-project {
+  padding-bottom: 10px;
 }
