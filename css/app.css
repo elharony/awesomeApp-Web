@@ -49,6 +49,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 15px 0;
 }
 
 .logo {
@@ -148,6 +149,7 @@ body {
 input[type=search] {
   padding: 5px;
   width: 80%;
+  min-width: 160px;
   border-radius: 3px;
   border-color: transparent;
 }
@@ -629,5 +631,14 @@ outline: 1px solid slategrey;
   }
   .classmates-box {
     flex: 1;
+  }
+}
+
+@media only screen and (max-width: 801px) {
+  .side-nav {
+    flex-wrap: wrap;
+  }
+  .user-box {
+    order: 3;
   }
 }
