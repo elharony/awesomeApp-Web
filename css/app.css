@@ -583,9 +583,12 @@ outline: 1px solid slategrey;
 }
 
 .user-project,
-.user-track, 
-.slack-link  {
+.user-track {
   padding-bottom: 10px;
+}
+
+.user-track {
+  padding-top: 10px;
 }
 
 .user-language {
