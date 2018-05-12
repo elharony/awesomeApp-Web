@@ -44,9 +44,6 @@ body {
   background-color: rgba(66, 185, 171, 0.8);
   width: 100%;
   text-align: center;
-
-  /* to be deleted */
-  flex-basis: 170px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,7 +70,6 @@ body {
   background-repeat: no-repeat;
   flex: 1;
   justify-content: space-around;
-  min-height: 280px;
   max-height: 400px;
 }
 
@@ -600,4 +596,41 @@ outline: 1px solid slategrey;
 .user-language {
   order: 2;
   padding: 5px 0;
+}
+
+@media only screen and (max-width: 1281px) {
+  .container {
+    max-width: 100%%;
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  .container {
+    flex-direction: column;
+  }
+  .side-nav {
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: stretch;
+    flex-basis: unset;
+    font-size: 14px;
+  }
+  .logo-box {
+    flex: 1;
+    flex-basis: unset;
+  }
+  .user-box {
+    flex: 2;
+    min-width: 265px;
+    order: 3;
+  }
+
+  .user-img {
+    width: 55px;
+    height: 55px;
+  }
+  .classmates-box {
+    flex: 1;
+    order: 2;
+  }
 }
