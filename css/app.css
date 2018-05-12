@@ -358,6 +358,7 @@ outline: 1px solid slategrey;
   justify-content: space-between;
   align-items: center;
   color: #d81b60;
+  margin-bottom: 10px;
 }
 
 .language-filter {
@@ -365,7 +366,6 @@ outline: 1px solid slategrey;
   cursor: pointer;
   width: auto;
   padding: 5px;
-  margin-bottom: 10px;
 }
 
 .language-filter:focus, .language-filter:active {
