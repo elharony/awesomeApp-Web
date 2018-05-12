@@ -446,7 +446,7 @@ function getStudents(containerElement, projectName, queryFlag) {
                     workingProject.className = "user-info";
                     workingProject.innerHTML = `<div class="user-track"><i class="ion-ios-star-outline icon-track"></i> ${doc.data().userTrack}</div>
                     <div class="user-project"><i class="ion-ios-copy-outline icon-project"></i> ${doc.data().currentProject}</div>`;
-                    data_contact.appendChild(workingProject);
+                    student.appendChild(workingProject);
                 }
 
                 
