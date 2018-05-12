@@ -362,7 +362,7 @@ outline: 1px solid slategrey;
 }
 
 .search-count {
-  margin-bottom: 10px;
+  margin: 0 10px 10px 0;
 }
 
 .language-filter {
@@ -643,5 +643,23 @@ outline: 1px solid slategrey;
   }
   .explore-box {
     padding-top: 10px;
+  }
+  .track-details {
+    padding: 30px 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .search-results {
+    flex-wrap: wrap-reverse;
+  }
+  .closeFilter {
+    left: 0;
+  }
+}
+
+@media only screen and (max-width: 481px) {
+  .user-box {
+    order: unset;
   }
 }
