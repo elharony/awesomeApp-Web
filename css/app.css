@@ -44,6 +44,7 @@ body {
   background-color: rgba(66, 185, 171, 0.8);
   width: 100%;
   text-align: center;
+  flex-basis: 170px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -600,7 +601,7 @@ outline: 1px solid slategrey;
 
 @media only screen and (max-width: 1281px) {
   .container {
-    max-width: 100%%;
+    max-width: 100%;
   }
 }
 
@@ -609,7 +610,6 @@ outline: 1px solid slategrey;
     flex-direction: column;
   }
   .side-nav {
-    flex-wrap: wrap;
     flex-direction: row;
     align-items: stretch;
     flex-basis: unset;
