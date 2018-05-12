@@ -648,10 +648,6 @@ outline: 1px solid slategrey;
   .track-details {
     padding: 20px 0;
   }
-  .track-button {
-    width: 75px;
-    height: 75px;
-  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -668,6 +664,10 @@ outline: 1px solid slategrey;
   }
   .arrow-show {
     visibility: hidden;
+  }
+  .track-button {
+    width: 75px;
+    height: 75px;
   }
 }
 
