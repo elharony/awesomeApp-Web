@@ -439,18 +439,15 @@ function getStudents(containerElement, projectName, queryFlag) {
 
 
                 student.appendChild(data_contact);
+                student.appendChild(data_languages);
                 if(queryFlag) {
-                    const workingProject = document.createElement("li");
-                    workingProject.className = "collection-item row";
-                    const currentTrack = document.createElement("li");
-                    currentTrack.className = "collection-item row";
-                    currentTrack.innerHTML = `<div class="col s12"><i class="fas fa-certificate"></i> ${doc.data().userTrack}</div>`;
-                    workingProject.innerHTML = `<div class="col s12"><i class="fas fa-bug"></i> ${doc.data().currentProject}</div>`;
-                    student.appendChild(currentTrack);
+                    const workingProject = document.createElement("div");
+                    workingProject.className = "user-info";
+                    workingProject.innerHTML = `<span><i class="ion-ios-star-outline user-icons"></i> ${doc.data().userTrack}</span>
+                    <span><i class="ion-ios-copy-outline user-icons"></i> ${doc.data().currentProject}</span>`;
                     student.appendChild(workingProject);
                 }
 
-                student.appendChild(data_languages);
                 
                 retrievedStudents[doc.data().slackName] = student;
                 
