@@ -77,7 +77,7 @@ body {
 
 .user-box,
 .classmates-box {
-  padding: 20px 10px;
+  padding: 30px 10px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -628,6 +628,7 @@ outline: 1px solid slategrey;
   .user-box {
     flex: 2;
     min-width: 265px;
+    padding: 20px 10px;
   }
 
   .user-img {
@@ -636,6 +637,7 @@ outline: 1px solid slategrey;
   }
   .classmates-box {
     flex: 1;
+    padding: 20px 10px;
   }
 }
 
