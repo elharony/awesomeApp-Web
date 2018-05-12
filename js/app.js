@@ -443,8 +443,8 @@ function getStudents(containerElement, projectName, queryFlag) {
                 if(queryFlag) {
                     const workingProject = document.createElement("div");
                     workingProject.className = "user-info";
-                    workingProject.innerHTML = `<div class="user-track"><i class="ion-ios-star-outline user-icons"></i> ${doc.data().userTrack}</div>
-                    <div class="user-project"><i class="ion-ios-copy-outline user-icons"></i> ${doc.data().currentProject}</div>`;
+                    workingProject.innerHTML = `<div class="user-track"><i class="ion-ios-star-outline icon-track"></i> ${doc.data().userTrack}</div>
+                    <div class="user-project"><i class="ion-ios-copy-outline icon-project"></i> ${doc.data().currentProject}</div>`;
                     data_contact.appendChild(workingProject);
                 }
 
