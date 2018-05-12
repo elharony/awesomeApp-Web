@@ -49,7 +49,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 15px 0;
+  padding: 15px;
 }
 
 .logo {
@@ -607,7 +607,7 @@ outline: 1px solid slategrey;
   }
 }
 
-@media only screen and (max-width: 1025px) {
+@media only screen and (max-width: 1025px) and (min-width: 480px) {
   .container {
     flex-direction: column;
   }
@@ -634,11 +634,14 @@ outline: 1px solid slategrey;
   }
 }
 
-@media only screen and (max-width: 801px) {
+@media only screen and (max-width: 801px) and (min-width: 480px) {
   .side-nav {
     flex-wrap: wrap;
   }
   .user-box {
     order: 3;
+  }
+  .explore-box {
+    padding-top: 10px;
   }
 }
