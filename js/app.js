@@ -388,7 +388,7 @@ function getStudents(containerElement, projectName, queryFlag) {
                 const closeFilter = document.createElement("span");
                 closeFilter.classList.add("closeFilter");
                 closeFilter.innerHTML = "close"
-                studentsCount.appendChild(closeFilter);
+                infoBox.appendChild(closeFilter);
 
                 //close filter event
                 closeFilter.addEventListener('click', ()=>{
