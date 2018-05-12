@@ -572,7 +572,8 @@ outline: 1px solid slategrey;
 }
 
 .icon-project, 
-.icon-track {
+.icon-track,
+.icon-language {
   margin-right: 5px;
   font-size: 20px;
 }
