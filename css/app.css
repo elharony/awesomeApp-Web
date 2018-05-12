@@ -435,6 +435,7 @@ outline: 1px solid slategrey;
 .projects {
   background-color: rgba(255, 255, 255, 0.6);
   text-align: center;
+  margin: 0 20px 40px;
 }
 
 .border {
@@ -445,7 +446,6 @@ outline: 1px solid slategrey;
 .projects, 
 .info-block {
   flex-basis: 50%;
-  margin: 0 20px 40px;
   height: 100%;
 }
 
@@ -513,6 +513,10 @@ outline: 1px solid slategrey;
 
 
 /* Students */
+
+.info-block {
+  margin: 0 20px;
+}
 
 .students {
   list-style: none;
