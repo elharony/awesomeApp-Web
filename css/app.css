@@ -648,13 +648,16 @@ outline: 1px solid slategrey;
   .track-details {
     padding: 20px 0;
   }
-  .track-buttons {
+  .track-button {
     width: 75px;
     height: 75px;
   }
 }
 
 @media only screen and (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
   .tracks,
   .track-details {
     flex-wrap: wrap;
@@ -669,8 +672,10 @@ outline: 1px solid slategrey;
 }
 
 @media only screen and (max-width: 481px) {
+  body {
+    font-size: 14px;
+  }
   .user-box {
     order: unset;
   }
-
 }
