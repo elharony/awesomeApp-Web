@@ -796,6 +796,3 @@ $(document).ready(function(){
     $('.modal').modal();
     $('.sidenav').sidenav();
 });
-
-const signedOutContainer = document.querySelector(".signedOut");
-signedOutContainer.style.height = window.innerHeight + "px";
