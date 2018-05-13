@@ -643,6 +643,7 @@ outline: 1px solid slategrey;
   text-align: center;
   background-color: #41c5b6;
   padding: 5px 10px;
+  margin-left: 1rem;
   text-transform: uppercase;
   position: absolute;
   z-index: 1;
