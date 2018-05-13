@@ -10,7 +10,7 @@ body {
   color: #555;
 }
 .signedIn {
-  padding: 3vh 0;
+  padding: 30px 30px 0;
   background: linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,255,255,0.8)),url(../img/bg-img.gif);
   background-size: cover;
   background-repeat: no-repeat;
@@ -20,7 +20,7 @@ body {
 .container {
   max-width: 80%;
   margin: 0 auto;
-  min-height: 94vh;
+  min-height: calc(100vh - 80px);
   display: flex;
   border-radius: 3px;
   overflow: hidden;
@@ -44,13 +44,12 @@ body {
   background-color: rgba(66, 185, 171, 0.8);
   width: 100%;
   text-align: center;
-
-  /* to be deleted */
   flex-basis: 170px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 15px;
 }
 
 .logo {
@@ -73,17 +72,14 @@ body {
   background-repeat: no-repeat;
   flex: 1;
   justify-content: space-around;
-  min-height: 280px;
-  max-height: 400px;
+  max-height: 290px;
 }
 
 .user-box,
 .classmates-box {
-  padding: 20px 10px;
+  padding: 30px 10px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
 }
 
 .user-img {
@@ -136,6 +132,12 @@ body {
   margin: 20px 0;
 }
 
+#totalClassmates {
+  font-size: 22px;
+  line-height: 27px;
+  margin: 0 5px 0 0;
+}
+
 .search-wrapper {
   display: flex;
   align-content: center;
@@ -145,6 +147,7 @@ body {
 input[type=search] {
   padding: 5px;
   width: 80%;
+  min-width: 160px;
   border-radius: 3px;
   border-color: transparent;
 }
@@ -161,14 +164,13 @@ input[type=search] {
 .slack-icon {
   height: 14px;
   color: #fff;
-  margin-right: 3px;
+  margin-right: 5px;
 }
 
 .last-user {
   display: block;
   padding-top: 10px;
 }
-
 
 
 /***** MODAL *****/
@@ -275,113 +277,127 @@ input[type=search] {
     z-index: 99;
 }
 
+.form-wrapper {
+  position: relative;
+  background-color: #fff;
+  width: 60%;
+  max-width: 800px;
+  height: 600px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-close {
+  text-decoration: none;
+  color: inherit;
+}
+
+.icon-close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 35px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 85%;
+  margin: auto 0;
+}
+
+.form-title {
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.form-description {
+  margin: 15px 0 25px;
+  font-size: 15px;
+}
+
+#message {
+  min-height: 20px;
+}
+
+.field-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #777;
+}
+
+.form-field {
+  padding: 5px;
+  outline-color: rgba(66, 185, 171, 0.8);
+  border: 1px solid rgb(223, 223, 223) !important;
+}
+
+.btn-form {
+  background-color: rgba(66, 185, 171, 0.8);
+  border: 2px solid rgba(66, 185, 171, 0.8);
+  color: #fff;
+  margin-top: 30px;
+  margin-left: 0;
+  padding: 5px 35px;
+}
+
+.btn-form:hover {
+  color: #555;
+}
+
+/*////////////////////////////////////////////////////////////*/
+
+#loader {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(253, 253, 253, 0.84);
+    z-index: 99;
+}
+
 #loader .preloader-wrapper.big {
     /* top: 30%; */
 }
 
 
-
-.allClassmates {
-  display: flex;
-  align-items: flex-end;
-}
-
-.student-card {
-  box-shadow: 2px 2px 10px #bab7b7;
-}
-
-.student-card .collection-item {
-  display: flex;
-  align-items: center;
-}
-
-#totalClassmates {
-  font-size: 22px;
-  line-height: 27px;
-  margin: 0 5px 0 0;
-}
-
-.allClassmates {
-  display: flex;
-  align-items: flex-end;
-}
-
-.student-card .collection-item {
-  display: flex;
-  align-items: center;
-}
-
-#totalClassmates {
-  font-size: 22px;
-  line-height: 27px;
-  margin: 0 5px 0 0;
-}
-
-.notfound {
-    color: #f82440;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-}
-
-.hidden {
-  opacity: 0;
-  display: none;
-  transition: opacity .5 ease-out;
-}
-
-.deadline {
-  opacity: 1;
-  display: flex;
-  transition: opacity .5 ease-out;
-}
-
 .signedIn,
 .signedOut {
   display: none; }
 
-.signedOut {
-  background: url(../img/background.jpg);
-  background-size: cover;
-  background-repeat: no-repeat; }
-  .signedOut .inner {
-    width: 90%;
-    margin: 0 auto;
-    padding-top: 20%;
-    text-align: center; }
-    .signedOut .inner h1 {
-      margin: 0 0 1rem 0;
-      color: #fff; }
+  .signedOut {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba(66, 185, 171, 0.8),rgba(69, 89, 138, 0.9)), url(../img/login-bg.jpg) center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+}
+    .signedOut .inner {
+      width: 90%;
+      margin: 0 auto;
+      padding-top: 15%;
+      text-align: center; }
+      .signedOut .inner h1 {
+        margin: 0 0 1rem 0;
+        color: #fff;
+        font-size: 50px; 
+        font-weight: 300;}
+
 
 .signedIn #signout {
   margin-left: 1rem; }
 
-
-#explore {
-  padding: 0 15px;
-  background-color: #fff;
-  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
-  min-height: 700px;
-}
-
-#explore .tracks {
-  margin-top: 2rem;
-padding-top: 15px; }
-  #explore .tracks .track .track-button {
-    width: 100%; }
-#explore .track-details .projects .project-button {
-  width: 100%;
-  margin-bottom: 0.5rem;
-  text-align: left; }
-#explore .track-details .students {
-  max-height: 450px;
-  /* overflow-y: scroll;  */
-  }
-
-  #explore .track-details .students .collection {
-    margin-top: 0; 
-    width: 98%;
-  }
 
 .students::-webkit-scrollbar {
   width: .6em;
@@ -399,12 +415,13 @@ outline: 1px solid slategrey;
 /*# sourceMappingURL=app.css.map */
 
 .link-container {
+  height: 50px;
   text-align: center;
   padding: 15px;
   width: 100%;
 }
 
-a.graphic {
+.graphic {
   font-size: 12px;
   color: #424242;
 }
@@ -417,23 +434,25 @@ a.graphic {
   background: #fa9bc6;
 }
 
-.modal-content select:hover {
-  border: 1px solid #c50048;
-  cursor: pointer;
-}
 
 .search-results {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #f82440;
   position: relative;
-  color: #d81b60;
+}
+
+.search-count {
+  margin: 0 10px 10px 0;
 }
 
 .language-filter {
   display: block;
   cursor: pointer;
   width: auto;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 .language-filter:focus, .language-filter:active {
@@ -441,13 +460,313 @@ a.graphic {
 }
 
 .closeFilter {
-  color: red;
+  color: #f82440;
   font-size: 13px;
   cursor: pointer;
   position: absolute;
-  top: 0;
+  top: -14px;
+  right: 0;
 }
 
-#message {
-  min-height: 20px;
+/*////////////////////////////////////////////////////////////*/
+
+/***** TRACKS & PROJECTS SECTION *****/
+
+.explore-box {
+  flex: 1;
+}
+
+/* Tracks */
+
+.tracks {
+  padding: 25px 20px 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.track-button {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background-color: #fff;
+  font-size: 17px;
+  color: inherit;
+  box-shadow: 0 5px 10px rgba(0,0,0, 0.1);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.track-button:focus {
+  border: 2px solid #41c5b6;
+}
+
+
+/* Projects */
+
+.track-details {
+  padding: 30px;
+  display: flex;
+}
+
+.projects {
+  background-color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  margin: 0 20px 40px;
+}
+
+.border {
+  border: 1px solid rgb(218, 218, 218);
+  box-shadow: 0 5px 10px rgba(0,0,0, 0.1);
+}
+
+.projects, 
+.info-block {
+  flex-basis: 50%;
+  height: 100%;
+}
+
+.project-button {
+  cursor: pointer;
+  padding: 15px;
+  position: relative;
+  background-color: transparent;
+  font-size: inherit;
+  color: inherit;
+  outline: none;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.project-button:not(.deadline) {
+  border-top: 1px solid rgb(218, 218, 218);
+  width: 100%;
+  }
+
+.project-button:focus {
+  border: 2px solid #29ccb9;
+}
+
+.arrow-hidden {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  display: inline-block;
+  position: absolute;
+  right: -10px;
+  transform: rotate(45deg);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.arrow-show {
+  visibility: visible;
+  opacity: 1;
+  background-color: #41c5b6;
+  transition: all 0.1s;
+}
+
+.activeButton {
+  background-color: #41c5b6;
+  color:#fff;
+  transition: all 0.1s;
+}
+
+.deadline {
+  margin: 10px;
+  padding: 15px 10px;
+  border: 1px solid #41c5b6;
+  font-size: 13px;
+  opacity: 1;
+  display: block;
+  transition: opacity .5 ease-out;
+}
+
+.hidden {
+  opacity: 0;
+  display: none;
+  transition: opacity .5 ease-out;
+}
+
+
+/* Students */
+
+.info-block {
+  margin: 0 20px;
+}
+
+.students {
+  list-style: none;
+  width: 100%;
+}
+
+.student-card {
+  margin: 10px 0;
+  padding: 20px 35px;
+  border: 1px solid rgb(218, 218, 218);
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 5px 10px rgba(0,0,0, 0.1);
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.student-card:first-child {
+  margin-top: 0; 
+}
+
+.slack-link {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+  margin-right: auto;
+  padding: 5px 20px 5px 0;
+}
+
+.slack-link:focus {
+  border: 1px solid #29ccb9;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  color: #fff;
+  font-family: "Lato", "sans-serif";
+  font-size: 12px;
+  width: 100px;
+  text-align: center;
+  background-color: #41c5b6;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  position: absolute;
+  z-index: 1;
+  border-radius: 3px;
+}
+
+.slack-link:hover .tooltiptext {
+  visibility: visible;
+}
+
+.notfound {
+  color: #f82440;
+  font-size: 16px;
+  text-align: center;
+}
+
+.user-info {
+  width: 100%;
+}
+
+.icon-project, 
+.icon-track,
+.icon-language {
+  margin-right: 5px;
+  font-size: 20px;
+}
+
+.icon-project {
+  margin-left: 3px;
+}
+
+.user-project,
+.user-track {
+  padding-bottom: 10px;
+}
+
+.user-track {
+  padding-top: 10px;
+}
+
+.user-language {
+  order: 2;
+  padding: 5px 0;
+}
+
+@media only screen and (max-width: 1281px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  .container {
+    flex-direction: column;
+  }
+  .side-nav {
+    flex-direction: row;
+    align-items: stretch;
+    flex-basis: unset;
+    font-size: 14px;
+  }
+  .logo-box {
+    flex: 1;
+  }
+  .user-box {
+    flex: 2;
+    min-width: 265px;
+    padding: 20px 10px;
+  }
+
+  .user-img {
+    width: 55px;
+    height: 55px;
+  }
+  .classmates-box {
+    flex: 1;
+    padding: 20px 10px;
+  }
+}
+
+@media only screen and (max-width: 801px) {
+  .side-nav {
+    flex-wrap: wrap;
+  }
+  .user-box {
+    order: 3;
+  }
+  .explore-box {
+    padding-top: 10px;
+  }
+  .track-details {
+    padding: 20px 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
+  .tracks,
+  .track-details {
+    flex-wrap: wrap;
+  }
+  .projects,
+  .info-block {
+    flex-basis: 100%;
+  }
+  .arrow-show {
+    visibility: hidden;
+  }
+  .track-button {
+    width: 75px;
+    height: 75px;
+  }
+  .form-wrapper {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 481px) {
+  body {
+    font-size: 14px;
+  }
+  .user-box {
+    order: unset;
+  }
 }
