@@ -99,13 +99,8 @@ firebase.initializeApp(config);
             //checkSlackUsername();
 
         }else{
-<<<<<<< HEAD
-            message.innerHTML = "Your Slack Username should include at least 3 numbers of letters";
-            message.style.color = "red";
-=======
             message.innerHTML = "Your Slack Username should include at least 3 numbers or letters";
             message.style.color = "#f82440";
->>>>>>> upstream/master
         }
     });
 
@@ -140,18 +135,6 @@ firebase.initializeApp(config);
 
 function checkSlackUsername(){
     return new Promise((resolve, reject)=>{
-<<<<<<< HEAD
-        console.log(firebase.auth().currentUser)
-        db.doc("Users/" + firebase.auth().currentUser.uid)
-        .get()
-        .then(userDoc => {
-            let usrName = '';
-                usrName = userDoc.data().slackName;
-            
-            console.log(slackNameField.value)
-            console.log(usrName)
-                if(slackNameField.value === usrName){
-=======
         db.collection("Users")
         .where('slackName', '>=', slackNameField.value )
         .orderBy('slackName')
@@ -163,17 +146,12 @@ function checkSlackUsername(){
                 usrName = doc.data().userName;
             });
                 if(firebase.auth().currentUser.displayName === usrName){
->>>>>>> upstream/master
                     // message.innerHTML = "This is your actual Username"
                     // message.style.color = "green";
                     resolve('true');
                 }else if(querySnapshot.size && firebase.auth().currentUser.displayName !== usrName ){
                     message.innerHTML = '<p>This Username already in use. If you\'re sure that is someone uses your Slack Username, please <a href=#>report</a></p>';
-<<<<<<< HEAD
-                    message.style.color = "red";
-=======
                     message.style.color = "#f82440";
->>>>>>> upstream/master
                     reject("Already in use");
                     return false;
                 }else if(slackNameField.value.replace(/\s/g,'') !== '' &&
@@ -284,11 +262,7 @@ function checkSlackUsername(){
                 writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
             }
         })
-<<<<<<< HEAD
     }, {once: true});
-=======
-    });
->>>>>>> upstream/master
 
 
     db.collection("Users")
