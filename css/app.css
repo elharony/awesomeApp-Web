@@ -464,13 +464,6 @@ outline: 1px solid slategrey;
   font-size: 13px;
   cursor: pointer;
   position: absolute;
-<<<<<<< HEAD
-  top: 0;
-}
-
-#message {
-  min-height: 20px;
-=======
   top: -14px;
   right: 0;
 }
@@ -777,5 +770,4 @@ outline: 1px solid slategrey;
   .user-box {
     order: unset;
   }
->>>>>>> upstream/master
 }
