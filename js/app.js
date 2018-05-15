@@ -135,17 +135,16 @@ firebase.initializeApp(config);
 
 function checkSlackUsername(){
     return new Promise((resolve, reject)=>{
-        db.collection("Users")
-        .where('slackName', '>=', slackNameField.value )
-        .orderBy('slackName')
-        .startAt(slackNameField.value)
-        .endAt(slackNameField.value).get()
-        .then(querySnapshot => {
+        console.log(firebase.auth().currentUser)
+        db.doc("Users/" + firebase.auth().currentUser.uid)
+        .get()
+        .then(userDoc => {
             let usrName = '';
-            querySnapshot.forEach(doc => {
-                usrName = doc.data().userName;
-            });
-                if(firebase.auth().currentUser.displayName === usrName){
+                usrName = userDoc.data().slackName;
+            
+            console.log(slackNameField.value)
+            console.log(usrName)
+                if(slackNameField.value === usrName){
                     // message.innerHTML = "This is your actual Username"
                     // message.style.color = "green";
                     resolve('true');
@@ -260,7 +259,7 @@ function checkSlackUsername(){
                 writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
             }
         })
-    });
+    }, {once: true});
 
 
     db.collection("Users")
