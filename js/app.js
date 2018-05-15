@@ -99,8 +99,13 @@ firebase.initializeApp(config);
             //checkSlackUsername();
 
         }else{
+<<<<<<< HEAD
             message.innerHTML = "Your Slack Username should include at least 3 numbers of letters";
             message.style.color = "red";
+=======
+            message.innerHTML = "Your Slack Username should include at least 3 numbers or letters";
+            message.style.color = "#f82440";
+>>>>>>> upstream/master
         }
     });
 
@@ -135,6 +140,7 @@ firebase.initializeApp(config);
 
 function checkSlackUsername(){
     return new Promise((resolve, reject)=>{
+<<<<<<< HEAD
         console.log(firebase.auth().currentUser)
         db.doc("Users/" + firebase.auth().currentUser.uid)
         .get()
@@ -145,12 +151,29 @@ function checkSlackUsername(){
             console.log(slackNameField.value)
             console.log(usrName)
                 if(slackNameField.value === usrName){
+=======
+        db.collection("Users")
+        .where('slackName', '>=', slackNameField.value )
+        .orderBy('slackName')
+        .startAt(slackNameField.value)
+        .endAt(slackNameField.value).get()
+        .then(querySnapshot => {
+            let usrName = '';
+            querySnapshot.forEach(doc => {
+                usrName = doc.data().userName;
+            });
+                if(firebase.auth().currentUser.displayName === usrName){
+>>>>>>> upstream/master
                     // message.innerHTML = "This is your actual Username"
                     // message.style.color = "green";
                     resolve('true');
                 }else if(querySnapshot.size && firebase.auth().currentUser.displayName !== usrName ){
                     message.innerHTML = '<p>This Username already in use. If you\'re sure that is someone uses your Slack Username, please <a href=#>report</a></p>';
+<<<<<<< HEAD
                     message.style.color = "red";
+=======
+                    message.style.color = "#f82440";
+>>>>>>> upstream/master
                     reject("Already in use");
                     return false;
                 }else if(slackNameField.value.replace(/\s/g,'') !== '' &&
@@ -181,7 +204,7 @@ function checkSlackUsername(){
 
     // Display User Data
     userImage.setAttribute("src", user.photoURL);
-    userContact.innerHTML  = `<i class="fas fa-user"></i> ${user.displayName}`;
+    userContact.innerHTML  = `<i class="ion-ios-person-outline user-icons"></i> ${user.displayName}`;
 
 
     // Preferences Fields
@@ -209,7 +232,9 @@ function checkSlackUsername(){
             const u_tracks_Options = u_track.querySelectorAll('option');
 
             // User Current Info [ Top Summary ]
-            userPreferences.innerHTML = `<i class="fas fa-certificate"></i> ${doc.data().userTrack} <i class="fas fa-bug"></i> ${doc.data().currentProject} <br><i class="fas fa-globe"></i> ${doc.data().language.replace(',', ', ')}`;
+            userPreferences.innerHTML = `<p><i class="ion-ios-star-outline user-icons"></i> ${doc.data().userTrack}</p>
+            <p><i class="ion-ios-copy-outline user-icons"></i> ${doc.data().currentProject}</p>
+            <p><i class="ion-ios-world-outline user-icons"></i> ${doc.data().language.replace(',', ', ')}</p>`;
 
             // User Current Info [ Preferences Fields ]
             const [lang1, lang2] = doc.data().language.split(',');
@@ -259,7 +284,11 @@ function checkSlackUsername(){
                 writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
             }
         })
+<<<<<<< HEAD
     }, {once: true});
+=======
+    });
+>>>>>>> upstream/master
 
 
     db.collection("Users")
@@ -346,6 +375,9 @@ function getStudents(containerElement, projectName, queryFlag) {
     containerElement.removeAttribute('style');
     containerElement.innerHTML = '';
     containerElement.append(spinnerBox);
+
+
+
     let query = queryFlag === 'classmate' ?
              ["slackName", ">=", search.value]:
              ["currentProject", ">=", projectName];
@@ -381,7 +413,7 @@ function getStudents(containerElement, projectName, queryFlag) {
                 studentsCount.innerHTML = ('Filtered ' + numOfItems + " record" + (+numOfItems===1?"":"s"));
                 const closeFilter = document.createElement("span");
                 closeFilter.classList.add("closeFilter");
-                closeFilter.innerHTML = "close"
+                closeFilter.innerHTML = "clear filter"
                 studentsCount.appendChild(closeFilter);
 
                 //close filter event
@@ -417,32 +449,32 @@ function getStudents(containerElement, projectName, queryFlag) {
                     
                 })
 
-                const student = document.createElement("ul");
-                student.className = "student-card collection";
+                const student = document.createElement("li");
+                student.className = "student-card";
 
-                const data_contact = document.createElement("li");
-                data_contact.className = "collection-item row";
-                data_contact.innerHTML = `<div class="col s6"><i class="fab fa-slack-hash"></i> ${doc.data().slackName}</div> <div class="col s6"><a href="https://slack.com/app_redirect?channel=C97PS9WJD" id="go-to-slack" class="waves-effect waves-light btn-small blue-grey darken-4">Go to Slack</a></div>`;
+                const data_contact = document.createElement("a");
+                data_contact.className = "slack-link";
+                data_contact.setAttribute("href", "#");
+                data_contact.setAttribute("target", "blank");
+                data_contact.innerHTML = `<img src="img/slack-black.svg" alt="" class="slack-icon"><span>${doc.data().slackName}</span>
+                <span class="tooltiptext">Go to slack</span>`;
 
-                const data_languages = document.createElement("li");
-                data_languages.className = "collection-item row";
-                data_languages.innerHTML = `<div class="col s12"><i class="fas fa-globe"></i> ${doc.data().language.replace(',',', ')} </div>`;
+                const data_languages = document.createElement("p");
+                data_languages.className = "user-language"
+                data_languages.innerHTML = `<i class="ion-ios-world-outline icon-language"></i> ${doc.data().language.replace(',',', ')}`;
 
 
 
                 student.appendChild(data_contact);
+                student.appendChild(data_languages);
                 if(queryFlag) {
-                    const workingProject = document.createElement("li");
-                    workingProject.className = "collection-item row";
-                    const currentTrack = document.createElement("li");
-                    currentTrack.className = "collection-item row";
-                    currentTrack.innerHTML = `<div class="col s12"><i class="fas fa-certificate"></i> ${doc.data().userTrack}</div>`;
-                    workingProject.innerHTML = `<div class="col s12"><i class="fas fa-bug"></i> ${doc.data().currentProject}</div>`;
-                    student.appendChild(currentTrack);
+                    const workingProject = document.createElement("div");
+                    workingProject.className = "user-info";
+                    workingProject.innerHTML = `<div class="user-track"><i class="ion-ios-star-outline icon-track"></i> ${doc.data().userTrack}</div>
+                    <div class="user-project"><i class="ion-ios-copy-outline icon-project"></i> ${doc.data().currentProject}</div>`;
                     student.appendChild(workingProject);
                 }
 
-                student.appendChild(data_languages);
                 
                 retrievedStudents[doc.data().slackName] = student;
                 
@@ -474,13 +506,12 @@ function getStudents(containerElement, projectName, queryFlag) {
 
 
         }else{
-            const student = document.createElement("ul");
-            student.className = "student-card collection";
+            const student = document.createElement("li");
+            student.className = "student-card";
             const notFound = document.createElement("li");
-            notFound.className = "collection-item row";
-            notFound.innerHTML = `<div class="col s12 notfound"><i class="small material-icons .fab">error_outline</i> It seems we could not find anything</div>`;
-            student.appendChild(notFound);
-            containerElement.appendChild(student);
+            notFound.className = "student-card notfound";
+            notFound.innerHTML = `It seems we could not find anything`;
+            containerElement.appendChild(notFound);
         }
 
     })
@@ -534,14 +565,11 @@ db.collection("Tracks").get().then(function(querySnapshot) {
     // Tracks
     const tracksContainer = document.querySelector(".tracks");
     myData.forEach(function (value) {
-        const track = document.createElement("div");
-        track.className = "track col s6 m3 center-align";
         const trackBtn = document.createElement("button");
-        trackBtn.className = "track-button waves-effect waves-light btn-large blue-grey darken-4";
+        trackBtn.className = "track-button";
         trackBtn.innerHTML = value;
         trackBtn.setAttribute("data-value", value);
-        track.appendChild(trackBtn);
-        tracksContainer.appendChild(track);
+        tracksContainer.appendChild(trackBtn);
     });
 
 
@@ -552,12 +580,18 @@ db.collection("Tracks").get().then(function(querySnapshot) {
     const projectsContainer = document.querySelector(".projects");
 
     for(let i = 0; i < trackButtons.length; i++) {
-        trackButtons[i].addEventListener("click", function() {
+        trackButtons[i].addEventListener("click", function(e) {
             const foundInfo = document.querySelector('.search-results');
             foundInfo.innerHTML = '';
             const studentsContainer = document.querySelector(".students");
             studentsContainer.innerHTML = "";
             const trackName = this.getAttribute("data-value");
+            
+            removeClass(trackButtons, "activeButton");
+            projectsContainer.classList.add("border");
+            if (e.target.classList.contains("track-button")) {
+                e.target.classList.add("activeButton");
+            }
 
             // Display the projects based on the clicked Track
             switch(trackName) {
@@ -585,6 +619,14 @@ db.collection("Tracks").get().then(function(querySnapshot) {
     console.log("Got an error: ", error);
 });
 
+// Remove class from active elements
+function removeClass(element, elClass) {
+    for (let i = 0; i < element.length; i++) {
+        element[i].classList.remove(elClass);
+    }
+}
+
+
 
 /*****************************
 ****** Helper Functions ******
@@ -609,10 +651,10 @@ function optionFiedCreator(arrayOfData, containerElement) {
 function getProjects(arrayOfData, containerElement, trackName) {
     arrayOfData.forEach(function(data) {
         const project = document.createElement("button");
-        project.className = "project-button waves-effect waves-light btn-large blue-grey darken-3";
+        project.className = "project-button";
         project.setAttribute("data-track", trackName);
         project.setAttribute("data-project", data);
-        project.innerHTML = data;
+        project.innerHTML = `${data} <span class="arrow-hidden"></span>`;
         containerElement.appendChild(project);
     });
 
@@ -672,6 +714,17 @@ function getProjects(arrayOfData, containerElement, trackName) {
                 break;
             }
 
+            // Change color of active elements
+
+            const arrow = document.querySelectorAll(".arrow-hidden");
+            removeClass(arrow, "arrow-show");
+            removeClass(projectButtons, "activeButton");
+
+            if (evt.target.classList.contains("project-button")) {
+                evt.target.classList.add('activeButton');
+                evt.target.lastChild.classList.add('arrow-show');
+            }
+        
 
             // Retrieve project's deadlines
 
@@ -692,12 +745,9 @@ function getProjects(arrayOfData, containerElement, trackName) {
                     querySnapshot.forEach(function(doc) {
                         const deadline = doc.data().deadline
                         .toLocaleString('en-EN',{ timeZone: 'UTC', day: "numeric", month: "long", year: "numeric", minute: "2-digit", hour: "2-digit", timeZoneName: "short" })
-                    const deadline_ul = document.createElement("ul");
-                    deadline_ul.className = "student-card collection deadline";
-                    const deadline_li = document.createElement("li");
-                    deadline_li.className = "collection-item row";;
-                    deadline_li.innerHTML = `<div class="col s12">Deadline: ${deadline}</div>`;
-                    deadline_ul.appendChild(deadline_li);
+                    const deadline_ul = document.createElement("div");
+                    deadline_ul.className = "project-name deadline";
+                    deadline_ul.innerHTML = `Deadline: ${deadline}</div>`;
                     projectsContainer[insertIndex].after(deadline_ul);
                     })
                 }).catch((error) => {
@@ -793,6 +843,3 @@ $(document).ready(function(){
     $('.modal').modal();
     $('.sidenav').sidenav();
 });
-
-const signedOutContainer = document.querySelector(".signedOut");
-signedOutContainer.style.height = window.innerHeight + "px";

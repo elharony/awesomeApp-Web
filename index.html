@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AwesomeApp | Work with your Udacity ND Classmates</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
 
     <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
@@ -18,6 +18,7 @@
 
         <div class="signedIn">
           <div class="container">
+<<<<<<< HEAD
             <div class="heading-wrapper">
                 <h2 class="main-title">Awesome App</h2>
             </div>
@@ -30,23 +31,38 @@
                     <a id="prefsButton" href="javascript:void(0)" class="btn-floating waves-effect waves-light btn-large pink darken-1" data-target="preferences" title="Preferences"><i class="fas fa-user-circle btn-fa"></i></a>
                     <a href="#" class="btn-floating waves-effect waves-light btn-large pink darken-1" id="signout" title="Logout"><i class="fas fa-sign-out-alt btn-fa"></i></a>
                   </div>
+=======
+>>>>>>> upstream/master
 
-                </li>
-              </ul>
-            
-              <div class="info-box row">
-                <div class="info col s12 m7">
-                    <div class="allClassmates"><span id="totalClassmates"></span> classmates</div>
-                    <div>Last registered: <i class="fab fa-slack-hash"></i> <span id="lastClassmate"></span></div>
+            <nav class="side-nav">
+                <div class="logo-box">
+                    <img src="img/logo.gif" alt="Awesome App" class="logo">
+                    <a href="https://play.google.com/store/apps/details?id=com.awesomeapp.android.awesomeapp" target="blank" class="download">Download App <i class="ion-ios-download-outline user-icons"></i></a>
                 </div>
-                <div class="search col s12 m5">
-                    <i class="medium material-icons">search</i>
-                    <input id="searchClassmate" type="text" name="search" value="Quick search for a classmate" onfocus="clearSearch(this)" onblur="setSearch(this)">
+                <div class="user-box">
+                    <img id="userImage" src="" alt="" class="user-img">
+                    <p id="userContact"></p>
+                    <div id="userPreferences" class="preferences-wrapper">
+                    </div>
+                    <div class="buttons">
+                        <a id="prefsButton" href="javascript:void(0)" class="btn" data-target="preferences" title="Preferences">Update</a>
+                        <a href="#" class="btn" id="signout" title="Logout">Logout</a>
+                    </div> 
                 </div>
-              </div>
+                <div class="classmates-box">
+                    <div class="classmates-no"><span id="totalClassmates"></span> classmates</div>
+                    <div class="search-wrapper">
+                        <i class="ion-ios-search icon-search"></i>
+                        <input id="searchClassmate" type="search" name="search" placeholder="Search for a classmate" onfocus="clearSearch(this)" onblur="setSearch(this)">
+                    </div>
+                    <div class="last-registered">Last registered:<span class="last-user"><img src="img/slack-white.svg" alt="" class="slack-icon"><span id="lastClassmate"></span></span></div>
+                </div>
+
+              </nav>
 
             <!-- Preferences -->
             <div id="preferences" class="modal">
+<<<<<<< HEAD
               <form action="" id="preferencesForm">
               <div class="modal-content">
                 <h4>Preferences</h4>
@@ -79,27 +95,76 @@
                     <a id="closeButton" href="javascript:void(0)" class="btn-floating waves-effect btn-large grey darken-4"><i class="fas fa-times"></i></a>
                     <button type="submit" id="savePreferences" class="secondary-content btn-floating waves-effect btn-large pink darken-1 accent-4" title="Update Preferences"><i class="fas fa-pencil-alt"></i></button>
                 </div>
+=======
+              <div class="form-center">
+                  <div class="form-wrapper">
+                    <a id="closeButton" href="javascript:void(0)" class="btn-close"><i class="ion-ios-close-empty icon-close"></i></a>
+  
+                    <form action="" id="preferencesForm" class="form">
+                      <h4 class="form-title">Preferences</h4>
+                      <p class="form-description">Update your Preferences to stay connected with other classmates!</p>
+                      <div id="message"></div>
+                        
+                      <div class="field-wrapper">
+                          <label for="slackName" class="form-label">Your Slack Username</label>
+                          <input id="slackName" type="text" name="slackNameField" required onfocus="clearSearch(this)" onblur="setSearch(this)" class="form-field">
+                      </div>
+  
+                      <div class="field-wrapper">
+                          <label for="tracks" class="form-label">Your Track</label>
+                          <select id="tracks" class="browser-default form-field" required>
+                            <option value="" disabled selected>Nanodegree Tracks</option>
+                          </select>
+                      </div>
+  
+                      <div class="field-wrapper">
+                          <label for="availableProjects" class="form-label">Current Project</label>
+                          <select id="availableProjects" class="browser-default form-field" required>
+                            <option value="" disabled selected>Current Project</option>
+                          </select>
+                      </div>
+                      
+                      <div class="field-wrapper">
+                          <label for="langOne" class="form-label">First Language</label>
+                          <select id="langOne" class="browser-default form-field" required>
+                            <option value="" disabled selected>Preferred Language #1</option>
+                          </select>
+                      </div>
+  
+                      <div class="field-wrapper">
+                          <label for="langTwo" class="form-label">Second Language</label>
+                          <select id="langTwo" class="browser-default form-field" required>
+                            <option value="" disabled selected>Preferred Language #2</option>
+                          </select>
+                      </div>
+                      
+                      <div class="button-wrapper">
+                          <button type="submit" id="savePreferences" class="btn btn-form" title="Update Preferences">Save</button>
+                      </div>
+  
+                    </form>
+                  </div>  
+>>>>>>> upstream/master
               </div>
-
-              </form>
+              
             </div>
 
             <!-- Explore -->
-            <div id="explore" class="col s12 explore-box">
+            <section id="explore" class="explore-box">
 
               <!-- Tracks -->
-              <div class="tracks row">
+              <div class="tracks">
               </div>
 
               <!-- Details -->
-              <div class="track-details row">
-                <div class="projects col s12 m6"></div>
-                <div class="info-block col s12 m6">
+              <div class="track-details">
+                <div class="projects"></div>
+                <div class="info-block">
                     <div class="search-results"></div>
-                  <div class="students"></div>
+                  <ul class="students"></ul>
                 </div>
               </div>
-            </div>
+            </section>
           </div>
           <footer class="link-container">
             <a href="http://www.freepik.com" class="graphic">Background vector designed by Starline / Freepik</a>
@@ -152,6 +217,7 @@
         </div>
         <section class="signedOut">
           <div class="inner">
+            <img src="img/logo.gif" alt="Awesome App" class="logo">
             <h1 id="login">Meet a classmate!</h1>
             <div id="firebaseui-auth-container"></div>
           </div>
