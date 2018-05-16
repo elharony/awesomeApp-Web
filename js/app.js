@@ -20,7 +20,7 @@ function clearSearch(search) {
 }
 function setSearch(search) {
     if(search.placeholder == ""){
-        search.placeholder = "Enter your Slack Username here";
+        search.placeholder = "Search for a classmate";
     }else if (search.value == "") {
         search.value = search.defaultValue;
     }
@@ -114,9 +114,11 @@ firebase.initializeApp(config);
     });
 
      const studentsContainer = document.querySelector(".students");
+     const foundInfo = document.querySelector('.search-results');
      // Listener to check search input
      search.addEventListener('input', ()=>{
         //when input - clear students container from previous data
+        foundInfo.innerHTML = '';
         studentsContainer.innerHTML = '';
 
         if(search.value) {
@@ -373,7 +375,7 @@ function getStudents(containerElement, projectName, queryFlag) {
 
             //filter event listener
             langFilter.addEventListener('change', function(evt){
-                const studentsFilterList = containerElement.querySelectorAll('ul');
+                const studentsFilterList = containerElement.querySelectorAll('li');
                 studentsFilterList.forEach(e => {
                     if(e.lastChild.innerHTML.match(langFilter.value)) {
                         if(e.classList.contains('hidden')){
@@ -703,11 +705,13 @@ function getProjects(arrayOfData, containerElement, trackName) {
             // Retrieve project's deadlines
 
             let projectsContainer = document.querySelectorAll(".projects button");
-            let hideDeadlineBox = document.querySelector(".projects .deadline");
+            let hideDeadlineBox = document.querySelectorAll(".projects .deadline");
 
-            if(hideDeadlineBox) {
-                hideDeadlineBox.classList.remove('deadline');
-                hideDeadlineBox.classList.add('hidden');
+            if(hideDeadlineBox.length) {
+                hideDeadlineBox.forEach(el => {
+                    el.classList.remove('deadline');
+                    el.classList.add('hidden');
+                })
             }
 
             const insertIndex = Array.prototype.indexOf.call(projectsContainer, evt.target);
@@ -716,6 +720,15 @@ function getProjects(arrayOfData, containerElement, trackName) {
 
             db.collection("Projects").where('name', '==', projectName)
                 .get().then((querySnapshot) => {
+                    let hideDeadlineBox = document.querySelectorAll(".projects .deadline");
+
+                    if(hideDeadlineBox.length) {
+                        hideDeadlineBox.forEach(el => {
+                            el.classList.remove('deadline');
+                            el.classList.add('hidden');
+                        })
+                    }
+
                     querySnapshot.forEach(function(doc) {
                         const deadline = doc.data().deadline
                         .toLocaleString('en-EN',{ timeZone: 'UTC', day: "numeric", month: "long", year: "numeric", minute: "2-digit", hour: "2-digit", timeZoneName: "short" })
