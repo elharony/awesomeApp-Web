@@ -1,7 +1,7 @@
 css/.sass-cache
 app.css.map
 node_modules/
-.firebaserc
-firebase.json
-/functions
-package-lock.json
+/.firebaserc
+/firebase.json
+functions/
+/package-lock.json
