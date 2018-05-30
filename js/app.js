@@ -734,7 +734,7 @@ function getProjects(arrayOfData, containerElement, trackName) {
 
                     querySnapshot.forEach(function(doc) {
                         const deadline = doc.data().deadline
-                        .toLocaleString('en-EN',{ timeZone: 'UTC', day: "numeric", month: "long", year: "numeric", minute: "2-digit", hour: "2-digit", timeZoneName: "short" })
+                        .toLocaleString('en-EN',{ day: "numeric", month: "long", year: "numeric", minute: "2-digit", hour: "2-digit", timeZoneName: "short" })
                     const deadline_ul = document.createElement("div");
                     deadline_ul.className = "project-name deadline";
                     deadline_ul.innerHTML = `Deadline: ${deadline}</div>`;
