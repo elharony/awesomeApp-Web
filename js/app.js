@@ -375,9 +375,12 @@ function getStudents(containerElement, projectName, queryFlag) {
 
             //filter event listener
             langFilter.addEventListener('change', function(evt){
-                const studentsFilterList = containerElement.querySelectorAll('li');
+                const studentsFilterList = containerElement.querySelectorAll('.student-card');
+                console.log(studentsFilterList)
                 studentsFilterList.forEach(e => {
-                    if(e.lastChild.innerHTML.match(langFilter.value)) {
+                    let lang = e.querySelector('.user-language');
+                    if(e.lastChild.innerHTML.match(langFilter.value) ||
+                        lang.innerHTML.match(langFilter.value)) {
                         if(e.classList.contains('hidden')){
                             e.classList.remove('hidden');
                         }
