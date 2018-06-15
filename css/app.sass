@@ -10,6 +10,27 @@ body
     font-family: 'Lato', sans-serif
     color: #555
 
+.activeButton
+    background-color: #41c5b6 !important
+    color: #fff !important
+
+.btn 
+    display: inline-block
+    margin: 20px 7px 10px
+    padding: 5px 20px
+    background-color: #fff
+    border: 2px solid #fff
+    border-radius: 3px
+    cursor: pointer
+    font-size: 13px
+    color: #333
+    text-decoration: none
+    transition: all 0.4s
+
+    &:hover 
+        background-color: transparent
+        color: #fff
+
 /* Grouping */
 .signedIn, .signedOut
     display: none
@@ -63,6 +84,10 @@ body
                     text-decoration: none
                     color: inherit
 
+                    .user-icons
+                        margin: 0 5px
+                        font-size: 20px
+
             // User
             .user-box
                 background: linear-gradient(rgba(66, 185, 171, 0.8),rgba(69, 89, 138, 0.9)), url(../img/group.jpeg) 15%
@@ -87,22 +112,7 @@ body
                     text-align: center
 
                 .buttons
-                    .btn 
-                        display: inline-block
-                        margin: 20px 7px 10px
-                        padding: 5px 20px
-                        background-color: #fff
-                        border: 2px solid #fff
-                        border-radius: 3px
-                        cursor: pointer
-                        font-size: 13px
-                        color: #333
-                        text-decoration: none
-                        transition: all 0.4s
                     
-                        &:hover 
-                            background-color: transparent
-                            color: #fff
 
                     #signout 
                         margin-left: 1rem
@@ -228,13 +238,14 @@ body
                         .button-wrapper
                             .btn-form 
                                 background-color: rgba(66, 185, 171, 0.8)
-                                border: 2px solid rgba(66, 185, 171, 0.8)
                                 color: #fff
                                 margin-top: 30px
-                                margin-left: 0
+                                margin-left: 0px
+                                border: 2px solid rgba(66, 185, 171, 0.8)
+                                border-width: 2px
                                 padding: 5px 35px
-                                
-                                &:hover 
+                                &:hover
+                                    background: #fff
                                     color: #555
 
         //// Explore ////
@@ -324,11 +335,6 @@ body
                             
                         &:focus
                             border: 2px solid #29ccb9
-
-                    .activeButton 
-                        background-color: #41c5b6
-                        color: #fff
-                        transition: all 0.1s
                         
                     .deadline 
                         margin: 10px
@@ -728,69 +734,80 @@ body
 /******* RESPONSIVE *******/
 
 @media only screen and (max-width: 1281px) 
-    .container 
+    .signedIn .container 
         max-width: 100%
   
-@media only screen and (max-width: 1025px) 
-    .container 
-        flex-direction: column
-  
-    .side-nav 
-        flex-direction: row !important
-        align-items: stretch !important
-        flex-basis: unset !important
-        font-size: 14px !important
-  
-        .logo-box 
-            flex: 1
-    
-        .user-box 
-            flex: 2
-            min-width: 265px
-            padding: 20px 10px
+@media only screen and (max-width: 1025px)
+    .signedIn 
+        .container 
+            flex-direction: column
 
-        .user-img 
-            width: 55px
-            height: 55px
-  
-        .classmates-box 
-            flex: 1
-            padding: 20px 10px
+            .side-nav 
+                flex-direction: row !important
+                align-items: stretch !important
+                flex-basis: unset !important
+                font-size: 14px !important
+        
+                .logo-box 
+                    flex: 1
+            
+                .user-box 
+                    flex: 2
+                    min-width: 265px
+                    padding: 20px 10px
+
+                    .user-img 
+                        width: 55px
+                        height: 55px
+        
+                .classmates-box 
+                    flex: 1
+                    padding: 20px 10px
 
 @media only screen and (max-width: 801px) 
-    .side-nav 
-        flex-wrap: wrap
-  
-        .user-box 
-            order: 3
-  
-    .explore-box 
-        padding-top: 10px
-  
-        .track-details 
-            padding: 20px 0
+    .signedIn 
+        .container 
+            .explore-box
+                padding-top: 10px
+                .track-details
+                    padding: 20px 0
+
+            .side-nav 
+                flex-wrap: wrap
+                .user-box 
+                    order: 3
   
 @media only screen and (max-width: 600px) 
     body 
         font-size: 15px
     
-    .tracks,
-    .track-details 
-        flex-wrap: wrap
-    
-    .projects,
-    .info-block 
-        flex-basis: 100%
-    
-    .arrow-show 
-        visibility: hidden
-    
-    .track-button 
-        width: 75px
-        height: 75px
-    
-    .form-wrapper 
-        width: 80%
+    .signedIn
+        .container
+            .modal
+                .form-wrapper 
+                    width: 80%
+
+            .explore-box
+                .tracks,
+                .track-details 
+                    flex-wrap: wrap
+
+                .tracks
+                    .track-button 
+                        width: 75px
+                        height: 75px
+                
+                .track-details
+                    .projects,
+                    .info-block 
+                        flex-basis: 100%
+                
+                    .projects
+                        .project-button
+                            .arrow-show 
+                                visibility: hidden
+                
+            
     
 @media only screen and (max-width: 481px) 
     body 
