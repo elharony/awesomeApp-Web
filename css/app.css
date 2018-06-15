@@ -1,3 +1,246 @@
+/* Loading bar */
+@-webkit-keyframes indeterminate {
+  0% {
+    left: -35%;
+    right: 100%; }
+  60% {
+    left: 100%;
+    right: -90%; }
+  100% {
+    left: 100%;
+    right: -90%; } }
+@keyframes indeterminate {
+  0% {
+    left: -35%;
+    right: 100%; }
+  60% {
+    left: 100%;
+    right: -90%; }
+  100% {
+    left: 100%;
+    right: -90%; } }
+@-webkit-keyframes indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%; }
+  60% {
+    left: 107%;
+    right: -8%; }
+  100% {
+    left: 107%;
+    right: -8%; } }
+@keyframes indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%; }
+  60% {
+    left: 107%;
+    right: -8%; }
+  100% {
+    left: 107%;
+    right: -8%; } }
+/* Spinner */
+@-webkit-keyframes container-rotate {
+  to {
+    -webkit-transform: rotate(360deg); } }
+@keyframes container-rotate {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@-webkit-keyframes fill-unfill-rotate {
+  12.5% {
+    -webkit-transform: rotate(135deg); }
+  /* 0.5 * ARCSIZE */
+  25% {
+    -webkit-transform: rotate(270deg); }
+  /* 1   * ARCSIZE */
+  37.5% {
+    -webkit-transform: rotate(405deg); }
+  /* 1.5 * ARCSIZE */
+  50% {
+    -webkit-transform: rotate(540deg); }
+  /* 2   * ARCSIZE */
+  62.5% {
+    -webkit-transform: rotate(675deg); }
+  /* 2.5 * ARCSIZE */
+  75% {
+    -webkit-transform: rotate(810deg); }
+  /* 3   * ARCSIZE */
+  87.5% {
+    -webkit-transform: rotate(945deg); }
+  /* 3.5 * ARCSIZE */
+  to {
+    -webkit-transform: rotate(1080deg); }
+  /* 4   * ARCSIZE */ }
+@keyframes fill-unfill-rotate {
+  12.5% {
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg); }
+  /* 0.5 * ARCSIZE */
+  25% {
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg); }
+  /* 1   * ARCSIZE */
+  37.5% {
+    -webkit-transform: rotate(405deg);
+    transform: rotate(405deg); }
+  /* 1.5 * ARCSIZE */
+  50% {
+    -webkit-transform: rotate(540deg);
+    transform: rotate(540deg); }
+  /* 2   * ARCSIZE */
+  62.5% {
+    -webkit-transform: rotate(675deg);
+    transform: rotate(675deg); }
+  /* 2.5 * ARCSIZE */
+  75% {
+    -webkit-transform: rotate(810deg);
+    transform: rotate(810deg); }
+  /* 3   * ARCSIZE */
+  87.5% {
+    -webkit-transform: rotate(945deg);
+    transform: rotate(945deg); }
+  /* 3.5 * ARCSIZE */
+  to {
+    -webkit-transform: rotate(1080deg);
+    transform: rotate(1080deg); }
+  /* 4   * ARCSIZE */ }
+@-webkit-keyframes blue-fade-in-out {
+  from {
+    opacity: 1; }
+  25% {
+    opacity: 1; }
+  26% {
+    opacity: 0; }
+  89% {
+    opacity: 0; }
+  90% {
+    opacity: 1; }
+  100% {
+    opacity: 1; } }
+@keyframes blue-fade-in-out {
+  from {
+    opacity: 1; }
+  25% {
+    opacity: 1; }
+  26% {
+    opacity: 0; }
+  89% {
+    opacity: 0; }
+  90% {
+    opacity: 1; }
+  100% {
+    opacity: 1; } }
+@-webkit-keyframes red-fade-in-out {
+  from {
+    opacity: 0; }
+  15% {
+    opacity: 0; }
+  25% {
+    opacity: 1; }
+  50% {
+    opacity: 1; }
+  51% {
+    opacity: 0; } }
+@keyframes red-fade-in-out {
+  from {
+    opacity: 0; }
+  15% {
+    opacity: 0; }
+  25% {
+    opacity: 1; }
+  50% {
+    opacity: 1; }
+  51% {
+    opacity: 0; } }
+@-webkit-keyframes yellow-fade-in-out {
+  from {
+    opacity: 0; }
+  40% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  75% {
+    opacity: 1; }
+  76% {
+    opacity: 0; } }
+@keyframes yellow-fade-in-out {
+  from {
+    opacity: 0; }
+  40% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  75% {
+    opacity: 1; }
+  76% {
+    opacity: 0; } }
+@-webkit-keyframes green-fade-in-out {
+  from {
+    opacity: 0; }
+  65% {
+    opacity: 0; }
+  75% {
+    opacity: 1; }
+  90% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+@keyframes green-fade-in-out {
+  from {
+    opacity: 0; }
+  65% {
+    opacity: 0; }
+  75% {
+    opacity: 1; }
+  90% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+@-webkit-keyframes left-spin {
+  from {
+    -webkit-transform: rotate(130deg); }
+  50% {
+    -webkit-transform: rotate(-5deg); }
+  to {
+    -webkit-transform: rotate(130deg); } }
+@keyframes left-spin {
+  from {
+    -webkit-transform: rotate(130deg);
+    transform: rotate(130deg); }
+  50% {
+    -webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg); }
+  to {
+    -webkit-transform: rotate(130deg);
+    transform: rotate(130deg); } }
+@-webkit-keyframes right-spin {
+  from {
+    -webkit-transform: rotate(-130deg); }
+  50% {
+    -webkit-transform: rotate(5deg); }
+  to {
+    -webkit-transform: rotate(-130deg); } }
+@keyframes right-spin {
+  from {
+    -webkit-transform: rotate(-130deg);
+    transform: rotate(-130deg); }
+  50% {
+    -webkit-transform: rotate(5deg);
+    transform: rotate(5deg); }
+  to {
+    -webkit-transform: rotate(-130deg);
+    transform: rotate(-130deg); } }
+@-webkit-keyframes fade-out {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+@keyframes fade-out {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
 * {
   box-sizing: border-box;
   margin: 0;
@@ -221,8 +464,11 @@ body {
           border: 1px solid #dadada;
           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); }
         .signedIn .container .explore-box .track-details .projects, .signedIn .container .explore-box .track-details .info-block {
-          flex-basis: 50%;
+          flex-basis: 100%;
           height: 100%; }
+          @media all and (min-width: 600px) {
+            .signedIn .container .explore-box .track-details .projects, .signedIn .container .explore-box .track-details .info-block {
+              flex-basis: 50%; } }
         .signedIn .container .explore-box .track-details .projects {
           background-color: rgba(255, 255, 255, 0.6);
           text-align: center;
@@ -414,7 +660,7 @@ body {
   height: 4px;
   display: block;
   width: 100%;
-  background-color: #acece6;
+  background: #fa9bc6;
   border-radius: 2px;
   margin: 0.5rem 0 1rem 0;
   overflow: hidden; }
@@ -427,7 +673,7 @@ body {
     -webkit-transition: width 0.3s linear;
     transition: width 0.3s linear; }
   .progress .indeterminate {
-    background-color: #26a69a; }
+    background: #c50048; }
     .progress .indeterminate:before {
       content: "";
       position: absolute;
@@ -451,46 +697,6 @@ body {
       -webkit-animation-delay: 1.15s;
       animation-delay: 1.15s; }
 
-@-webkit-keyframes indeterminate {
-  0% {
-    left: -35%;
-    right: 100%; }
-  60% {
-    left: 100%;
-    right: -90%; }
-  100% {
-    left: 100%;
-    right: -90%; } }
-@keyframes indeterminate {
-  0% {
-    left: -35%;
-    right: 100%; }
-  60% {
-    left: 100%;
-    right: -90%; }
-  100% {
-    left: 100%;
-    right: -90%; } }
-@-webkit-keyframes indeterminate-short {
-  0% {
-    left: -200%;
-    right: 100%; }
-  60% {
-    left: 107%;
-    right: -8%; }
-  100% {
-    left: 107%;
-    right: -8%; } }
-@keyframes indeterminate-short {
-  0% {
-    left: -200%;
-    right: 100%; }
-  60% {
-    left: 107%;
-    right: -8%; }
-  100% {
-    left: 107%;
-    right: -8%; } }
 /* @license
  * Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
  * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -533,13 +739,6 @@ body {
   -webkit-animation: container-rotate 1568ms linear infinite;
   animation: container-rotate 1568ms linear infinite; }
 
-@-webkit-keyframes container-rotate {
-  to {
-    -webkit-transform: rotate(360deg); } }
-@keyframes container-rotate {
-  to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg); } }
 .spinner-layer {
   position: absolute;
   width: 100%;
@@ -563,19 +762,6 @@ body {
 .spinner-green-only {
   border-color: #0f9d58; }
 
-/**
- * IMPORTANT NOTE ABOUT CSS ANIMATION PROPERTIES (keanulee):
- *
- * iOS Safari (tested on iOS 8.1) does not handle animation-delay very well - it doesn't
- * guarantee that the animation will start _exactly_ after that value. So we avoid using
- * animation-delay and instead set custom keyframes for each color (as redundant as it
- * seems).
- *
- * We write out each animation in full (instead of separating animation-name,
- * animation-duration, etc.) because under the polyfill, Safari does not recognize those
- * specific properties properly, treats them as -webkit-animation, and overrides the
- * other animation rules. See https://github.com/Polymer/platform/issues/53.
- */
 .active .spinner-layer.spinner-blue {
   /* durations: 4 * ARCTIME */
   -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
@@ -606,156 +792,6 @@ body {
   -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
   animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both; }
 
-@-webkit-keyframes fill-unfill-rotate {
-  12.5% {
-    -webkit-transform: rotate(135deg); }
-  /* 0.5 * ARCSIZE */
-  25% {
-    -webkit-transform: rotate(270deg); }
-  /* 1   * ARCSIZE */
-  37.5% {
-    -webkit-transform: rotate(405deg); }
-  /* 1.5 * ARCSIZE */
-  50% {
-    -webkit-transform: rotate(540deg); }
-  /* 2   * ARCSIZE */
-  62.5% {
-    -webkit-transform: rotate(675deg); }
-  /* 2.5 * ARCSIZE */
-  75% {
-    -webkit-transform: rotate(810deg); }
-  /* 3   * ARCSIZE */
-  87.5% {
-    -webkit-transform: rotate(945deg); }
-  /* 3.5 * ARCSIZE */
-  to {
-    -webkit-transform: rotate(1080deg); }
-  /* 4   * ARCSIZE */ }
-@keyframes fill-unfill-rotate {
-  12.5% {
-    -webkit-transform: rotate(135deg);
-    transform: rotate(135deg); }
-  /* 0.5 * ARCSIZE */
-  25% {
-    -webkit-transform: rotate(270deg);
-    transform: rotate(270deg); }
-  /* 1   * ARCSIZE */
-  37.5% {
-    -webkit-transform: rotate(405deg);
-    transform: rotate(405deg); }
-  /* 1.5 * ARCSIZE */
-  50% {
-    -webkit-transform: rotate(540deg);
-    transform: rotate(540deg); }
-  /* 2   * ARCSIZE */
-  62.5% {
-    -webkit-transform: rotate(675deg);
-    transform: rotate(675deg); }
-  /* 2.5 * ARCSIZE */
-  75% {
-    -webkit-transform: rotate(810deg);
-    transform: rotate(810deg); }
-  /* 3   * ARCSIZE */
-  87.5% {
-    -webkit-transform: rotate(945deg);
-    transform: rotate(945deg); }
-  /* 3.5 * ARCSIZE */
-  to {
-    -webkit-transform: rotate(1080deg);
-    transform: rotate(1080deg); }
-  /* 4   * ARCSIZE */ }
-@-webkit-keyframes blue-fade-in-out {
-  from {
-    opacity: 1; }
-  25% {
-    opacity: 1; }
-  26% {
-    opacity: 0; }
-  89% {
-    opacity: 0; }
-  90% {
-    opacity: 1; }
-  100% {
-    opacity: 1; } }
-@keyframes blue-fade-in-out {
-  from {
-    opacity: 1; }
-  25% {
-    opacity: 1; }
-  26% {
-    opacity: 0; }
-  89% {
-    opacity: 0; }
-  90% {
-    opacity: 1; }
-  100% {
-    opacity: 1; } }
-@-webkit-keyframes red-fade-in-out {
-  from {
-    opacity: 0; }
-  15% {
-    opacity: 0; }
-  25% {
-    opacity: 1; }
-  50% {
-    opacity: 1; }
-  51% {
-    opacity: 0; } }
-@keyframes red-fade-in-out {
-  from {
-    opacity: 0; }
-  15% {
-    opacity: 0; }
-  25% {
-    opacity: 1; }
-  50% {
-    opacity: 1; }
-  51% {
-    opacity: 0; } }
-@-webkit-keyframes yellow-fade-in-out {
-  from {
-    opacity: 0; }
-  40% {
-    opacity: 0; }
-  50% {
-    opacity: 1; }
-  75% {
-    opacity: 1; }
-  76% {
-    opacity: 0; } }
-@keyframes yellow-fade-in-out {
-  from {
-    opacity: 0; }
-  40% {
-    opacity: 0; }
-  50% {
-    opacity: 1; }
-  75% {
-    opacity: 1; }
-  76% {
-    opacity: 0; } }
-@-webkit-keyframes green-fade-in-out {
-  from {
-    opacity: 0; }
-  65% {
-    opacity: 0; }
-  75% {
-    opacity: 1; }
-  90% {
-    opacity: 1; }
-  100% {
-    opacity: 0; } }
-@keyframes green-fade-in-out {
-  from {
-    opacity: 0; }
-  65% {
-    opacity: 0; }
-  75% {
-    opacity: 1; }
-  90% {
-    opacity: 1; }
-  100% {
-    opacity: 0; } }
 /**
  * Patch the gap that appear between the two adjacent div.circle-clipper while the
  * spinner is rotating (appears on Chrome 38, Safari 7.1, and IE 11).
@@ -819,55 +855,11 @@ body {
   -webkit-animation: right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
   animation: right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both; }
 
-@-webkit-keyframes left-spin {
-  from {
-    -webkit-transform: rotate(130deg); }
-  50% {
-    -webkit-transform: rotate(-5deg); }
-  to {
-    -webkit-transform: rotate(130deg); } }
-@keyframes left-spin {
-  from {
-    -webkit-transform: rotate(130deg);
-    transform: rotate(130deg); }
-  50% {
-    -webkit-transform: rotate(-5deg);
-    transform: rotate(-5deg); }
-  to {
-    -webkit-transform: rotate(130deg);
-    transform: rotate(130deg); } }
-@-webkit-keyframes right-spin {
-  from {
-    -webkit-transform: rotate(-130deg); }
-  50% {
-    -webkit-transform: rotate(5deg); }
-  to {
-    -webkit-transform: rotate(-130deg); } }
-@keyframes right-spin {
-  from {
-    -webkit-transform: rotate(-130deg);
-    transform: rotate(-130deg); }
-  50% {
-    -webkit-transform: rotate(5deg);
-    transform: rotate(5deg); }
-  to {
-    -webkit-transform: rotate(-130deg);
-    transform: rotate(-130deg); } }
 #spinnerContainer.cooldown {
   /* duration: SHRINK_TIME */
   -webkit-animation: container-rotate 1568ms linear infinite, fade-out 400ms cubic-bezier(0.4, 0, 0.2, 1);
   animation: container-rotate 1568ms linear infinite, fade-out 400ms cubic-bezier(0.4, 0, 0.2, 1); }
 
-@-webkit-keyframes fade-out {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
-@keyframes fade-out {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
 /******* RESPONSIVE ****** */
 @media only screen and (max-width: 1281px) {
   .container {
@@ -877,10 +869,10 @@ body {
     flex-direction: column; }
 
   .side-nav {
-    flex-direction: row;
-    align-items: stretch;
-    flex-basis: unset;
-    font-size: 14px; }
+    flex-direction: row !important;
+    align-items: stretch !important;
+    flex-basis: unset !important;
+    font-size: 14px !important; }
     .side-nav .logo-box {
       flex: 1; }
     .side-nav .user-box {
@@ -930,13 +922,5 @@ body {
 
   .user-box {
     order: unset; } }
-/*//////////////////////////////////////////////////////////// */
-.progress .indeterminate {
-  background: #c50048; }
-
-.progress {
-  background: #fa9bc6; }
-
-/*//////////////////////////////////////////////////////////// */
 
 /*# sourceMappingURL=app.css.map */
