@@ -138,23 +138,24 @@ firebase.initializeApp(config);
 function checkSlackUsername(){
     return new Promise((resolve, reject)=>{
         db.collection("Users")
-        .where('slackName', '>=', slackNameField.value )
-        .orderBy('slackName')
-        .startAt(slackNameField.value)
-        .endAt(slackNameField.value).get()
+        .where('slackName', '==', slackNameField.value )
+        .get()
         .then(querySnapshot => {
             let usrName = '';
             querySnapshot.forEach(doc => {
-                usrName = doc.data().userName;
+                usrName = doc.id;
+                console.log(doc.id);
+                console.log(firebase.auth().currentUser.uid);
             });
-                if(firebase.auth().currentUser.displayName === usrName){
+
+                if(firebase.auth().currentUser.uid === usrName){
                     // message.innerHTML = "This is your actual Username"
                     // message.style.color = "green";
                     resolve('true');
-                }else if(querySnapshot.size && firebase.auth().currentUser.displayName !== usrName ){
+                }else if(querySnapshot.size && firebase.auth().currentUser.uid !== usrName ){
                     message.innerHTML = '<p>This Username already in use. If you\'re sure that is someone uses your Slack Username, please <a href=#>report</a></p>';
                     message.style.color = "#f82440";
-                    reject("Already in use");
+                    reject('SlackName already in use!');
                     return false;
                 }else if(slackNameField.value.replace(/\s/g,'') !== '' &&
                         slackNameField.value.replace(/[^\w]/g,'').length >= 3){
@@ -263,6 +264,8 @@ function checkSlackUsername(){
                 modalWindow.close();
                 writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
             }
+        }).catch(error => {
+            console.log(error);
         })
     }, {once: true});
 
