@@ -138,23 +138,24 @@ firebase.initializeApp(config);
 function checkSlackUsername(){
     return new Promise((resolve, reject)=>{
         db.collection("Users")
-        .where('slackName', '>=', slackNameField.value )
-        .orderBy('slackName')
-        .startAt(slackNameField.value)
-        .endAt(slackNameField.value).get()
+        .where('slackName', '==', slackNameField.value )
+        .get()
         .then(querySnapshot => {
             let usrName = '';
             querySnapshot.forEach(doc => {
-                usrName = doc.data().userName;
+                usrName = doc.id;
+                console.log(doc.id);
+                console.log(firebase.auth().currentUser.uid);
             });
-                if(firebase.auth().currentUser.displayName === usrName){
+
+                if(firebase.auth().currentUser.uid === usrName){
                     // message.innerHTML = "This is your actual Username"
                     // message.style.color = "green";
                     resolve('true');
-                }else if(querySnapshot.size && firebase.auth().currentUser.displayName !== usrName ){
+                }else if(querySnapshot.size && firebase.auth().currentUser.uid !== usrName ){
                     message.innerHTML = '<p>This Username already in use. If you\'re sure that is someone uses your Slack Username, please <a href=#>report</a></p>';
                     message.style.color = "#f82440";
-                    reject("Already in use");
+                    reject('SlackName already in use!');
                     return false;
                 }else if(slackNameField.value.replace(/\s/g,'') !== '' &&
                         slackNameField.value.replace(/[^\w]/g,'').length >= 3){
@@ -263,6 +264,8 @@ function checkSlackUsername(){
                 modalWindow.close();
                 writeUserData(user.uid, user.displayName, user.email, u_slackName.value, u_track.value, u_currentProject.value, u_langOne.value, u_langTwo.value);
             }
+        }).catch(error => {
+            console.log(error);
         })
     }, {once: true});
 
@@ -375,9 +378,12 @@ function getStudents(containerElement, projectName, queryFlag) {
 
             //filter event listener
             langFilter.addEventListener('change', function(evt){
-                const studentsFilterList = containerElement.querySelectorAll('li');
+                const studentsFilterList = containerElement.querySelectorAll('.student-card');
+                console.log(studentsFilterList)
                 studentsFilterList.forEach(e => {
-                    if(e.lastChild.innerHTML.match(langFilter.value)) {
+                    let lang = e.querySelector('.user-language');
+                    if(e.lastChild.innerHTML.match(langFilter.value) ||
+                        lang.innerHTML.match(langFilter.value)) {
                         if(e.classList.contains('hidden')){
                             e.classList.remove('hidden');
                         }
@@ -731,7 +737,7 @@ function getProjects(arrayOfData, containerElement, trackName) {
 
                     querySnapshot.forEach(function(doc) {
                         const deadline = doc.data().deadline
-                        .toLocaleString('en-EN',{ timeZone: 'UTC', day: "numeric", month: "long", year: "numeric", minute: "2-digit", hour: "2-digit", timeZoneName: "short" })
+                        .toLocaleString('en-EN',{ day: "numeric", month: "long", year: "numeric", minute: "2-digit", hour: "2-digit", timeZoneName: "short" })
                     const deadline_ul = document.createElement("div");
                     deadline_ul.className = "project-name deadline";
                     deadline_ul.innerHTML = `Deadline: ${deadline}</div>`;
