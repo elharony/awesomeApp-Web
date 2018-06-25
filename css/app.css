@@ -654,6 +654,8 @@ body {
     margin: 0 auto;
     padding-top: 15%;
     text-align: center; }
+    .signedOut .inner .logo {
+      width: 200px; }
     .signedOut .inner h1 {
       margin: 0 0 1rem 0;
       color: #fff;
