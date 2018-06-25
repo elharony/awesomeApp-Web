@@ -905,7 +905,7 @@ body {
   body {
     font-size: 15px; }
 
-  .signedIn .container .modal .form-wrapper {
+  .signedIn .container .modal .form-center .form-wrapper {
     width: 80%; }
   .signedIn .container .explore-box .tracks,
   .signedIn .container .explore-box .track-details {
