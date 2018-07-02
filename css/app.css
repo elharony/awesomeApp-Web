@@ -255,6 +255,11 @@ body {
   background-color: #41c5b6 !important;
   color: #fff !important; }
 
+.hidden {
+  opacity: 0;
+  display: none !important;
+  transition: opacity 0.5 ease-out; }
+
 .btn {
   display: inline-block;
   margin: 20px 7px 10px;
