@@ -434,12 +434,9 @@ function getStudents(containerElement, projectName, queryFlag) {
                 const student = document.createElement("li");
                 student.className = "student-card";
 
-                const data_contact = document.createElement("a");
+                const data_contact = document.createElement("span");
                 data_contact.className = "slack-link";
-                data_contact.setAttribute("href", "#");
-                data_contact.setAttribute("target", "blank");
-                data_contact.innerHTML = `<img src="img/slack-black.svg" alt="" class="slack-icon"><span>${doc.data().slackName}</span>
-                <span class="tooltiptext">Go to slack</span>`;
+                data_contact.innerHTML = `<img src="img/slack-black.svg" alt="Slack Icon" class="slack-icon"><span>${doc.data().slackName}</span>`;
 
                 const data_languages = document.createElement("p");
                 data_languages.className = "user-language"
