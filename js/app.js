@@ -181,7 +181,7 @@ function checkSlackUsername(){
     // Show/Hide based on Auth
     loggedInDiv.style.display = "block";
     loggedOutDiv.style.display = "none";
-    console.log(user);
+    // console.log(user);
 
     // Display User Data
     userImage.setAttribute("src", user.photoURL);
@@ -379,7 +379,7 @@ function getStudents(containerElement, projectName, queryFlag) {
             //filter event listener
             langFilter.addEventListener('change', function(evt){
                 const studentsFilterList = containerElement.querySelectorAll('.student-card');
-                console.log(studentsFilterList)
+                // console.log(studentsFilterList)
                 studentsFilterList.forEach(e => {
                     let lang = e.querySelector('.user-language');
                     if(e.lastChild.innerHTML.match(langFilter.value) ||
