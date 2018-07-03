@@ -274,7 +274,7 @@ body {
   color: #555; }
 
 .activeButton {
-  background-color: #41c5b6 !important;
+  background-color: #ED5757 !important;
   color: #fff !important; }
 
 .hidden {
@@ -327,7 +327,7 @@ body {
       color: #fff;
       font-size: 15px; }
       .signedIn .container .side-nav .logo-box {
-        background-color: rgba(66, 185, 171, 0.8);
+        background: linear-gradient(#D53638, #ED5757);
         width: 100%;
         text-align: center;
         flex-basis: 170px;
@@ -493,7 +493,7 @@ body {
           outline: none;
           transition: all 0.3s; }
           .signedIn .container .explore-box .tracks .track-button:focus {
-            border: 2px solid #41c5b6; }
+            border: 2px solid #D53638; }
       .signedIn .container .explore-box .track-details {
         padding: 30px;
         display: flex; }
@@ -533,17 +533,17 @@ body {
             .signedIn .container .explore-box .track-details .projects .project-button .arrow-show {
               visibility: visible;
               opacity: 1;
-              background-color: #41c5b6;
+              background-color: #D53638;
               transition: all 0.1s; }
             .signedIn .container .explore-box .track-details .projects .project-button:not(.deadline) {
               border-top: 1px solid #dadada;
               width: 100%; }
             .signedIn .container .explore-box .track-details .projects .project-button:focus {
-              border: 2px solid #29ccb9; }
+              border: 2px solid #D53638; }
           .signedIn .container .explore-box .track-details .projects .deadline {
             margin: 10px;
             padding: 15px 10px;
-            border: 1px solid #41c5b6;
+            border: 1px solid #D53638;
             font-size: 13px;
             opacity: 1;
             display: block;
@@ -607,7 +607,7 @@ body {
                 font-size: 12px;
                 width: 100px;
                 text-align: center;
-                background-color: #41c5b6;
+                background-color: #D53638;
                 padding: 5px 10px;
                 margin-left: 1rem;
                 text-transform: uppercase;

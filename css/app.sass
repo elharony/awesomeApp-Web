@@ -1,5 +1,8 @@
 @import 'keyframes' 
 
+$color-primary-light: #ED5757
+$color-primary-dark: #D53638
+
 * 
     box-sizing: border-box
     margin: 0
@@ -11,7 +14,7 @@ body
     color: #555
 
 .activeButton
-    background-color: #41c5b6 !important
+    background-color: $color-primary-light !important
     color: #fff !important
 
 .hidden
@@ -69,7 +72,7 @@ body
 
             // Logo
             .logo-box
-                background-color: rgba(66, 185, 171, 0.8)
+                background: linear-gradient($color-primary-dark, $color-primary-light)
                 width: 100%
                 text-align: center
                 flex-basis: 170px
@@ -281,7 +284,7 @@ body
                     transition: all 0.3s
                     
                     &:focus 
-                        border: 2px solid #41c5b6
+                        border: 2px solid $color-primary-dark
                         
 
             // Track Details
@@ -330,7 +333,7 @@ body
                         .arrow-show 
                             visibility: visible
                             opacity: 1
-                            background-color: #41c5b6
+                            background-color: $color-primary-dark
                             transition: all 0.1s
                             
                         
@@ -339,12 +342,12 @@ body
                             width: 100%
                             
                         &:focus
-                            border: 2px solid #29ccb9
+                            border: 2px solid $color-primary-dark
                         
                     .deadline 
                         margin: 10px
                         padding: 15px 10px
-                        border: 1px solid #41c5b6
+                        border: 1px solid $color-primary-dark
                         font-size: 13px
                         opacity: 1
                         display: block
@@ -421,7 +424,7 @@ body
                                 font-size: 12px
                                 width: 100px
                                 text-align: center
-                                background-color: #41c5b6
+                                background-color: $color-primary-dark
                                 padding: 5px 10px
                                 margin-left: 1rem
                                 text-transform: uppercase
