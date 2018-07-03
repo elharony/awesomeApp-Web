@@ -19,11 +19,13 @@ Sign up from our [Live Preview](https://elharony.github.io/awesomeApp-Web/) now!
 > The current version is the **Beta** Release
 
 ## Setup Instructions
-If you are willing to help us or even want to mess around AwesomeApp. Here are the steps to run it locally:
-- Write `npm install` command to download the required dependencies
-- Then, write `gulp` and... That's it!
+Here are the steps to setup AwesomeApp locally:
+- `git clone https://github.com/elharony/awesomeApp-Web.git`
+- `cd awesomeApp-Web`
+- `npm install`
+- `gulp`
 
-AwesomeApp is working on your Machine now. Feel free to contribute with us!!!
+AwesomeApp is working on your Machine now!! 🚀
 
 ## Contributing
 AwesomeApp built by Udacity Students, just like you. That's why we encourage every student to improve the current version by Enhancing its UI/UX, Adding new features, and Fixing some bugs. It is a great way to practice by contributing to an Open Source Project like `AwesomeApp` and see your contributions in action! ⭐️
