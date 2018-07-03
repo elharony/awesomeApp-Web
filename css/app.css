@@ -9,6 +9,7 @@
   100% {
     left: 100%;
     right: -90%; } }
+
 @keyframes indeterminate {
   0% {
     left: -35%;
@@ -19,6 +20,7 @@
   100% {
     left: 100%;
     right: -90%; } }
+
 @-webkit-keyframes indeterminate-short {
   0% {
     left: -200%;
@@ -29,6 +31,7 @@
   100% {
     left: 107%;
     right: -8%; } }
+
 @keyframes indeterminate-short {
   0% {
     left: -200%;
@@ -39,14 +42,17 @@
   100% {
     left: 107%;
     right: -8%; } }
+
 /* Spinner */
 @-webkit-keyframes container-rotate {
   to {
     -webkit-transform: rotate(360deg); } }
+
 @keyframes container-rotate {
   to {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
+
 @-webkit-keyframes fill-unfill-rotate {
   12.5% {
     -webkit-transform: rotate(135deg); }
@@ -72,6 +78,7 @@
   to {
     -webkit-transform: rotate(1080deg); }
   /* 4   * ARCSIZE */ }
+
 @keyframes fill-unfill-rotate {
   12.5% {
     -webkit-transform: rotate(135deg);
@@ -105,6 +112,7 @@
     -webkit-transform: rotate(1080deg);
     transform: rotate(1080deg); }
   /* 4   * ARCSIZE */ }
+
 @-webkit-keyframes blue-fade-in-out {
   from {
     opacity: 1; }
@@ -118,6 +126,7 @@
     opacity: 1; }
   100% {
     opacity: 1; } }
+
 @keyframes blue-fade-in-out {
   from {
     opacity: 1; }
@@ -131,6 +140,7 @@
     opacity: 1; }
   100% {
     opacity: 1; } }
+
 @-webkit-keyframes red-fade-in-out {
   from {
     opacity: 0; }
@@ -142,6 +152,7 @@
     opacity: 1; }
   51% {
     opacity: 0; } }
+
 @keyframes red-fade-in-out {
   from {
     opacity: 0; }
@@ -153,6 +164,7 @@
     opacity: 1; }
   51% {
     opacity: 0; } }
+
 @-webkit-keyframes yellow-fade-in-out {
   from {
     opacity: 0; }
@@ -164,6 +176,7 @@
     opacity: 1; }
   76% {
     opacity: 0; } }
+
 @keyframes yellow-fade-in-out {
   from {
     opacity: 0; }
@@ -175,6 +188,7 @@
     opacity: 1; }
   76% {
     opacity: 0; } }
+
 @-webkit-keyframes green-fade-in-out {
   from {
     opacity: 0; }
@@ -186,6 +200,7 @@
     opacity: 1; }
   100% {
     opacity: 0; } }
+
 @keyframes green-fade-in-out {
   from {
     opacity: 0; }
@@ -197,6 +212,7 @@
     opacity: 1; }
   100% {
     opacity: 0; } }
+
 @-webkit-keyframes left-spin {
   from {
     -webkit-transform: rotate(130deg); }
@@ -204,6 +220,7 @@
     -webkit-transform: rotate(-5deg); }
   to {
     -webkit-transform: rotate(130deg); } }
+
 @keyframes left-spin {
   from {
     -webkit-transform: rotate(130deg);
@@ -214,6 +231,7 @@
   to {
     -webkit-transform: rotate(130deg);
     transform: rotate(130deg); } }
+
 @-webkit-keyframes right-spin {
   from {
     -webkit-transform: rotate(-130deg); }
@@ -221,6 +239,7 @@
     -webkit-transform: rotate(5deg); }
   to {
     -webkit-transform: rotate(-130deg); } }
+
 @keyframes right-spin {
   from {
     -webkit-transform: rotate(-130deg);
@@ -231,16 +250,19 @@
   to {
     -webkit-transform: rotate(-130deg);
     transform: rotate(-130deg); } }
+
 @-webkit-keyframes fade-out {
   from {
     opacity: 1; }
   to {
     opacity: 0; } }
+
 @keyframes fade-out {
   from {
     opacity: 1; }
   to {
     opacity: 0; } }
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -248,7 +270,7 @@
 
 body {
   font-size: 16px;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   color: #555; }
 
 .activeButton {
@@ -258,7 +280,7 @@ body {
 .hidden {
   opacity: 0;
   display: none !important;
-  transition: opacity 0.5 ease-out; }
+  transition: opacity .5 ease-out; }
 
 .btn {
   display: inline-block;
@@ -287,8 +309,8 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  /*** Content ** */
-  /*** Footer ** */ }
+  /*** Content ***/
+  /*** Footer ***/ }
   .signedIn .container {
     max-width: 80%;
     margin: 0 auto;
@@ -525,11 +547,11 @@ body {
             font-size: 13px;
             opacity: 1;
             display: block;
-            transition: opacity 0.5 ease-out; }
+            transition: opacity .5 ease-out; }
           .signedIn .container .explore-box .track-details .projects .hidden {
             opacity: 0;
             display: none !important;
-            transition: opacity 0.5 ease-out; }
+            transition: opacity .5 ease-out; }
         .signedIn .container .explore-box .track-details .info-block {
           margin: 0 20px; }
           .signedIn .container .explore-box .track-details .info-block .search-results {
@@ -619,14 +641,13 @@ body {
             font-size: 16px;
             text-align: center; }
           .signedIn .container .explore-box .track-details .students::-webkit-scrollbar {
-            width: 0.6em; }
+            width: .6em; }
           .signedIn .container .explore-box .track-details .students::-webkit-scrollbar-track {
             box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3); }
           .signedIn .container .explore-box .track-details .students::-webkit-scrollbar-thumb {
             background-color: #d81b60;
             outline: 1px solid slategrey; }
   .signedIn .link-container {
-    height: 50px;
     text-align: center;
     padding: 15px;
     width: 100%; }
@@ -683,12 +704,12 @@ body {
     left: 0;
     bottom: 0;
     background-color: #26a69a;
-    -webkit-transition: width 0.3s linear;
-    transition: width 0.3s linear; }
+    -webkit-transition: width .3s linear;
+    transition: width .3s linear; }
   .progress .indeterminate {
     background: #c50048; }
     .progress .indeterminate:before {
-      content: "";
+      content: '';
       position: absolute;
       background-color: inherit;
       top: 0;
@@ -698,7 +719,7 @@ body {
       -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
       animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite; }
     .progress .indeterminate:after {
-      content: "";
+      content: '';
       position: absolute;
       background-color: inherit;
       top: 0;
@@ -710,18 +731,20 @@ body {
       -webkit-animation-delay: 1.15s;
       animation-delay: 1.15s; }
 
-/* @license
- * Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
- * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
- * The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
- * The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
- * Code distributed by Google as part of the polymer project is also
- * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
- */
-/************************* */
+/*
+    @license
+    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+    Code distributed by Google as part of the polymer project is also
+    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+    */
+/**************************/
 /* STYLES FOR THE SPINNER */
-/************************* */
-/* Constants:
+/**************************/
+/*
+ * Constants:
  *      STROKEWIDTH = 3px
  *      ARCSIZE     = 270 degrees (amount of circle the arc takes up)
  *      ARCTIME     = 1333ms (time it takes to expand and contract arc)
@@ -873,10 +896,11 @@ body {
   -webkit-animation: container-rotate 1568ms linear infinite, fade-out 400ms cubic-bezier(0.4, 0, 0.2, 1);
   animation: container-rotate 1568ms linear infinite, fade-out 400ms cubic-bezier(0.4, 0, 0.2, 1); }
 
-/******* RESPONSIVE ****** */
+/******* RESPONSIVE *******/
 @media only screen and (max-width: 1281px) {
   .signedIn .container {
     max-width: 100%; } }
+
 @media only screen and (max-width: 1025px) {
   .signedIn .container {
     flex-direction: column; }
@@ -897,6 +921,7 @@ body {
       .signedIn .container .side-nav .classmates-box {
         flex: 1;
         padding: 20px 10px; } }
+
 @media only screen and (max-width: 801px) {
   .signedIn .container .explore-box {
     padding-top: 10px; }
@@ -906,10 +931,10 @@ body {
     flex-wrap: wrap; }
     .signedIn .container .side-nav .user-box {
       order: 3; } }
+
 @media only screen and (max-width: 600px) {
   body {
     font-size: 15px; }
-
   .signedIn .container .modal .form-center .form-wrapper {
     width: 80%; }
   .signedIn .container .explore-box .tracks,
@@ -923,11 +948,9 @@ body {
     flex-basis: 100%; }
   .signedIn .container .explore-box .track-details .projects .project-button .arrow-show {
     visibility: hidden; } }
+
 @media only screen and (max-width: 481px) {
   body {
     font-size: 14px; }
-
   .user-box {
     order: unset; } }
-
-/*# sourceMappingURL=app.css.map */
