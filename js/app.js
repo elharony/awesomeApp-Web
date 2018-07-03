@@ -469,7 +469,7 @@ function getStudents(containerElement, projectName, queryFlag) {
             });
 
             if(containerElement.offsetHeight > 420){
-                containerElement.setAttribute('style', 'overflow-y:scroll');
+                containerElement.setAttribute('style', 'overflow-y:scroll; max-height: 489px');
                 containerElement.scrollTop = 0;
             }
             
