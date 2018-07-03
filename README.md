@@ -1,4 +1,4 @@
-# AwesomeApp | Meet a classmate!
+# AwesomeApp | Find a Classmate!
 AwesomeApp is a Web App aims to connect Udacity Nanodegree Students to their Classmates who are working on the same project! 🎓
 
 ## How it works?
