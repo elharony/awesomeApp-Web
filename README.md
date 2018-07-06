@@ -16,7 +16,6 @@ Each student fill his/her Preferences to be visible to other students. Here is t
 
 ## How to use it?
 Sign up from our [Live Preview](https://elharony.github.io/awesomeApp-Web/) now!
-> The current version is the **Beta** Release
 
 ## Setup Instructions
 Here are the steps to setup AwesomeApp locally:
