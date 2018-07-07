@@ -14,6 +14,8 @@ Each student fill his/her Preferences to be visible to other students. Here is t
 - First Language
 - Language Language
 
+> _The provided preferences ( Slack Name, Track, ... etc. ) are going to be **PUBLIC**. This allows other students to find you!_
+
 ## How to use it?
 Sign up from our [Live Preview](https://elharony.github.io/awesomeApp-Web/) now!
 
